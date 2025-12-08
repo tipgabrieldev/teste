@@ -1090,6 +1090,273 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     color: transparent;
     font-weight: 600;
 }
+
+    /* ESTILOS DO CONTADOR */
+.contador-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+    padding: 10px 12px;
+    background: rgba(23, 23, 23, 0.8);
+    border-radius: 12px;
+    border: 1px solid #374151;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.contador-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+    border-color: #d4af37;
+}
+
+.contador-numero {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #d4af37, #fbbf24);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+    margin-bottom: 4px;
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.contador-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+.contador-separator {
+    font-size: 1.5rem;
+    color: #d4af37;
+    font-weight: bold;
+    padding: 0 5px;
+    margin-top: -10px;
+}
+
+/* Animações para o contador */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.contador-animado {
+    animation: pulse 0.5s ease;
+}
+
+/* Responsividade para o contador */
+@media (max-width: 768px) {
+    .contador-item {
+        min-width: 60px;
+        padding: 8px 10px;
+    }
+    
+    .contador-numero {
+        font-size: 1.5rem;
+    }
+    
+    .contador-label {
+        font-size: 0.65rem;
+    }
+    
+    .contador-separator {
+        font-size: 1.2rem;
+        padding: 0 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contador-item {
+        min-width: 50px;
+        padding: 6px 8px;
+    }
+    
+    .contador-numero {
+        font-size: 1.3rem;
+    }
+    
+    .contador-label {
+        font-size: 0.6rem;
+    }
+}
+
+    /* ESTILOS ELEGANTES PARA RESULTADOS APÓS SORTEIO */
+.sorteio-realizado .numero-oficial {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border-color: #10b981;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    animation: pulse-verde 2s infinite;
+}
+
+@keyframes pulse-verde {
+    0% { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
+    50% { box-shadow: 0 6px 30px rgba(16, 185, 129, 0.7); }
+    100% { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
+}
+
+/* Estilo premium para o container de resultados */
+.resultado-premium {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+    border: 2px solid;
+    border-image: linear-gradient(135deg, #d4af37, #10b981) 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.resultado-premium::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Estilo para mensagem de resultado */
+.mensagem-premio {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(212, 175, 55, 0.15));
+    border-left: 4px solid;
+    border-image: linear-gradient(to bottom, #d4af37, #10b981) 1;
+    padding: 20px;
+    border-radius: 0 12px 12px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.mensagem-premio::before {
+    content: "🏆";
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 60px;
+    opacity: 0.1;
+    transform: rotate(15deg);
+}
+
+/* Estilo para estatísticas */
+.estatistica-premio {
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    position: relative;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.estatistica-premio:hover {
+    transform: translateY(-5px);
+    border-color: #d4af37;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+}
+
+.estatistica-premio .valor {
+    font-size: 2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #d4af37, #10b981);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Badge de vencedor premium */
+.badge-premium {
+    background: linear-gradient(135deg, #d4af37, #fbbf24);
+    color: #1e293b;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.badge-premium::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 50%
+    );
+    transform: rotate(30deg);
+}
+
+/* Efeito de confete para resultados */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #d4af37;
+    border-radius: 50%;
+    opacity: 0;
+    animation: confetti-fall 3s linear infinite;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(500px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Estilo para o botão de verificação após sorteio */
+.btn-premium {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-premium:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.6);
+}
+
+.btn-premium::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.btn-premium:hover::after {
+    left: 100%;
+}
 </style>
 </head>
 <body class="text-white">
@@ -1131,6 +1398,71 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             </nav>
         </div>
     </header>
+
+    <!-- Contador para Mega da Virada -->
+<section id="contador" class="py-6 px-4 bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#0f172a] border-b border-[#374151]">
+    <div class="container mx-auto max-w-4xl">
+        <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
+            <!-- Título -->
+            <div class="text-center md:text-left">
+                <h2 class="text-2xl md:text-3xl font-bold">
+                    <i class="fas fa-clock text-[#d4af37] mr-2"></i>
+                    Mega da Virada 2025
+                </h2>
+                <p class="text-sm text-gray-300 mt-1">Sorteio: 31 de Dezembro - 19h</p>
+            </div>
+            
+            <!-- Contador -->
+            <div class="flex items-center gap-2 md:gap-4">
+                <!-- Dias -->
+                <div class="contador-item">
+                    <div class="contador-numero" id="dias">23</div>
+                    <div class="contador-label">Dias</div>
+                </div>
+                
+                <div class="contador-separator">:</div>
+                
+                <!-- Horas -->
+                <div class="contador-item">
+                    <div class="contador-numero" id="horas">12</div>
+                    <div class="contador-label">Horas</div>
+                </div>
+                
+                <div class="contador-separator">:</div>
+                
+                <!-- Minutos -->
+                <div class="contador-item">
+                    <div class="contador-numero" id="minutos">45</div>
+                    <div class="contador-label">Minutos</div>
+                </div>
+                
+                <div class="contador-separator">:</div>
+                
+                <!-- Segundos -->
+                <div class="contador-item">
+                    <div class="contador-numero" id="segundos">18</div>
+                    <div class="contador-label">Segundos</div>
+                </div>
+            </div>
+            
+            <!-- Ícone de destaque -->
+            <div class="hidden md:block">
+                <i class="fas fa-trophy text-3xl text-[#d4af37]"></i>
+            </div>
+        </div>
+        
+        <!-- Barra de progresso -->
+        <div class="mt-4">
+            <div class="flex justify-between text-xs text-gray-400 mb-1">
+                <span>08/12/2025</span>
+                <span>31/12/2025</span>
+            </div>
+            <div class="h-2 bg-[#374151] rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-gradient-to-r from-[#d4af37] to-[#fbbf24] rounded-full"></div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- O RESTANTE DO SEU CÓDIGO index.html PERMANECE IGUAL A PARTIR DAQUI -->
 
@@ -2078,6 +2410,124 @@ function copiarPix(elementId) {
             // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
              atualizarNumerosOficiais([27, 32, 52, 10, 56, 03]);
         });
+
+        // ========== CONTADOR PARA MEGA DA VIRADA ==========
+function atualizarContador() {
+    const dataSorteio = new Date('December 31, 2025 19:00:00').getTime();
+    const agora = new Date().getTime();
+    const diferenca = dataSorteio - agora;
+    
+    // Se já passou do sorteio
+    if (diferenca < 0) {
+        document.getElementById('dias').textContent = '00';
+        document.getElementById('horas').textContent = '00';
+        document.getElementById('minutos').textContent = '00';
+        document.getElementById('segundos').textContent = '00';
+        
+        // Atualizar barra de progresso para 100%
+        document.getElementById('progress-bar').style.width = '100%';
+        
+        // Alterar mensagem do contador
+        const contadorSection = document.getElementById('contador');
+        const titulo = contadorSection.querySelector('h2');
+        titulo.innerHTML = '<i class="fas fa-trophy text-[#10b981] mr-2"></i>SORTEIO REALIZADO!';
+        
+        return;
+    }
+    
+    // Calcular dias, horas, minutos, segundos
+    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+    
+    // Atualizar elementos DOM com animação
+    atualizarComAnimacao('dias', dias.toString().padStart(2, '0'));
+    atualizarComAnimacao('horas', horas.toString().padStart(2, '0'));
+    atualizarComAnimacao('minutos', minutos.toString().padStart(2, '0'));
+    atualizarComAnimacao('segundos', segundos.toString().padStart(2, '0'));
+    
+    // Atualizar barra de progresso
+    const dataInicio = new Date('December 08, 2025').getTime();
+    const dataFim = new Date('December 31, 2025').getTime();
+    const totalDias = dataFim - dataInicio;
+    const diasPassados = agora - dataInicio;
+    const progresso = Math.min((diasPassados / totalDias) * 100, 100);
+    
+    document.getElementById('progress-bar').style.width = `${progresso}%`;
+}
+
+function atualizarComAnimacao(elementId, novoValor) {
+    const elemento = document.getElementById(elementId);
+    if (elemento.textContent !== novoValor) {
+        elemento.classList.add('contador-animado');
+        elemento.textContent = novoValor;
+        
+        // Remover a classe de animação após a animação terminar
+        setTimeout(() => {
+            elemento.classList.remove('contador-animado');
+        }, 500);
+    }
+}
+
+// Iniciar contador
+atualizarContador();
+setInterval(atualizarContador, 1000);
+
+        // ========== APLICAR ESTILOS APÓS SORTEIO ==========
+function aplicarEstilosAposSorteio() {
+    const hoje = new Date();
+    const dataSorteio = new Date('December 31, 2025 19:00:00');
+    
+    // Verificar se o sorteio já ocorreu
+    if (hoje >= dataSorteio) {
+        // Adicionar classe especial à seção de resultados
+        const resultadoSection = document.querySelector('#resultado .bg-\\[\\#262626\\]');
+        if (resultadoSection) {
+            resultadoSection.classList.add('resultado-premium');
+        }
+        
+        // Atualizar título
+        const tituloResultado = document.querySelector('#resultado h2');
+        if (tituloResultado) {
+            tituloResultado.innerHTML = '🏆 <span class="text-[#d4af37]">Resultado Oficial</span> Mega da Virada 2025 🏆';
+        }
+        
+        // Atualizar botão de verificação
+        const btnVerificar = document.getElementById('btn-verificar-bilhetes');
+        if (btnVerificar) {
+            btnVerificar.innerHTML = '<i class="fas fa-trophy mr-2"></i>Conferir Prêmios';
+            btnVerificar.classList.add('btn-premium');
+        }
+        
+        // Adicionar efeito de confete
+        adicionarConfetti();
+    }
+}
+
+function adicionarConfetti() {
+    const container = document.getElementById('resultado');
+    const colors = ['#d4af37', '#10b981', '#fbbf24', '#3b82f6', '#8b5cf6'];
+    
+    for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 3 + 's';
+        confetti.style.width = Math.random() * 10 + 5 + 'px';
+        confetti.style.height = confetti.style.width;
+        container.appendChild(confetti);
+    }
+}
+
+// Aplicar estilos quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    // ... seu código existente ...
+    
+    // Adicionar esta linha no final do DOMContentLoaded
+    aplicarEstilosAposSorteio();
+});
     </script>
 </body>
 </html>
