@@ -251,31 +251,22 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     margin: 0 auto 20px auto; /* ← ADICIONADO margin-bottom */
 }
 
-        /* NÚMEROS OFICIAIS - ESTADO INICIAL (NÃO VERDE) */
+        /* NÚMEROS OFICIAIS - AGORA VERDES POR PADRÃO */
         .numero-oficial {
             display: inline-flex;
             width: 45px;
             height: 45px;
             align-items: center;
             justify-content: center;
-            background: white;
-            border: 2px solid #e2e8f0;
+            background: linear-gradient(135deg, #10b981, #059669); /* VERDE POR PADRÃO */
+            border: 2px solid #10b981;
             border-radius: 50%;
             font-weight: bold;
             font-size: 16px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            color: #1e293b;
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+            color: white;
             transition: all 0.3s ease;
             margin: 0;
-        }
-
-        /* NÚMEROS OFICIAIS - ESTADO APÓS VERIFICAÇÃO (VERDE) */
-        .numero-oficial.verificado {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border-color: #10b981;
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
 
         /* NÚMEROS DOS TICKETS - 3 por linha */
@@ -319,22 +310,16 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     border: 1px solid rgba(255,255,255,0.2) !important; /* ← MANTÉM A BORDA ORIGINAL */
         }
 
-        /* NÚMEROS DE ACERTO - DESTACADO COM ESTILO ESPECIAL */
-        .numero-acerto {
+        /* NÚMEROS DE ACERTO - REMOVIDO O CIRCULO AMARELO */
+        /* .numero-acerto {
             background: linear-gradient(135deg, #d4af37, #fbbf24);
             animation: bounce 0.5s;
-            color: #1e293b !important;
-            border-color: #d4af37 !important;
+            color: #1e293b;
+            border-color: #d4af37;
             border-radius: 50%;
             box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4) !important;
             transform: scale(1.1);
-        }
-
-        @keyframes bounce {
-            0%, 20%, 60%, 100% { transform: translateY(0) scale(1.1); }
-            40% { transform: translateY(-8px) scale(1.1); }
-            80% { transform: translateY(-4px) scale(1.1); }
-        }
+        } */
 
         .badge-premiado {
             position: absolute;
@@ -449,19 +434,55 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
 
-/* ESTILOS GERAIS DO VÍDEO */
-.video-container {
+/* ESTILOS PREMIUM PARA O VÍDEO NO MOBILE */
+.video-container-premium {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* Proporção 16:9 */
     height: 0;
+    padding-bottom: 75%; /* Mais alto que 16:9 para mobile (4:3) */
     overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
     background: #000;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
 }
 
-.video-container iframe {
+.video-container-premium::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, 
+        #d4af37 0%, 
+        #fbbf24 25%, 
+        #10b981 50%, 
+        #059669 75%, 
+        #d4af37 100%);
+    border-radius: inherit;
+    z-index: -1;
+    animation: border-glow 4s linear infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes border-glow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.video-container-premium iframe {
     position: absolute;
     top: 0;
     left: 0;
@@ -505,6 +526,31 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 
             .search-btn {
                 width: 100%;
+            }
+            
+            /* Ajustes específicos para mobile do vídeo */
+            #video {
+                padding: 3rem 1rem;
+            }
+            
+            .video-container-premium {
+                padding-bottom: 70%; /* Proporção mais quadrada para mobile */
+                margin: 0 -0.5rem; /* Extende um pouco além das bordas */
+                border-radius: 1rem;
+            }
+            
+            #video .container {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+            
+            #video h2 {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            #video .bg-gradient-to-br {
+                padding: 1.5rem;
             }
         }
 
@@ -934,53 +980,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     z-index: 2;
 }
 
-/* CORREÇÃO: VÍDEO COMPLETO SEM CORTES NO MOBILE */
-@media (max-width: 768px) {
-    #video .container {
-        max-width: 100%;
-        padding-left: 0;
-        padding-right: 0;
-    }
-    
-    #video .bg-\[\#262626\] {
-        background: transparent !important;
-        border: none !important;
-        padding: 10px 15px;
-        border-radius: 0;
-    }
-    
-    .video-container {
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        margin: 0;
-        /* Garantir proporção segura para mobile */
-        padding-bottom: 60%; /* Um pouco mais alto para evitar cortes */
-    }
-    
-    #video .bg-\[\#262626\] p {
-        padding: 0 15px;
-        margin-top: 15px;
-    }
-}
-
-/* AJUSTE ESPECÍFICO PARA LANDSCAPE - EVITAR CORTES */
-@media (max-width: 768px) and (orientation: landscape) {
-    .video-container {
-        padding-bottom: 50%; /* Ajuste balanceado para landscape */
-    }
-}
-
-/* Safe area para iPhones com notch */
-@supports (padding: max(0px)) {
-    @media (max-width: 768px) {
-        #video .container {
-            padding-left: max(15px, env(safe-area-inset-left));
-            padding-right: max(15px, env(safe-area-inset-right));
-        }
-    }
-}
-
-
 /* SOBRESCREVER QUALQUER MEDIA QUERY QUE ALTERE CORES NO MOBILE */
 @media (max-width: 768px) {
     .ticket-body {
@@ -1392,43 +1391,18 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     left: 100%;
 }
 
-    /* ESTILOS PREMIUM PARA O VÍDEO NO MOBILE */
-.video-container-premium {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 75%; /* Mais alto que 16:9 para mobile (4:3) */
-    overflow: hidden;
-    background: #000;
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 8px 16px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 3px solid transparent;
-    background-clip: padding-box;
-    position: relative;
+/* NOVOS ESTILOS PARA GRADIENTES NO VÍDEO */
+.texto-gradiente-video {
+    background: linear-gradient(135deg, #d4af37, #fbbf24, #10b981, #059669);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease infinite;
 }
 
-.video-container-premium::before {
-    content: '';
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: linear-gradient(135deg, 
-        #d4af37 0%, 
-        #fbbf24 25%, 
-        #10b981 50%, 
-        #059669 75%, 
-        #d4af37 100%);
-    border-radius: inherit;
-    z-index: -1;
-    animation: border-glow 4s linear infinite;
-    background-size: 400% 400%;
-}
-
-@keyframes border-glow {
+@keyframes gradient-shift {
     0% {
         background-position: 0% 50%;
     }
@@ -1440,40 +1414,14 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     }
 }
 
-.video-container-premium iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-/* Ajustes específicos para mobile */
-@media (max-width: 768px) {
-    #video {
-        padding: 3rem 1rem;
-    }
-    
-    .video-container-premium {
-        padding-bottom: 70%; /* Proporção mais quadrada para mobile */
-        margin: 0 -0.5rem; /* Extende um pouco além das bordas */
-        border-radius: 1rem;
-    }
-    
-    #video .container {
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-    }
-    
-    #video h2 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    #video .bg-gradient-to-br {
-        padding: 1.5rem;
-    }
+.texto-gradiente-premio {
+    background: linear-gradient(135deg, #d4af37, #fbbf24, #dc2626, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
 }
 
 /* Para telas um pouco maiores (tablets) */
@@ -1508,104 +1456,10 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     opacity: 0.7;
 }
 
-/* Ícone de play flutuante */
-.play-icon {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    background: rgba(212, 175, 55, 0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
-}
-
-.play-icon:hover {
-    background: rgba(212, 175, 55, 1);
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-.play-icon i {
-    font-size: 2rem;
-    color: #1e293b;
-    margin-left: 5px;
-}
-
-/* Responsividade do ícone de play */
-@media (max-width: 768px) {
-    .play-icon {
-        width: 60px;
-        height: 60px;
-    }
-    
-    .play-icon i {
-        font-size: 1.5rem;
-    }
-}
-
-/* Badge "AO VIVO" */
-.live-badge {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: linear-gradient(135deg, #dc2626, #ef4444);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    z-index: 10;
-    animation: pulse-red 2s infinite;
-    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-}
-
-@keyframes pulse-red {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
-    }
-}
-
 /* Ajuste para landscape no mobile */
 @media (max-width: 768px) and (orientation: landscape) {
     .video-container-premium {
         padding-bottom: 50%; /* Mais largo para landscape */
-    }
-}
-
-/* Efeito de loading sutil */
-.video-loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, 
-        transparent 0%, 
-        rgba(255, 255, 255, 0.1) 50%, 
-        transparent 100%);
-    background-size: 200% 100%;
-    animation: loading-shimmer 1.5s infinite;
-    z-index: 2;
-}
-
-@keyframes loading-shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-    100% {
-        background-position: 200% 0;
     }
 }
 </style>
@@ -1773,14 +1627,14 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
                     
-                    <!-- Números oficiais fixos - INICIALMENTE NÃO SÃO VERDES -->
+                    <!-- Números oficiais fixos - AGORA VERDES POR PADRÃO -->
                     <div class="flex justify-center flex-wrap gap-3 mb-6" id="numeros-oficiais">
-                        <span class="numero-oficial">00</span>
-                        <span class="numero-oficial">00</span>
-                        <span class="numero-oficial">00</span>
-                        <span class="numero-oficial">00</span>
-                        <span class="numero-oficial">00</span>
-                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">27</span>
+                        <span class="numero-oficial">32</span>
+                        <span class="numero-oficial">52</span>
+                        <span class="numero-oficial">10</span>
+                        <span class="numero-oficial">56</span>
+                        <span class="numero-oficial">03</span>
                     </div>
                     
                     <div class="flex justify-center mb-6">
@@ -1827,7 +1681,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         </div>
     </section>
 
-    <!-- Seção: Vídeo do Sorteio - VERSÃO ATUALIZADA PARA MOBILE -->
+    <!-- Seção: Vídeo do Sorteio - ATUALIZADA COM GRADIENTES -->
     <section id="video" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-8 md:mb-12">Sorteio ao vivo</h2>
@@ -1849,7 +1703,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                 </div>
                 
                 <div class="mt-6 md:mt-8 text-center px-2 md:px-0">
-                    <p class="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[#d4af37] to-[#fbbf24] bg-clip-text text-transparent">
+                    <p class="text-lg md:text-xl font-bold mb-3 md:mb-4 texto-gradiente-video">
                         NÃO VAI PERDER, VAI?
                     </p>
                     <p class="text-sm md:text-base text-gray-300 mb-4 md:mb-6 leading-relaxed">
@@ -1859,9 +1713,9 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                     
                     <div class="inline-block bg-gradient-to-r from-[#10b981] via-[#059669] to-[#10b981] p-1 rounded-full">
                         <div class="bg-[#0f172a] rounded-full px-6 py-3">
-                            <h3 class="text-lg md:text-2xl font-bold bg-gradient-to-r from-[#d4af37] via-[#fbbf24] to-[#d4af37] bg-clip-text text-transparent">
-                                BILHÃO DA VIRADA!<br>
-                                <span class="text-white">R$ 850 MILHÕES EM JOGO!</span>
+                            <h3 class="text-lg md:text-2xl font-bold">
+                                <span class="texto-gradiente-premio">BILHÃO DA VIRADA!</span><br>
+                                <span class="texto-gradiente-video">R$ 850 MILHÕES EM JOGO!</span>
                             </h3>
                         </div>
                     </div>
@@ -2181,7 +2035,7 @@ function copiarPix(elementId) {
             
             // ========== VARIÁVEIS GLOBAIS ==========
             // Números oficiais da Mega da Virada - serão atualizados após o sorteio
-            let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
+            let numerosSorteados = [27, 32, 52, 10, 56, 03]; // Números já definidos e VERDES
             let bilheteVencedor = null;
             let grupoGanhou = false;
             let verificacaoRealizada = false; // Nova variável para controlar se a verificação já foi feita
@@ -2212,8 +2066,7 @@ function copiarPix(elementId) {
                 numerosElementos.forEach((elemento, index) => {
                     if (index < novosNumeros.length) {
                         elemento.textContent = novosNumeros[index].toString().padStart(2, '0');
-                        // REMOVIDO: Não adiciona a classe "verificado" aqui
-                        // Apenas atualiza os números, mas não os torna verdes
+                        // Números já são verdes por padrão agora
                     }
                 });
                 
@@ -2223,14 +2076,6 @@ function copiarPix(elementId) {
                 } else {
                     statusSorteio.innerHTML = '<p class="text-[#d4af37]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>';
                 }
-            }
-
-            // Função para destacar números oficiais como verdes (após verificação)
-            function destacarNumerosOficiais() {
-                const numerosElementos = document.querySelectorAll('.numero-oficial');
-                numerosElementos.forEach(elemento => {
-                    elemento.classList.add('verificado');
-                });
             }
 
             // Função para verificar acertos de um bilhete
@@ -2384,9 +2229,6 @@ function copiarPix(elementId) {
                     return;
                 }
 
-                // Destacar números oficiais como verdes
-                destacarNumerosOficiais();
-                
                 // Marcar que a verificação foi realizada
                 verificacaoRealizada = true;
 
@@ -2451,6 +2293,7 @@ function copiarPix(elementId) {
                 "Paloma",
                 "Pedro", 
                 "Ronaldo",
+                "Rosiclea", // NOVO PARTICIPANTE ADICIONADO
                 "Sandra",
                 "Soninha",
                 "Suellen",
@@ -2485,11 +2328,12 @@ function copiarPix(elementId) {
                 { id: 24, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 13, 23, 33, 43, 53", assignedName: "Paloma" },
                 { id: 25, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 16, 19, 24, 03, 44", assignedName: "Pedro" },
                 { id: 26, event: "Mega da Virada", date: "31/12/2025", numbers: "49, 09, 38, 20, 21, 42", assignedName: "Ronaldo" },
-                { id: 27, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 13, 15, 21, 17", assignedName: "Sandra" },
-                { id: 28, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 52, 33, 13, 48, 25", assignedName: "Soninha" },
-                { id: 29, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 05, 08, 11, 20, 24", assignedName: "Suellen" },
-                { id: 30, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Thiago" },
-                { id: 31, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 05, 34, 27, 25", assignedName: "TH Romerito" }
+                { id: 27, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Rosiclea" }, // NOVO BILHETE
+                { id: 28, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 13, 15, 21, 17", assignedName: "Sandra" },
+                { id: 29, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 52, 33, 13, 48, 25", assignedName: "Soninha" },
+                { id: 30, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 05, 08, 11, 20, 24", assignedName: "Suellen" },
+                { id: 31, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Thiago" },
+                { id: 32, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 05, 34, 27, 25", assignedName: "TH Romerito" }
             ];
 
             let displayedTickets = window.innerWidth < 768 ? 4 : 8;
@@ -2562,8 +2406,9 @@ function copiarPix(elementId) {
                     const numerosArray = ticket.numbers.split(', ');
                     const numerosHTML = numerosArray.map(num => {
                         const numero = parseInt(num);
-                        const isAcerto = verificacaoRealizada && temNumerosValidos(numerosSorteados) && numerosSorteados.includes(numero);
-                        return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
+                        // REMOVIDO: Não destacamos mais os números com círculo amarelo
+                        // Apenas mostramos quantos acertos foram feitos
+                        return `<span class="numero-sorteio">${num.padStart(2, '0')}</span>`;
                     }).join('');
 
                     // Gerar um código aleatório para o ticket
@@ -2697,9 +2542,8 @@ function copiarPix(elementId) {
                 });
             });
 
-            // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
-            // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
-             atualizarNumerosOficiais([27, 32, 52, 10, 56, 03]);
+            // ========== ATUALIZAR NÚMEROS OFICIAIS ==========
+            atualizarNumerosOficiais([27, 32, 52, 10, 56, 03]);
         });
 
         // ========== CONTADOR PARA MEGA DA VIRADA ==========
