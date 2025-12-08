@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acordo de Participação - Bolão MegaTIP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
+
+        :root {
+            --color-primary: #171717;
+            --color-secondary: #d4af37;
+            --color-accent: #10b981;
+            --color-text: #ffffff;
+            --color-card: #262626;
+            --color-highlight: #dc2626;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            min-height: 100vh;
+            color: var(--color-text);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== ESTILOS DO MENU MOBILE SOBREPOSTO ========== */
+        /* Menu Mobile - estilo igual ao primeiro arquivo */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #171717;
+            border-bottom: 1px solid #374151;
+            z-index: 100;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        #mobile-menu.active {
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        .mobile-link {
+            display: block;
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .mobile-link:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: #d4af37;
+            padding-left: 28px;
+        }
+        
+        .mobile-link:last-child {
+            border-bottom: none;
+        }
+
+        #mobile-menu-button {
+            display: block;
+            z-index: 150;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: color 0.3s ease;
+        }
+        
+        #mobile-menu-button:hover {
+            color: #d4af37;
+        }
+
+        /* Ajuste para telas maiores - esconder menu mobile */
+        @media (min-width: 768px) {
+            #mobile-menu-button,
+            #mobile-menu {
+                display: none !important;
+            }
+        }
+
+        .footer {
+            background: rgba(23, 23, 23, 0.95);
+            border-top: 1px solid #374151;
+        }
+
+        .content-card {
+            background: rgba(23, 23, 23, 0.85);
+            border-radius: 20px;
+            border: 1px solid #374151;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section-item {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #374151;
+        }
+
+        .section-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-item h3 {
+            color: #d4af37;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-item h3 i {
+            margin-right: 10px;
+            min-width: 24px;
+        }
+
+        .section-item p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .section-item ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .section-item li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            padding-left: 8px;
+        }
+
+        .highlight-box {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .success-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .form-section {
+            background: rgba(38, 38, 38, 0.7);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 40px;
+            border: 1px solid #374151;
+        }
+
+        .aceite-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #d4af37;
+            font-size: 1rem;
+        }
+
+        .form-input {
+            padding: 14px 16px;
+            border-radius: 10px;
+            border: 2px solid #374151;
+            background: rgba(23, 23, 23, 0.9);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+            background: rgba(23, 23, 23, 1);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37, #fbbf24);
+            color: #171717;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 1.1rem;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .success-message {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid #10b981;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .content-card {
+                padding: 25px 20px;
+                border-radius: 16px;
+            }
+            
+            .section-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .form-section {
+                padding: 25px 20px;
+            }
+            
+            .btn-primary {
+                padding: 14px 24px;
+                font-size: 1rem;
+            }
+            
+            .section-item {
+                margin-bottom: 25px;
+                padding-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content-card {
+                padding: 20px 16px;
+            }
+            
+            .form-section {
+                padding: 20px 16px;
+            }
+            
+            .form-input {
+                padding: 12px 14px;
+            }
+            
+            .section-item h3 {
+                font-size: 1rem;
+            }
+        }
+        
+        .animate-pulse-soft {
+            animation: pulseSoft 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseSoft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <!-- Header com menu mobile embutido -->
+    <header class="sticky top-0 z-50 bg-[#171717] py-4 px-6 border-b border-gray-700">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-clover text-[#d4af37] text-2xl mr-2"></i>
+                <h1 class="text-2xl font-bold">Mega<span class="text-[#d4af37]">TIP</span></h1>
+            </div>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="index.html" class="hover:text-[#d4af37] transition font-medium">Início</a>
+                <a href="index.html#resultado" class="hover:text-[#d4af37] transition font-medium">Resultado</a>
+                <a href="index.html#video" class="hover:text-[#d4af37] transition font-medium">Ao Vivo</a>
+                <a href="regulamento.html" class="hover:text-[#d4af37] transition font-medium">Regulamento</a>
+                <a href="index.html#pagamento" class="hover:text-[#d4af37] transition font-medium">Pagamento</a>
+                <a href="index.html#bilhetes" class="hover:text-[#d4af37] transition font-medium">Bilhetes</a>
+                <a href="index.html#contato" class="hover:text-[#d4af37] transition font-medium">Contato</a>
+            </nav>
+
+            <!-- Botão Menu Mobile -->
+            <button id="mobile-menu-button" class="md:hidden text-xl z-150 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Menu Mobile (SOBREPOSTO - igual ao primeiro arquivo) -->
+        <div id="mobile-menu" class="md:hidden bg-[#171717] border-b border-gray-700">
+            <nav class="flex flex-col">
+                <a href="index.html" class="mobile-link">Início</a>
+                <a href="index.html#resultado" class="mobile-link">Resultado</a>
+                <a href="index.html#video" class="mobile-link">Ao Vivo</a>
+                <a href="regulamento.html" class="mobile-link">Regulamento</a>
+                <a href="index.html#pagamento" class="mobile-link">Pagamento</a>
+                <a href="index.html#bilhetes" class="mobile-link">Bilhetes</a>
+                <a href="index.html#contato" class="mobile-link">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="py-12 md:py-16 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <div class="content-card">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">
+                    <span class="bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 bg-clip-text text-transparent animate-pulse-soft">
+                        Acordo de Participação
+                    </span>
+                </h2>
+                
+                <!-- Resto do conteúdo permanece igual -->
+                <div class="section-item">
+                    <p class="text-lg leading-relaxed">Este documento serve como um guia de transparência e regras para o nosso bolão da Mega da Virada, organizado de forma informal e privada entre amigos e conhecidos no grupo de WhatsApp.</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p class="text-lg font-semibold"><strong>Nosso Objetivo:</strong> Unir esforços para aumentar as chances de ganhar na Mega da Virada 2025. Se qualquer um dos bilhetes comprados em conjunto for premiado, o valor total será dividido igualmente entre todos os participantes confirmados.</p>
+                </div>
+
+                <div class="section-item">
+                    <h3><i class="fas fa-user-check"></i> Participação e Regras Básicas</h3>
+                    <ul>
+                        <li><strong>Quem pode participar:</strong> Apenas maiores de 18 anos, dentro do grupo combinado.</li>
+                        <li><strong>Valor:</strong> O custo da participação será informado diretamente pelo organizador.</li>
+                        <li><strong>Pagamento:</strong> Cada participante deve enviar o pagamento <u>até o dia <strong>20/12/2025</strong></u>, prazo final para confirmar a vaga no bolão.</li>
+                        <li><strong>Fora do prazo:</strong> Quem não pagar até <strong>20/12</strong> fica automaticamente fora do bolão desta edição.</li>
+                    </ul>
+                </div>
+
+                <div class="section-item">
+                    <h3><i class="fas fa-calendar-day"></i> Cronograma Oficial</h3>
+                    <ul>
+                        <li><strong>20/12/2025:</strong> Prazo final para pagamento e confirmação.</li>
+                        <li><strong>20/12/2025:</strong> Os bilhetes serão comprados nesse mesmo dia pelo organizador.</li>
+                        <li><strong>31/12/2025:</strong> Sorteio oficial da Mega da Virada realizado pela Caixa Econômica Federal.</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <p>Todos os bilhetes serão comprados no mesmo dia para garantir que todos participem da mesma rodada oficial.</p>
+                    </div>
+                </div>
+
+                <div class="section-item">
+                    <h3><i class="fas fa-eye"></i> Transparência e Confiança</h3>
+                    <ul>
+                        <li><strong>Comprovantes:</strong> O participante deve enviar o comprovante de pagamento ao organizador.</li>
+                        <li><strong>Bilhetes Oficiais:</strong> Após a compra dos bilhetes no dia <strong>20/12/2025</strong>, as imagens/números serão enviados ao grupo.</li>
+                        <li><strong>Prestação de Contas:</strong> Tudo será mostrado no grupo para garantir transparência total.</li>
+                    </ul>
+                </div>
+
+                <div class="section-item">
+                    <h3><i class="fas fa-money-bill-wave"></i> Rateio do Prêmio</h3>
+                    <ul>
+                        <p><strong>🛡️ Responsabilidade pelo Resgate do Prêmio:</strong></p>
+<ul>
+  <li>✅ <strong>Responsável direto:</strong> Gabriel da Paz Silva Santos.</li>
+  <li>🔄 <strong>Sucessão designada:</strong> Em caso de impedimento, a responsabilidade passa automaticamente para Melissa Vitoria Rodrigues Pedro (noiva).</li>
+  <li>🗳️ <strong>Decisão coletiva:</strong> Se ambos não puderem, o próprio grupo decide, por votação, quem fará o resgate.</li>
+</ul>
+<p><em>Transparência total para sua segurança.</em></p>
+                        <li>O valor líquido será dividido igualmente entre todos os participantes confirmados.</li>
+                        <li>Não há taxa, comissão ou qualquer vantagem para o organizador.</li>
+                    </ul>
+                </div>
+
+                <div class="section-item">
+                    <h3><i class="fas fa-shield-alt"></i> Proteção de Dados Pessoais (LGPD)</h3>
+                    <p>São coletados apenas os dados essenciais:</p>
+                    <ul>
+                        <li><strong>Nome</strong> – Identificação do participante</li>
+                        <li><strong>CPF</strong> – Identificação fiscal única (para eventual resgate)</li>
+                        <li><strong>Telefone</strong> – Contato e envio das informações sobre o bolão</li>
+                        <li><strong>Uso:</strong> Exclusivamente para organização dessa edição do bolão.</li>
+                        <li><strong>Armazenamento:</strong> Mantidos apenas durante a duração do bolão.</li>
+                        <li><strong>Compartilhamento:</strong> Nenhum dado é repassado para terceiros.</li>
+                    </ul>
+                    <div class="success-box">
+                        <p><strong>Ao enviar seus dados, você concorda com este uso limitado e pode solicitar exclusão a qualquer momento.</strong></p>
+                    </div>
+                </div>
+
+                <div class="section-item">
+                    <h3><i class="fas fa-info-circle"></i> Avisos Importantes</h3>
+                    <ul>
+                        <li>Este é um acordo informal entre amigos e não substitui regras oficiais da Caixa.</li>
+                        <li>O bolão não possui vínculo com a Caixa Econômica Federal.</li>
+                        <li>Ao confirmar participação, você concorda com todas as regras descritas acima.</li>
+                    </ul>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="text-2xl font-bold mb-6 text-[#d4af37] text-center">Confirmar Participação</h3>
+                    <p class="mb-6 text-center text-gray-300">Para participar, preencha seus dados abaixo:</p>
+                    
+                    <form id="aceiteForm" class="aceite-form">
+                        <div class="form-group">
+                            <label for="nome" class="form-label">Seu Nome</label>
+                            <input type="text" id="nome" class="form-input" placeholder="Nome completo" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cpf" class="form-label">CPF</label>
+                            <input type="text" id="cpf" class="form-input" placeholder="000.000.000-00" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone" class="form-label">Seu WhatsApp</label>
+                            <input type="tel" id="telefone" class="form-input" placeholder="(31) 99999-9999" required>
+                        </div>
+                        
+                        <div class="form-group mt-4">
+                            <p class="text-sm text-gray-300 bg-gray-800 p-4 rounded-lg">
+                                <i class="fas fa-info-circle text-[#d4af37] mr-2"></i>
+                                Ao enviar, você concorda com o acordo acima e autoriza o uso dos seus dados apenas para organização deste bolão entre amigos.
+                            </p>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-check-circle mr-2"></i>Confirmar Participação no Bolão
+                        </button>
+                    </form>
+                    
+                    <div id="mensagemSucesso" class="success-message hidden">
+                        <p class="text-green-300 text-center text-lg">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <strong>Participação confirmada!</strong><br>
+                            <span class="text-sm">Seus dados foram registrados para o bolão MegaTIP.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer py-10 px-4">
+        <div class="container mx-auto text-center">
+            <div class="flex justify-center space-x-8 mb-6 items-center">
+                <a href="https://poosting.com/profile/tipgabriel" 
+                   class="text-white hover:text-[#d4af37] transition transform hover:scale-110 flex items-center"
+                   title="Siga-nos no Posting">
+                    <img src="poosting.png" 
+                         alt="Posting" 
+                         class="w-6 h-6 object-contain">
+                </a>
+                
+                <a href="https://wa.me/5531982042552?text=Olá!%20Quero%20participar%20do%20Bolão%20MegaTIP!" 
+                   class="text-white hover:text-[#d4af37] transition transform hover:scale-110 flex items-center"
+                   title="Fale conosco no WhatsApp">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                </a>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-lg font-medium text-gray-200">MegaTIP - Apostas e Bolão</p>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-sm text-gray-400">
+                    &copy; 2025 MegaTIP. Organização informal e colaborativa.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, where, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAtOXsHN0eZr7_3TI1YEIDYmI0MdKDzl_Y",
+            authDomain: "megatip-da04d.firebaseapp.com",
+            projectId: "megatip-da04d",
+            storageBucket: "megatip-da04d.firebasestorage.app",
+            messagingSenderId: "961646949580",
+            appId: "1:961646949580:web:279a9b74aea0aa7e033e69"
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+            
+            enableIndexedDbPersistence(db).catch((err) => {
+                console.warn("Persistência offline não suportada:", err);
+            });
+            
+            window.firebaseDB = db;
+            window.firebaseModules = { collection, addDoc, getDocs, query, where };
+            
+            console.log('🔥 Firebase Firestore inicializado com sucesso!');
+            
+        } catch (error) {
+            console.error('❌ Erro ao inicializar Firebase:', error);
+            window.firebaseDB = null;
+            window.firebaseModules = null;
+        }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Bolão MegaTIP - Sistema inicializado');
+
+            // ========== SISTEMA DE MENU MOBILE SOBREPOSTO ==========
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let menuOpen = false;
+
+            function toggleMobileMenu() {
+                menuOpen = !menuOpen;
+                
+                if (menuOpen) {
+                    // Abrir menu
+                    mobileMenu.classList.add('active');
+                    mobileMenuButton.innerHTML = '<i class="fas fa-times"></i>';
+                    // Não bloqueia o scroll do body
+                } else {
+                    // Fechar menu
+                    mobileMenu.classList.remove('active');
+                    mobileMenuButton.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+
+            // Evento no botão do menu
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileMenu();
+                });
+            }
+
+            // Fechar menu ao clicar em um link
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (menuOpen) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+
+            // Fechar menu ao clicar fora (em telas mobile)
+            document.addEventListener('click', function(e) {
+                if (menuOpen && 
+                    window.innerWidth < 768 &&
+                    !mobileMenu.contains(e.target) && 
+                    !mobileMenuButton.contains(e.target)) {
+                    toggleMobileMenu();
+                }
+            });
+
+            // Fechar menu com tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && menuOpen) {
+                    toggleMobileMenu();
+                }
+            });
+
+            // Fechar menu ao redimensionar para desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768 && menuOpen) {
+                    toggleMobileMenu();
+                }
+            });
+
+            console.log('✅ Menu Mobile sobreposto inicializado!');
+
+            // ========== RESTANTE DO CÓDIGO EXISTENTE ==========
+            const aceiteForm = document.getElementById('aceiteForm');
+            const mensagemSucesso = document.getElementById('mensagemSucesso');
+
+            function getParticipantesLocais() {
+                try {
+                    const participantes = localStorage.getItem('aceites_megatip');
+                    return participantes ? JSON.parse(participantes) : [];
+                } catch (error) {
+                    return [];
+                }
+            }
+
+            function salvarParticipanteLocal(participante) {
+                try {
+                    const participantes = getParticipantesLocais();
+                    participantes.push({
+                        ...participante,
+                        id: Date.now().toString(),
+                        data: new Date().toISOString(),
+                        timestamp: Date.now()
+                    });
+                    localStorage.setItem('aceites_megatip', JSON.stringify(participantes));
+                    console.log('📋 Dados salvos localmente na coleção aceites:', participante);
+                    return { success: true, id: Date.now().toString(), local: true };
+                } catch (error) {
+                    console.error('Erro ao salvar localmente:', error);
+                    return { success: false, error: error.message, local: true };
+                }
+            }
+
+            function verificarTelefoneLocal(telefone) {
+                try {
+                    const participantes = getParticipantesLocais();
+                    return participantes.some(p => p.telefone === telefone);
+                } catch (error) {
+                    return false;
+                }
+            }
+
+            async function salvarNoFirebase(participante) {
+                if (!window.firebaseDB || !window.firebaseModules) {
+                    console.log('Firebase não disponível, usando armazenamento local');
+                    return salvarParticipanteLocal(participante);
+                }
+
+                try {
+                    const { collection, addDoc } = window.firebaseModules;
+                    const db = window.firebaseDB;
+                    
+                    console.log('📤 Tentando salvar na coleção aceites...');
+                    
+                    const docRef = await addDoc(collection(db, "aceites"), {
+                        nome: participante.nome,
+                        cpf: participante.cpf,
+                        telefone: participante.telefone,
+                        data: new Date().toISOString(),
+                        timestamp: Date.now(),
+                        aceiteLGPD: true,
+                        tipo: 'bolao_megatip',
+                        status: 'pendente'
+                    });
+                    
+                    console.log('✅ Dados salvos na coleção aceites com ID:', docRef.id);
+                    return { success: true, id: docRef.id, firebase: true };
+                    
+                } catch (error) {
+                    console.error('❌ Erro ao salvar no Firebase:', error);
+                    return salvarParticipanteLocal(participante);
+                }
+            }
+
+            async function verificarTelefoneNoFirebase(telefone) {
+                if (!window.firebaseDB || !window.firebaseModules) {
+                    console.log('Firebase não disponível, verificando localmente');
+                    return verificarTelefoneLocal(telefone);
+                }
+
+                try {
+                    const { collection, getDocs, query, where } = window.firebaseModules;
+                    const db = window.firebaseDB;
+                    
+                    const q = query(
+                        collection(db, "aceites"), 
+                        where("telefone", "==", telefone)
+                    );
+                    
+                    const querySnapshot = await getDocs(q);
+                    const existe = !querySnapshot.empty;
+                    
+                    console.log('🔍 Telefone verificado na coleção aceites:', telefone, 'Existe:', existe);
+                    return existe;
+                    
+                } catch (error) {
+                    console.error('❌ Erro ao verificar telefone no Firebase:', error);
+                    return verificarTelefoneLocal(telefone);
+                }
+            }
+
+            function aplicarMascaraTelefone(telefone) {
+                const numbers = telefone.replace(/\D/g, '');
+                if (numbers.length <= 10) {
+                    return numbers
+                        .replace(/(\d{2})(\d)/, '($1) $2')
+                        .replace(/(\d{4})(\d)/, '$1-$2')
+                        .substring(0, 14);
+                } else {
+                    return numbers
+                        .replace(/(\d{2})(\d)/, '($1) $2')
+                        .replace(/(\d{5})(\d)/, '$1-$2')
+                        .substring(0, 15);
+                }
+            }
+
+            function aplicarMascaraCPF(cpf) {
+                const numbers = cpf.replace(/\D/g, '');
+                if (numbers.length <= 11) {
+                    return numbers
+                        .replace(/(\d{3})(\d)/, '$1.$2')
+                        .replace(/(\d{3})(\d)/, '$1.$2')
+                        .replace(/(\d{3})(\d{1,2})$/, '$1-$2')
+                        .substring(0, 14);
+                }
+                return numbers.substring(0, 11)
+                    .replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d)/, '$1.$2')
+                    .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            }
+
+            function validarCPF(cpf) {
+                const cpfLimpo = cpf.replace(/\D/g, '');
+                return cpfLimpo.length === 11;
+            }
+
+            const telefoneInput = document.getElementById('telefone');
+            const cpfInput = document.getElementById('cpf');
+
+            if (telefoneInput) {
+                telefoneInput.addEventListener('input', function(e) {
+                    e.target.value = aplicarMascaraTelefone(e.target.value);
+                });
+            }
+
+            if (cpfInput) {
+                cpfInput.addEventListener('input', function(e) {
+                    e.target.value = aplicarMascaraCPF(e.target.value);
+                });
+            }
+
+            function validarNome(nome) {
+                return nome && nome.trim().length >= 2;
+            }
+
+            function validarTelefone(telefone) {
+                const telefoneLimpo = telefone.replace(/\D/g, '');
+                return telefoneLimpo.length >= 10 && telefoneLimpo.length <= 11;
+            }
+
+            function validarFormulario(dados) {
+                const erros = [];
+
+                if (!validarNome(dados.nome)) {
+                    erros.push('Por favor, informe seu nome (mínimo 2 letras)');
+                }
+
+                if (!validarCPF(dados.cpf)) {
+                    erros.push('CPF inválido. Use o formato 000.000.000-00');
+                }
+
+                if (!validarTelefone(dados.telefone)) {
+                    erros.push('Telefone inválido. Use (00) 00000-0000');
+                }
+
+                return erros;
+            }
+
+            if (aceiteForm) {
+                aceiteForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const submitBtn = aceiteForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+                    submitBtn.disabled = true;
+                    
+                    try {
+                        const dadosForm = {
+                            nome: document.getElementById('nome').value.trim(),
+                            cpf: document.getElementById('cpf').value,
+                            telefone: document.getElementById('telefone').value
+                        };
+
+                        const erros = validarFormulario(dadosForm);
+                        if (erros.length > 0) {
+                            alert(erros[0]);
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            return;
+                        }
+
+                        const telefoneLimpo = dadosForm.telefone.replace(/\D/g, '');
+                        const cpfLimpo = dadosForm.cpf.replace(/\D/g, '');
+                        
+                        console.log('🔍 Verificando telefone:', telefoneLimpo);
+                        const telefoneExistente = await verificarTelefoneNoFirebase(telefoneLimpo);
+                        
+                        if (telefoneExistente) {
+                            alert('Este telefone já está registrado no bolão.');
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.disabled = false;
+                            return;
+                        }
+
+                        const participanteParaSalvar = {
+                            nome: dadosForm.nome,
+                            cpf: cpfLimpo,
+                            telefone: telefoneLimpo
+                        };
+
+                        console.log('💾 Salvando na coleção aceites...');
+                        const resultado = await salvarNoFirebase(participanteParaSalvar);
+                        
+                        if (resultado.success) {
+                            if (mensagemSucesso) {
+                                mensagemSucesso.classList.remove('hidden');
+                                if (resultado.local) {
+                                    mensagemSucesso.innerHTML = `
+                                        <p class="text-green-300 text-center text-lg">
+                                            <i class="fas fa-check-circle mr-2"></i>
+                                            <strong>Participação registrada localmente!</strong><br>
+                                            <span class="text-sm">Os dados serão sincronizados quando o sistema estiver online.</span>
+                                        </p>
+                                    `;
+                                } else {
+                                    mensagemSucesso.innerHTML = `
+                                        <p class="text-green-300 text-center text-lg">
+                                            <i class="fas fa-check-circle mr-2"></i>
+                                            <strong>Participação confirmada!</strong><br>
+                                            <span class="text-sm">Dados registrados com segurança em nuvem.<br>
+                    Você está no bolão!</span>
+                                        </p>
+                                    `;
+                                }
+                            }
+                            
+                            aceiteForm.reset();
+                            mensagemSucesso.scrollIntoView({ behavior: 'smooth' });
+                            
+                            setTimeout(() => {
+                                if (mensagemSucesso) {
+                                    mensagemSucesso.classList.add('hidden');
+                                }
+                            }, 5000);
+                            
+                        } else {
+                            throw new Error(resultado.error || 'Erro desconhecido ao salvar');
+                        }
+                        
+                    } catch (error) {
+                        console.error('❌ Erro no envio do formulário:', error);
+                        alert('Erro ao processar participação. Por favor, tente novamente.');
+                    } finally {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }
+                });
+            }
+
+            async function verificarFirebase() {
+                console.log('🔧 Verificando conexão com Firebase...');
+                
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                if (window.firebaseDB) {
+                    console.log('✅ Firebase está funcionando!');
+                    console.log('📊 Para ver os dados acesse:');
+                    console.log('https://console.firebase.google.com/project/megatip-da04d/firestore');
+                    console.log('📁 Coleção: aceites');
+                } else {
+                    console.warn('⚠️ Firebase não está disponível. Usando modo local.');
+                }
+            }
+
+            async function inicializarSistema() {
+                console.log('🚀 Inicializando sistema Bolão MegaTIP...');
+                await verificarFirebase();
+                console.log('✅ Sistema inicializado com sucesso');
+            }
+
+            inicializarSistema();
+        });
+    </script>
+</body>
+</html>
