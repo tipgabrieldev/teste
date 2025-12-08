@@ -251,6 +251,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     margin: 0 auto 20px auto; /* ← ADICIONADO margin-bottom */
 }
 
+        /* NÚMEROS OFICIAIS - ESTADO INICIAL (NÃO VERDE) */
         .numero-oficial {
             display: inline-flex;
             width: 45px;
@@ -268,11 +269,13 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             margin: 0;
         }
 
-        .numero-oficial.sorteado {
+        /* NÚMEROS OFICIAIS - ESTADO APÓS VERIFICAÇÃO (VERDE) */
+        .numero-oficial.verificado {
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             border-color: #10b981;
             transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
         }
 
         /* NÚMEROS DOS TICKETS - 3 por linha */
@@ -316,18 +319,21 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     border: 1px solid rgba(255,255,255,0.2) !important; /* ← MANTÉM A BORDA ORIGINAL */
         }
 
+        /* NÚMEROS DE ACERTO - DESTACADO COM ESTILO ESPECIAL */
         .numero-acerto {
             background: linear-gradient(135deg, #d4af37, #fbbf24);
             animation: bounce 0.5s;
-            color: #1e293b;
-            border-color: #d4af37;
+            color: #1e293b !important;
+            border-color: #d4af37 !important;
             border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4) !important;
+            transform: scale(1.1);
         }
 
         @keyframes bounce {
-            0%, 20%, 60%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            80% { transform: translateY(-4px); }
+            0%, 20%, 60%, 100% { transform: translateY(0) scale(1.1); }
+            40% { transform: translateY(-8px) scale(1.1); }
+            80% { transform: translateY(-4px) scale(1.1); }
         }
 
         .badge-premiado {
@@ -1188,6 +1194,35 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     }
 }
 
+/* ESTILOS PARA BARRA DE PROGRESSO DO CONTADOR */
+.progress-bar-container {
+    height: 2px;
+    background: #374151;
+    border-radius: 1px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37, #fbbf24);
+    border-radius: 1px;
+    transition: width 0.5s ease-in-out;
+    width: 0%;
+}
+
+/* Remover animações da barra de progresso que causam piscar */
+#progress-bar {
+    transition: width 0.5s ease-in-out !important;
+    animation: none !important;
+}
+
+/* REMOVER ANIMAÇÕES QUE CAUSAM PISCAR */
+@keyframes none {
+    0% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
     /* ESTILOS ELEGANTES PARA RESULTADOS APÓS SORTEIO */
 .sorteio-realizado .numero-oficial {
     background: linear-gradient(135deg, #10b981, #059669);
@@ -1195,7 +1230,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     border-color: #10b981;
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-    animation: pulse-verde 2s infinite;
 }
 
 @keyframes pulse-verde {
@@ -1357,6 +1391,223 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 .btn-premium:hover::after {
     left: 100%;
 }
+
+    /* ESTILOS PREMIUM PARA O VÍDEO NO MOBILE */
+.video-container-premium {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* Mais alto que 16:9 para mobile (4:3) */
+    overflow: hidden;
+    background: #000;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+
+.video-container-premium::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(135deg, 
+        #d4af37 0%, 
+        #fbbf24 25%, 
+        #10b981 50%, 
+        #059669 75%, 
+        #d4af37 100%);
+    border-radius: inherit;
+    z-index: -1;
+    animation: border-glow 4s linear infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes border-glow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.video-container-premium iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Ajustes específicos para mobile */
+@media (max-width: 768px) {
+    #video {
+        padding: 3rem 1rem;
+    }
+    
+    .video-container-premium {
+        padding-bottom: 70%; /* Proporção mais quadrada para mobile */
+        margin: 0 -0.5rem; /* Extende um pouco além das bordas */
+        border-radius: 1rem;
+    }
+    
+    #video .container {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    #video h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    #video .bg-gradient-to-br {
+        padding: 1.5rem;
+    }
+}
+
+/* Para telas um pouco maiores (tablets) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .video-container-premium {
+        padding-bottom: 60%; /* Proporção intermediária */
+    }
+}
+
+/* Para desktop */
+@media (min-width: 1025px) {
+    .video-container-premium {
+        padding-bottom: 56.25%; /* Proporção 16:9 padrão */
+    }
+}
+
+/* Efeito de brilho ao redor do container do vídeo */
+.video-container-premium::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        rgba(212, 175, 55, 0.3), 
+        rgba(16, 185, 129, 0.3), 
+        rgba(212, 175, 55, 0.3));
+    border-radius: inherit;
+    z-index: -2;
+    filter: blur(10px);
+    opacity: 0.7;
+}
+
+/* Ícone de play flutuante */
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(212, 175, 55, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+.play-icon:hover {
+    background: rgba(212, 175, 55, 1);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.play-icon i {
+    font-size: 2rem;
+    color: #1e293b;
+    margin-left: 5px;
+}
+
+/* Responsividade do ícone de play */
+@media (max-width: 768px) {
+    .play-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .play-icon i {
+        font-size: 1.5rem;
+    }
+}
+
+/* Badge "AO VIVO" */
+.live-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    z-index: 10;
+    animation: pulse-red 2s infinite;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+@keyframes pulse-red {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(220, 38, 38, 0.6);
+    }
+}
+
+/* Ajuste para landscape no mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .video-container-premium {
+        padding-bottom: 50%; /* Mais largo para landscape */
+    }
+}
+
+/* Efeito de loading sutil */
+.video-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        transparent 100%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+    z-index: 2;
+}
+
+@keyframes loading-shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
 </style>
 </head>
 <body class="text-white">
@@ -1451,14 +1702,14 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             </div>
         </div>
         
-        <!-- Barra de progresso -->
+        <!-- Barra de progresso - CORRIGIDA: SEM ANIMAÇÃO DE PISCAR -->
         <div class="mt-4">
             <div class="flex justify-between text-xs text-gray-400 mb-1">
                 <span>08/12/2025</span>
                 <span>31/12/2025</span>
             </div>
-            <div class="h-2 bg-[#374151] rounded-full overflow-hidden">
-                <div id="progress-bar" class="h-full bg-gradient-to-r from-[#d4af37] to-[#fbbf24] rounded-full"></div>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar-fill"></div>
             </div>
         </div>
     </div>
@@ -1522,7 +1773,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
                     
-                    <!-- Números oficiais fixos -->
+                    <!-- Números oficiais fixos - INICIALMENTE NÃO SÃO VERDES -->
                     <div class="flex justify-center flex-wrap gap-3 mb-6" id="numeros-oficiais">
                         <span class="numero-oficial">00</span>
                         <span class="numero-oficial">00</span>
@@ -1576,27 +1827,56 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         </div>
     </section>
 
-    <!-- Seção: Vídeo do Sorteio -->
+    <!-- Seção: Vídeo do Sorteio - VERSÃO ATUALIZADA PARA MOBILE -->
     <section id="video" class="py-16 px-4 bg-[#171717]">
-        <div class="container mx-auto max-w-4xl">
-            <h2 class="text-3xl font-bold text-center mb-12">Sorteio ao vivo</h2>
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-8 md:mb-12">Sorteio ao vivo</h2>
             
-            <div class="bg-[#262626] rounded-xl p-6 border border-gray-700">
-                <div class="video-container">
+            <div class="bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#1e293b] rounded-2xl md:rounded-3xl p-4 md:p-8 border-2 border-[#374151] shadow-2xl relative overflow-hidden">
+                <!-- Elementos decorativos -->
+                <div class="absolute top-0 left-0 w-32 h-32 bg-[#d4af37] opacity-5 rounded-full -translate-x-16 -translate-y-16"></div>
+                <div class="absolute bottom-0 right-0 w-40 h-40 bg-[#10b981] opacity-5 rounded-full translate-x-20 translate-y-20"></div>
+                
+                <!-- Container do vídeo com bordas suaves -->
+                <div class="video-container-premium rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
                     <iframe src="https://www.youtube.com/embed/42F-HsIC27k?si=ZIEobD56QuawK0jT" 
                             title="Sorteio Mega da Virada" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
+                            allowfullscreen
+                            class="w-full h-full">
                     </iframe>
                 </div>
-<p class="text-center mt-4 text-gray-300 text-sm md:text-base">
-    <span class="font-bold">NÃO VAI PERDER, VAI?</span><br class="hidden md:block">
-    A transmissão oficial será realizada em 31 de dezembro de 2025. É a nossa chance de mudar de vida.
-</p>
-<h3 class="text-center text-xl md:text-2xl font-bold mt-3 titulo-premio-gradiente">
-    BILHÃO DA VIRADA! <br> R$ 850 MILHÕES EM JOGO!
-</h3>
+                
+                <div class="mt-6 md:mt-8 text-center px-2 md:px-0">
+                    <p class="text-lg md:text-xl font-bold mb-3 md:mb-4 bg-gradient-to-r from-[#d4af37] to-[#fbbf24] bg-clip-text text-transparent">
+                        NÃO VAI PERDER, VAI?
+                    </p>
+                    <p class="text-sm md:text-base text-gray-300 mb-4 md:mb-6 leading-relaxed">
+                        A transmissão oficial será realizada em 31 de dezembro de 2025.<br class="hidden md:block">
+                        É a nossa chance de mudar de vida juntos!
+                    </p>
+                    
+                    <div class="inline-block bg-gradient-to-r from-[#10b981] via-[#059669] to-[#10b981] p-1 rounded-full">
+                        <div class="bg-[#0f172a] rounded-full px-6 py-3">
+                            <h3 class="text-lg md:text-2xl font-bold bg-gradient-to-r from-[#d4af37] via-[#fbbf24] to-[#d4af37] bg-clip-text text-transparent">
+                                BILHÃO DA VIRADA!<br>
+                                <span class="text-white">R$ 850 MILHÕES EM JOGO!</span>
+                            </h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Informação adicional em destaque -->
+                    <div class="mt-6 md:mt-8 p-4 md:p-5 bg-gradient-to-r from-[#1e293b]/50 to-[#0f172a]/50 rounded-xl border border-[#374151]">
+                        <div class="flex items-center justify-center gap-3 md:gap-4">
+                            <i class="fas fa-play-circle text-2xl md:text-3xl text-[#d4af37]"></i>
+                            <div class="text-left">
+                                <p class="font-bold text-white text-sm md:text-base">Ao vivo às 19h</p>
+                                <p class="text-xs md:text-sm text-gray-400">YouTube oficial da Caixa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1904,6 +2184,7 @@ function copiarPix(elementId) {
             let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
             let bilheteVencedor = null;
             let grupoGanhou = false;
+            let verificacaoRealizada = false; // Nova variável para controlar se a verificação já foi feita
 
             // ========== SISTEMA DE VERIFICAÇÃO ==========
             const btnVerificarBilhetes = document.getElementById('btn-verificar-bilhetes');
@@ -1931,12 +2212,8 @@ function copiarPix(elementId) {
                 numerosElementos.forEach((elemento, index) => {
                     if (index < novosNumeros.length) {
                         elemento.textContent = novosNumeros[index].toString().padStart(2, '0');
-                        // Só adiciona a classe "sorteado" se o número for maior que 0
-                        if (novosNumeros[index] > 0) {
-                            elemento.classList.add('sorteado');
-                        } else {
-                            elemento.classList.remove('sorteado');
-                        }
+                        // REMOVIDO: Não adiciona a classe "verificado" aqui
+                        // Apenas atualiza os números, mas não os torna verdes
                     }
                 });
                 
@@ -1946,6 +2223,14 @@ function copiarPix(elementId) {
                 } else {
                     statusSorteio.innerHTML = '<p class="text-[#d4af37]"><i class="fas fa-clock mr-2"></i>Aguardando sorteio oficial da Caixa</p>';
                 }
+            }
+
+            // Função para destacar números oficiais como verdes (após verificação)
+            function destacarNumerosOficiais() {
+                const numerosElementos = document.querySelectorAll('.numero-oficial');
+                numerosElementos.forEach(elemento => {
+                    elemento.classList.add('verificado');
+                });
             }
 
             // Função para verificar acertos de um bilhete
@@ -2098,6 +2383,12 @@ function copiarPix(elementId) {
                     statusSorteio.innerHTML = '<p class="text-[#dc2626]"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando sorteio oficial da Caixa!</p>';
                     return;
                 }
+
+                // Destacar números oficiais como verdes
+                destacarNumerosOficiais();
+                
+                // Marcar que a verificação foi realizada
+                verificacaoRealizada = true;
 
                 let maxAcertos = 0;
                 let bilhetesComAcertos = [];
@@ -2261,7 +2552,7 @@ function copiarPix(elementId) {
 
                 for (let i = 0; i < displayedTickets && i < filteredTickets.length; i++) {
                     const ticket = filteredTickets[i];
-                    const acertos = verificarAcertos(ticket.numbers);
+                    const acertos = verificacaoRealizada ? verificarAcertos(ticket.numbers) : 0;
                     const isVencedor = grupoGanhou && bilheteVencedor && bilheteVencedor.id === ticket.id;
                     const isGrupoVencedor = grupoGanhou;
 
@@ -2271,7 +2562,7 @@ function copiarPix(elementId) {
                     const numerosArray = ticket.numbers.split(', ');
                     const numerosHTML = numerosArray.map(num => {
                         const numero = parseInt(num);
-                        const isAcerto = temNumerosValidos(numerosSorteados) && numerosSorteados.includes(numero);
+                        const isAcerto = verificacaoRealizada && temNumerosValidos(numerosSorteados) && numerosSorteados.includes(numero);
                         return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
                     }).join('');
 
@@ -2447,14 +2738,17 @@ function atualizarContador() {
     atualizarComAnimacao('minutos', minutos.toString().padStart(2, '0'));
     atualizarComAnimacao('segundos', segundos.toString().padStart(2, '0'));
     
-    // Atualizar barra de progresso
+    // Atualizar barra de progresso (SEM ANIMAÇÕES QUE CAUSAM PISCAR)
     const dataInicio = new Date('December 08, 2025').getTime();
-    const dataFim = new Date('December 31, 2025').getTime();
+    const dataFim = new Date('December 31, 2025 19:00:00').getTime();
     const totalDias = dataFim - dataInicio;
     const diasPassados = agora - dataInicio;
     const progresso = Math.min((diasPassados / totalDias) * 100, 100);
     
-    document.getElementById('progress-bar').style.width = `${progresso}%`;
+    // Usar requestAnimationFrame para suavizar a transição
+    requestAnimationFrame(() => {
+        document.getElementById('progress-bar').style.width = `${progresso}%`;
+    });
 }
 
 function atualizarComAnimacao(elementId, novoValor) {
