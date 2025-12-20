@@ -1462,6 +1462,249 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         padding-bottom: 50%; /* Mais largo para landscape */
     }
 }
+
+    /* ========== ESTILOS PARA GALERIA DE BILHETES OFICIAIS ========== */
+
+/* Card de bilhete */
+.card-bilhete {
+    background: #262626;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #374151;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card-bilhete:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+    border-color: #d4af37;
+}
+
+.card-bilhete.confirmado {
+    border-left: 4px solid #10b981;
+}
+
+.card-bilhete.processamento {
+    border-left: 4px solid #fbbf24;
+}
+
+/* Imagem do bilhete */
+.bilhete-imagem-container {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    height: 200px;
+}
+
+.bilhete-imagem {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.card-bilhete:hover .bilhete-imagem {
+    transform: scale(1.05);
+}
+
+/* Overlay na imagem */
+.bilhete-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-bilhete:hover .bilhete-overlay {
+    opacity: 1;
+}
+
+.btn-ampliar {
+    background: rgba(212, 175, 55, 0.9);
+    color: #171717;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-ampliar:hover {
+    background: #d4af37;
+    transform: scale(1.05);
+}
+
+/* Conteúdo do card */
+.bilhete-conteudo {
+    padding: 16px;
+}
+
+.bilhete-numero {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-bottom: 4px;
+}
+
+.bilhete-participante {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: white;
+}
+
+.bilhete-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.status-confirmado {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.status-processamento {
+    background: rgba(251, 191, 36, 0.2);
+    color: #fbbf24;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+/* Números no card */
+.bilhete-numeros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+}
+
+.bilhete-numero-item {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 13px;
+    color: #f1f5f9;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-conteudo {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid #374151;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-overlay.active .modal-conteudo {
+    transform: translateY(0);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .bilhete-imagem-container {
+        height: 180px;
+    }
+    
+    .bilhete-participante {
+        font-size: 14px;
+    }
+    
+    .bilhete-numero-item {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+    }
+    
+    .modal-conteudo {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bilhete-imagem-container {
+        height: 160px;
+    }
+}
+
+/* Filtros ativos */
+.filter-btn.active {
+    background: linear-gradient(135deg, #d4af37, #fbbf24);
+    color: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Placeholder para imagem ausente */
+.imagem-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+}
+
+.imagem-placeholder i {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #4b5563;
+    }
 </style>
 </head>
 <body class="text-white">
@@ -1830,6 +2073,176 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         </div>
     </section>
 
+
+
+<!-- Seção: Galeria de Bilhetes Oficiais -->
+<section id="galeria-bilhetes" class="py-16 px-4 bg-[#171717]">
+    <div class="container mx-auto max-w-6xl">
+        <h2 class="text-3xl font-bold text-center mb-4">Galeria de Bilhetes Oficiais</h2>
+        <p class="text-center text-gray-300 mb-10 max-w-3xl mx-auto">
+            Bilhetes oficiais da Caixa Econômica Federal que serão apostados na Mega da Virada 2025.
+            Cada imagem representa um bilhete físico registrado na lotérica.
+        </p>
+        
+        <!-- Filtros e estatísticas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
+                <div class="flex items-center">
+                    <i class="fas fa-ticket-alt text-[#d4af37] text-2xl mr-4"></i>
+                    <div>
+                        <p class="text-sm text-gray-400">Total de Bilhetes</p>
+                        <p class="text-2xl font-bold" id="total-bilhetes">12</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle text-[#10b981] text-2xl mr-4"></i>
+                    <div>
+                        <p class="text-sm text-gray-400">Confirmados</p>
+                        <p class="text-2xl font-bold" id="bilhetes-confirmados">8</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-[#fbbf24] text-2xl mr-4"></i>
+                    <div>
+                        <p class="text-sm text-gray-400">Em Processamento</p>
+                        <p class="text-2xl font-bold" id="bilhetes-processamento">4</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Filtros -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8">
+            <button class="filter-btn active bg-[#d4af37] text-[#171717] font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="todos">
+                Todos
+            </button>
+            <button class="filter-btn bg-[#374151] hover:bg-[#4b5563] text-white font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="confirmados">
+                <i class="fas fa-check-circle mr-2"></i>Confirmados
+            </button>
+            <button class="filter-btn bg-[#374151] hover:bg-[#4b5563] text-white font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="processamento">
+                <i class="fas fa-clock mr-2"></i>Processamento
+            </button>
+            <button class="filter-btn bg-[#374151] hover:bg-[#4b5563] text-white font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="numeros">
+                <i class="fas fa-hashtag mr-2"></i>Por Números
+            </button>
+        </div>
+        
+        <!-- Galeria de Imagens -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="galeria-imagens">
+            <!-- Bilhetes serão carregados aqui -->
+        </div>
+        
+        <!-- Modal para visualização ampliada -->
+        <div id="modal-bilhete" class="modal-overlay">
+            <div class="modal-conteudo max-w-4xl">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-2xl font-bold text-[#d4af37]" id="modal-titulo">Bilhete Oficial</h3>
+                        <p class="text-gray-300" id="modal-descricao">Mega da Virada 2025</p>
+                    </div>
+                    <button id="fechar-modal" class="text-gray-400 hover:text-white text-2xl">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <div class="bg-black rounded-lg p-2 mb-4">
+                            <img id="modal-imagem" src="" alt="Bilhete Oficial" class="w-full h-auto rounded">
+                        </div>
+                        <div class="flex justify-center space-x-4">
+                            <button id="btn-anterior" class="bg-[#374151] hover:bg-[#4b5563] text-white py-2 px-4 rounded-lg">
+                                <i class="fas fa-chevron-left mr-2"></i>Anterior
+                            </button>
+                            <button id="btn-proximo" class="bg-[#374151] hover:bg-[#4b5563] text-white py-2 px-4 rounded-lg">
+                                Próximo<i class="fas fa-chevron-right ml-2"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-[#262626] p-4 rounded-lg border border-gray-700 mb-4">
+                            <h4 class="font-bold text-lg mb-2 text-[#d4af37]">Informações do Bilhete</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Número do Bilhete:</span>
+                                    <span class="font-bold" id="modal-numero">#001</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Participante:</span>
+                                    <span class="font-bold" id="modal-participante">Ana Silva</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Concurso:</span>
+                                    <span class="font-bold">Mega da Virada 2025</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Status:</span>
+                                    <span class="font-bold text-[#10b981]" id="modal-status">Confirmado</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Data do Jogo:</span>
+                                    <span class="font-bold">31/12/2025</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
+                            <h4 class="font-bold text-lg mb-2 text-[#d4af37]">Números Apostados</h4>
+                            <div class="numeros-container" id="modal-numeros">
+                                <!-- Números serão inseridos aqui -->
+                            </div>
+                            <p class="text-sm text-gray-400 mt-4">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Este é o bilhete físico oficial registrado na Caixa Econômica Federal.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Informações importantes -->
+        <div class="mt-12 bg-[#262626] p-6 rounded-lg border border-gray-700">
+            <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Sobre os Bilhetes Oficiais</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="flex items-start">
+                    <i class="fas fa-shield-alt text-[#10b981] text-xl mr-3 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold mb-1">Autenticidade Garantida</h4>
+                        <p class="text-sm text-gray-300">Todos os bilhetes são oficiais da Caixa, registrados no sistema da loteria.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-camera text-[#d4af37] text-xl mr-3 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold mb-1">Digitalização</h4>
+                        <p class="text-sm text-gray-300">Cada bilhete é fotografado/escaneado após a compra na lotérica.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <i class="fas fa-users text-[#3b82f6] text-xl mr-3 mt-1"></i>
+                    <div>
+                        <h4 class="font-bold mb-1">Transparência</h4>
+                        <p class="text-sm text-gray-300">Todos os participantes podem verificar os bilhetes apostados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    
+
+
+    
     <section id="contato" class="py-16 px-4 bg-[#171717]">
     <div class="container mx-auto max-w-4xl">
         <h2 class="text-3xl font-bold text-center mb-12">Entre em Contato</h2>
