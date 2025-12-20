@@ -3079,6 +3079,332 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adicionar esta linha no final do DOMContentLoaded
     aplicarEstilosAposSorteio();
 });
+
+        // ========== GALERIA DE BILHETES OFICIAIS ==========
+const galeriaImagens = document.getElementById('galeria-imagens');
+const filtroBotoes = document.querySelectorAll('.filter-btn');
+const modalBilhete = document.getElementById('modal-bilhete');
+const fecharModal = document.getElementById('fechar-modal');
+const btnAnterior = document.getElementById('btn-anterior');
+const btnProximo = document.getElementById('btn-proximo');
+
+// Dados dos bilhetes oficiais (com imagens)
+const bilhetesOficiais = [
+    {
+        id: 1,
+        numero: "#001",
+        participante: "Ana Silva",
+        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["04", "12", "25", "33", "42", "58"],
+        status: "confirmado",
+        data: "15/12/2025",
+        descricao: "Bilhete oficial da Mega da Virada - Participante 1"
+    },
+    {
+        id: 2,
+        numero: "#002",
+        participante: "Carlos Santos",
+        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["07", "15", "23", "31", "46", "52"],
+        status: "confirmado",
+        data: "14/12/2025",
+        descricao: "Bilhete registrado na lotérica central"
+    },
+    {
+        id: 3,
+        numero: "#003",
+        participante: "Mariana Oliveira",
+        imagem: "https://images.unsplash.com/photo-1585828918176-e6c6e6b1b43a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["02", "11", "29", "37", "44", "60"],
+        status: "processamento",
+        data: "16/12/2025",
+        descricao: "Aguardando confirmação de pagamento"
+    },
+    {
+        id: 4,
+        numero: "#004",
+        participante: "Ricardo Lima",
+        imagem: "https://images.unsplash.com/photo-1559223607-a43c990c692c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["09", "18", "27", "35", "49", "55"],
+        status: "confirmado",
+        data: "13/12/2025",
+        descricao: "Bilhete escaneado após compra"
+    },
+    {
+        id: 5,
+        numero: "#005",
+        participante: "Fernanda Costa",
+        imagem: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["13", "21", "34", "41", "53", "59"],
+        status: "confirmado",
+        data: "15/12/2025",
+        descricao: "Comprovante oficial da Caixa"
+    },
+    {
+        id: 6,
+        numero: "#006",
+        participante: "Roberto Alves",
+        imagem: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["05", "16", "28", "39", "47", "56"],
+        status: "processamento",
+        data: "16/12/2025",
+        descricao: "Bilhete em análise"
+    },
+    {
+        id: 7,
+        numero: "#007",
+        participante: "Juliana Pereira",
+        imagem: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["03", "14", "26", "38", "45", "57"],
+        status: "confirmado",
+        data: "14/12/2025",
+        descricao: "Documento oficial da loteria"
+    },
+    {
+        id: 8,
+        numero: "#008",
+        participante: "Pedro Mendes",
+        imagem: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["08", "19", "32", "43", "51", "60"],
+        status: "confirmado",
+        data: "13/12/2025",
+        descricao: "Registro válido para o sorteio"
+    },
+    {
+        id: 9,
+        numero: "#009",
+        participante: "Patrícia Souza",
+        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["06", "17", "30", "40", "48", "54"],
+        status: "processamento",
+        data: "16/12/2025",
+        descricao: "Aguardando validação"
+    },
+    {
+        id: 10,
+        numero: "#010",
+        participante: "Lucas Ferreira",
+        imagem: "https://images.unsplash.com/photo-1585828918176-e6c6e6b1b43a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["10", "22", "31", "42", "50", "59"],
+        status: "confirmado",
+        data: "15/12/2025",
+        descricao: "Bilhete físico digitalizado"
+    },
+    {
+        id: 11,
+        numero: "#011",
+        participante: "Camila Rocha",
+        imagem: "https://images.unsplash.com/photo-1559223607-a43c990c692c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["01", "20", "33", "44", "52", "57"],
+        status: "confirmado",
+        data: "14/12/2025",
+        descricao: "Comprovante de aposta oficial"
+    },
+    {
+        id: 12,
+        numero: "#012",
+        participante: "Bruno Cardoso",
+        imagem: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["11", "24", "36", "45", "53", "60"],
+        status: "processamento",
+        data: "16/12/2025",
+        descricao: "Processando documentação"
+    }
+];
+
+// Variáveis de controle
+let filtroAtual = 'todos';
+let bilheteAtualModal = 0;
+let bilhetesFiltrados = [];
+
+// Atualizar estatísticas
+function atualizarEstatisticas() {
+    const total = bilhetesOficiais.length;
+    const confirmados = bilhetesOficiais.filter(b => b.status === 'confirmado').length;
+    const processamento = bilhetesOficiais.filter(b => b.status === 'processamento').length;
+    
+    document.getElementById('total-bilhetes').textContent = total;
+    document.getElementById('bilhetes-confirmados').textContent = confirmados;
+    document.getElementById('bilhetes-processamento').textContent = processamento;
+}
+
+// Renderizar bilhetes
+function renderizarBilhetes() {
+    galeriaImagens.innerHTML = '';
+    
+    // Filtrar bilhetes
+    bilhetesFiltrados = [...bilhetesOficiais];
+    
+    if (filtroAtual === 'confirmados') {
+        bilhetesFiltrados = bilhetesFiltrados.filter(b => b.status === 'confirmado');
+    } else if (filtroAtual === 'processamento') {
+        bilhetesFiltrados = bilhetesFiltrados.filter(b => b.status === 'processamento');
+    } else if (filtroAtual === 'numeros') {
+        bilhetesFiltrados = [...bilhetesFiltrados].sort((a, b) => {
+            const numA = parseInt(a.numeros[0]);
+            const numB = parseInt(b.numeros[0]);
+            return numA - numB;
+        });
+    }
+    
+    // Renderizar cada bilhete
+    bilhetesFiltrados.forEach(bilhete => {
+        const card = document.createElement('div');
+        card.className = `card-bilhete ${bilhete.status}`;
+        card.dataset.id = bilhete.id;
+        
+        // Criar elementos dos números
+        const numerosHTML = bilhete.numeros.map(num => 
+            `<span class="bilhete-numero-item">${num}</span>`
+        ).join('');
+        
+        card.innerHTML = `
+            <div class="bilhete-imagem-container">
+                <img src="${bilhete.imagem}" alt="Bilhete ${bilhete.numero}" class="bilhete-imagem">
+                <div class="bilhete-overlay">
+                    <button class="btn-ampliar" data-id="${bilhete.id}">
+                        <i class="fas fa-search-plus"></i>
+                        Ampliar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bilhete-conteudo">
+                <div class="bilhete-numero">${bilhete.numero}</div>
+                <div class="bilhete-participante">${bilhete.participante}</div>
+                <div class="bilhete-status ${bilhete.status === 'confirmado' ? 'status-confirmado' : 'status-processamento'}">
+                    <i class="fas ${bilhete.status === 'confirmado' ? 'fa-check-circle' : 'fa-clock'} mr-2"></i>
+                    ${bilhete.status === 'confirmado' ? 'Confirmado' : 'Em Processamento'}
+                </div>
+                
+                <div class="bilhete-numeros">
+                    ${numerosHTML}
+                </div>
+                
+                <div class="text-xs text-gray-400 mt-3">
+                    <i class="fas fa-calendar-alt mr-1"></i>
+                    ${bilhete.data}
+                </div>
+            </div>
+        `;
+        
+        galeriaImagens.appendChild(card);
+        
+        // Adicionar evento de clique
+        const btnAmpliar = card.querySelector('.btn-ampliar');
+        btnAmpliar.addEventListener('click', (e) => {
+            e.stopPropagation();
+            abrirModal(bilhete.id);
+        });
+        
+        card.addEventListener('click', () => {
+            abrirModal(bilhete.id);
+        });
+    });
+}
+
+// Abrir modal
+function abrirModal(id) {
+    const bilhete = bilhetesOficiais.find(b => b.id === id);
+    if (!bilhete) return;
+    
+    bilheteAtualModal = bilhetesFiltrados.findIndex(b => b.id === id);
+    
+    // Atualizar conteúdo do modal
+    document.getElementById('modal-titulo').textContent = `Bilhete ${bilhete.numero}`;
+    document.getElementById('modal-descricao').textContent = bilhete.descricao;
+    document.getElementById('modal-imagem').src = bilhete.imagem;
+    document.getElementById('modal-imagem').alt = `Bilhete ${bilhete.numero} - ${bilhete.participante}`;
+    document.getElementById('modal-numero').textContent = bilhete.numero;
+    document.getElementById('modal-participante').textContent = bilhete.participante;
+    document.getElementById('modal-status').textContent = 
+        bilhete.status === 'confirmado' ? 'Confirmado' : 'Em Processamento';
+    document.getElementById('modal-status').className = 
+        `font-bold ${bilhete.status === 'confirmado' ? 'text-[#10b981]' : 'text-[#fbbf24]'}`;
+    
+    // Atualizar números
+    const numerosContainer = document.getElementById('modal-numeros');
+    numerosContainer.innerHTML = bilhete.numeros.map(num => 
+        `<span class="numero-sorteio">${num.padStart(2, '0')}</span>`
+    ).join('');
+    
+    // Mostrar modal
+    modalBilhete.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Fechar modal
+function fecharModalHandler() {
+    modalBilhete.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Navegar no modal
+function navegarModal(direcao) {
+    if (bilhetesFiltrados.length === 0) return;
+    
+    if (direcao === 'anterior') {
+        bilheteAtualModal--;
+        if (bilheteAtualModal < 0) {
+            bilheteAtualModal = bilhetesFiltrados.length - 1;
+        }
+    } else {
+        bilheteAtualModal++;
+        if (bilheteAtualModal >= bilhetesFiltrados.length) {
+            bilheteAtualModal = 0;
+        }
+    }
+    
+    abrirModal(bilhetesFiltrados[bilheteAtualModal].id);
+}
+
+// Inicializar eventos
+filtroBotoes.forEach(btn => {
+    btn.addEventListener('click', function() {
+        // Remover classe active de todos
+        filtroBotoes.forEach(b => b.classList.remove('active'));
+        
+        // Adicionar classe active ao botão clicado
+        this.classList.add('active');
+        
+        // Atualizar filtro
+        filtroAtual = this.dataset.filter;
+        
+        // Renderizar bilhetes
+        renderizarBilhetes();
+    });
+});
+
+fecharModal.addEventListener('click', fecharModalHandler);
+btnAnterior.addEventListener('click', () => navegarModal('anterior'));
+btnProximo.addEventListener('click', () => navegarModal('proximo'));
+
+// Fechar modal ao clicar fora
+modalBilhete.addEventListener('click', (e) => {
+    if (e.target === modalBilhete) {
+        fecharModalHandler();
+    }
+});
+
+// Fechar modal com tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalBilhete.classList.contains('active')) {
+        fecharModalHandler();
+    }
+    
+    // Navegação com setas
+    if (modalBilhete.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') {
+            navegarModal('anterior');
+        } else if (e.key === 'ArrowRight') {
+            navegarModal('proximo');
+        }
+    }
+});
+
+// Inicializar galeria
+atualizarEstatisticas();
+renderizarBilhetes();
     </script>
 </body>
 </html>
