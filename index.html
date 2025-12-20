@@ -1674,22 +1674,283 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     .grid-cols-4 {
         grid-template-columns: repeat(2, 1fr);
     }
+/* ========== GALERIA DE BILHETES OFICIAIS ========== */
+
+/* Card do bilhete */
+.card-bilhete-galeria {
+    background: #262626;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #374151;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.card-bilhete-galeria:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+    border-color: #d4af37;
+}
+
+/* Imagem do bilhete - SEM CORTES */
+.bilhete-imagem-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bilhete-imagem-galeria {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Mantém proporção sem cortar */
+    padding: 10px;
+    transition: transform 0.3s ease;
+}
+
+.card-bilhete-galeria:hover .bilhete-imagem-galeria {
+    transform: scale(1.05);
+}
+
+/* Overlay na imagem */
+.bilhete-overlay-galeria {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 40%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card-bilhete-galeria:hover .bilhete-overlay-galeria {
+    opacity: 1;
+}
+
+/* Conteúdo do card */
+.bilhete-info {
+    padding: 15px;
+    background: #1e293b;
+}
+
+.bilhete-nome {
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bilhete-codigo {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-bottom: 8px;
+    font-family: 'Courier New', monospace;
+}
+
+.bilhete-numeros-mini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 10px;
+}
+
+.numero-mini {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 12px;
+    color: #f1f5f9;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Badge de confirmação */
+.badge-confirmado {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-conteudo {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-radius: 16px;
+    padding: 30px;
+    width: 100%;
+    max-width: 1400px;
+    border: 1px solid #374151;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    transform: translateY(-20px);
+    transition: transform 0.3s ease;
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+.modal-overlay.active .modal-conteudo {
+    transform: translateY(0);
+}
+
+/* Imagem no modal - SEM CORTES */
+#modal-imagem {
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
+/* Botões do modal */
+.btn-modal-acao {
+    background: #374151;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-modal-acao:hover {
+    background: #4b5563;
+    transform: scale(1.1);
+}
+
+/* Miniaturas */
+.miniatura-item {
+    flex: 0 0 auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #374151;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.miniatura-item:hover {
+    border-color: #d4af37;
+    transform: scale(1.05);
+}
+
+.miniatura-item.active {
+    border-color: #d4af37;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+.miniatura-imagem {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Filtros */
+.filter-badge.active {
+    background: linear-gradient(135deg, #d4af37, #fbbf24);
+    color: #1e293b;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Barra de busca */
+#busca-bilhetes:focus {
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .grid-cols-5 {
+        grid-template-columns: repeat(4, 1fr);
+    }
     
-    .bilhete-imagem-container {
+    .bilhete-imagem-wrapper {
+        height: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-cols-5 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .bilhete-imagem-wrapper {
+        height: 180px;
+    }
+    
+    .modal-conteudo {
+        padding: 20px;
+    }
+    
+    .modal-conteudo .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .grid-cols-5 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bilhete-imagem-wrapper {
         height: 160px;
     }
 }
 
-/* Filtros ativos */
-.filter-btn.active {
-    background: linear-gradient(135deg, #d4af37, #fbbf24);
-    color: #1e293b;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-}
-
 /* Placeholder para imagem ausente */
-.imagem-placeholder {
+.imagem-placeholder-galeria {
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #1e293b, #0f172a);
@@ -1698,13 +1959,38 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     align-items: center;
     justify-content: center;
     color: #9ca3af;
+    padding: 20px;
 }
 
-.imagem-placeholder i {
+.imagem-placeholder-galeria i {
     font-size: 40px;
     margin-bottom: 10px;
     color: #4b5563;
-    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.card-bilhete-galeria {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Números no modal */
+#modal-numeros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+#modal-numeros .numero-sorteio {
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+}
 </style>
 </head>
 <body class="text-white">
@@ -2077,169 +2363,195 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 
 <!-- Seção: Galeria de Bilhetes Oficiais -->
 <section id="galeria-bilhetes" class="py-16 px-4 bg-[#171717]">
-    <div class="container mx-auto max-w-6xl">
+    <div class="container mx-auto max-w-7xl">
         <h2 class="text-3xl font-bold text-center mb-4">Galeria de Bilhetes Oficiais</h2>
         <p class="text-center text-gray-300 mb-10 max-w-3xl mx-auto">
-            Bilhetes oficiais da Caixa Econômica Federal que serão apostados na Mega da Virada 2025.
-            Cada imagem representa um bilhete físico registrado na lotérica.
+            Bilhetes oficiais da Caixa Econômica Federal apostados na Mega da Virada 2025.
+            <span class="text-[#d4af37] font-bold">43 bilhetes confirmados!</span>
         </p>
         
-        <!-- Filtros e estatísticas -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
-                <div class="flex items-center">
-                    <i class="fas fa-ticket-alt text-[#d4af37] text-2xl mr-4"></i>
-                    <div>
-                        <p class="text-sm text-gray-400">Total de Bilhetes</p>
-                        <p class="text-2xl font-bold" id="total-bilhetes">12</p>
-                    </div>
+        <!-- Barra de Busca -->
+        <div class="max-w-xl mx-auto mb-10">
+            <div class="relative">
+                <input type="text" 
+                       id="busca-bilhetes" 
+                       placeholder="Buscar por nome do participante..."
+                       class="w-full bg-[#262626] text-white border-2 border-[#374151] rounded-xl py-4 pl-12 pr-4 focus:outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37] transition-all">
+                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <div id="contador-resultados" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
+                    43 bilhetes
                 </div>
             </div>
-            
-            <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle text-[#10b981] text-2xl mr-4"></i>
-                    <div>
-                        <p class="text-sm text-gray-400">Confirmados</p>
-                        <p class="text-2xl font-bold" id="bilhetes-confirmados">8</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
-                <div class="flex items-center">
-                    <i class="fas fa-clock text-[#fbbf24] text-2xl mr-4"></i>
-                    <div>
-                        <p class="text-sm text-gray-400">Em Processamento</p>
-                        <p class="text-2xl font-bold" id="bilhetes-processamento">4</p>
-                    </div>
-                </div>
-            </div>
+            <p class="text-xs text-gray-500 mt-2 text-center">
+                Digite o nome do participante para filtrar os bilhetes
+            </p>
         </div>
         
-        <!-- Filtros -->
-        <div class="flex flex-wrap justify-center gap-2 mb-8">
-            <button class="filter-btn active bg-[#d4af37] text-[#171717] font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="todos">
-                Todos
+        <!-- Filtros Rápidos -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="filter-badge active px-4 py-2 rounded-full bg-[#d4af37] text-[#171717] font-bold text-sm transition-all hover:scale-105" data-filter="todos">
+                Todos (43)
             </button>
-            <button class="filter-btn bg-[#374151] hover:bg-[#4b5563] text-white font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="confirmados">
-                <i class="fas fa-check-circle mr-2"></i>Confirmados
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="A">
+                A-C
             </button>
-            <button class="filter-btn bg-[#374151] hover:bg-[#4b5563] text-white font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="processamento">
-                <i class="fas fa-clock mr-2"></i>Processamento
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="D">
+                D-F
             </button>
-            <button class="filter-btn bg-[#374151] hover:bg-[#4b5563] text-white font-bold py-2 px-4 rounded-lg transition text-sm" data-filter="numeros">
-                <i class="fas fa-hashtag mr-2"></i>Por Números
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="G">
+                G-I
+            </button>
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="J">
+                J-L
+            </button>
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="M">
+                M-O
+            </button>
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="P">
+                P-R
+            </button>
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="S">
+                S-U
+            </button>
+            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="V">
+                V-Z
             </button>
         </div>
         
-        <!-- Galeria de Imagens -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="galeria-imagens">
+        <!-- Grid de Bilhetes -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6" id="grid-bilhetes">
             <!-- Bilhetes serão carregados aqui -->
         </div>
         
-        <!-- Modal para visualização ampliada -->
-        <div id="modal-bilhete" class="modal-overlay">
-            <div class="modal-conteudo max-w-4xl">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h3 class="text-2xl font-bold text-[#d4af37]" id="modal-titulo">Bilhete Oficial</h3>
-                        <p class="text-gray-300" id="modal-descricao">Mega da Virada 2025</p>
-                    </div>
-                    <button id="fechar-modal" class="text-gray-400 hover:text-white text-2xl">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div>
-                        <div class="bg-black rounded-lg p-2 mb-4">
-                            <img id="modal-imagem" src="" alt="Bilhete Oficial" class="w-full h-auto rounded">
-                        </div>
-                        <div class="flex justify-center space-x-4">
-                            <button id="btn-anterior" class="bg-[#374151] hover:bg-[#4b5563] text-white py-2 px-4 rounded-lg">
-                                <i class="fas fa-chevron-left mr-2"></i>Anterior
-                            </button>
-                            <button id="btn-proximo" class="bg-[#374151] hover:bg-[#4b5563] text-white py-2 px-4 rounded-lg">
-                                Próximo<i class="fas fa-chevron-right ml-2"></i>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div class="bg-[#262626] p-4 rounded-lg border border-gray-700 mb-4">
-                            <h4 class="font-bold text-lg mb-2 text-[#d4af37]">Informações do Bilhete</h4>
-                            <div class="space-y-2">
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400">Número do Bilhete:</span>
-                                    <span class="font-bold" id="modal-numero">#001</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400">Participante:</span>
-                                    <span class="font-bold" id="modal-participante">Ana Silva</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400">Concurso:</span>
-                                    <span class="font-bold">Mega da Virada 2025</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400">Status:</span>
-                                    <span class="font-bold text-[#10b981]" id="modal-status">Confirmado</span>
-                                </div>
-                                <div class="flex justify-between">
-                                    <span class="text-gray-400">Data do Jogo:</span>
-                                    <span class="font-bold">31/12/2025</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-[#262626] p-4 rounded-lg border border-gray-700">
-                            <h4 class="font-bold text-lg mb-2 text-[#d4af37]">Números Apostados</h4>
-                            <div class="numeros-container" id="modal-numeros">
-                                <!-- Números serão inseridos aqui -->
-                            </div>
-                            <p class="text-sm text-gray-400 mt-4">
-                                <i class="fas fa-info-circle mr-2"></i>
-                                Este é o bilhete físico oficial registrado na Caixa Econômica Federal.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Informações importantes -->
-        <div class="mt-12 bg-[#262626] p-6 rounded-lg border border-gray-700">
-            <h3 class="text-xl font-bold mb-4 text-[#d4af37]">Sobre os Bilhetes Oficiais</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="flex items-start">
-                    <i class="fas fa-shield-alt text-[#10b981] text-xl mr-3 mt-1"></i>
-                    <div>
-                        <h4 class="font-bold mb-1">Autenticidade Garantida</h4>
-                        <p class="text-sm text-gray-300">Todos os bilhetes são oficiais da Caixa, registrados no sistema da loteria.</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <i class="fas fa-camera text-[#d4af37] text-xl mr-3 mt-1"></i>
-                    <div>
-                        <h4 class="font-bold mb-1">Digitalização</h4>
-                        <p class="text-sm text-gray-300">Cada bilhete é fotografado/escaneado após a compra na lotérica.</p>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <i class="fas fa-users text-[#3b82f6] text-xl mr-3 mt-1"></i>
-                    <div>
-                        <h4 class="font-bold mb-1">Transparência</h4>
-                        <p class="text-sm text-gray-300">Todos os participantes podem verificar os bilhetes apostados.</p>
-                    </div>
-                </div>
-            </div>
+        <!-- Mensagem de nenhum resultado -->
+        <div id="nenhum-resultado" class="hidden text-center py-12">
+            <i class="fas fa-search text-4xl text-gray-600 mb-4"></i>
+            <h3 class="text-xl font-bold text-gray-400 mb-2">Nenhum bilhete encontrado</h3>
+            <p class="text-gray-500">Tente buscar por outro nome ou use os filtros acima</p>
         </div>
     </div>
 </section>
 
+<!-- Modal de Visualização -->
+<div id="modal-galeria" class="modal-overlay">
+    <div class="modal-conteudo max-w-6xl w-full">
+        <!-- Header do Modal -->
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h3 class="text-2xl font-bold text-[#d4af37]" id="modal-titulo">Bilhete Oficial</h3>
+                <p class="text-gray-300 text-sm" id="modal-participante">Participante</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span class="text-gray-400 text-sm" id="modal-contador">1 de 43</span>
+                <button id="btn-fechar-modal" class="text-gray-400 hover:text-white text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Conteúdo Principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Imagem Ampliada -->
+            <div class="lg:col-span-2">
+                <div class="bg-black rounded-xl overflow-hidden">
+                    <img id="modal-imagem" src="" alt="Bilhete Oficial" class="w-full h-auto object-contain max-h-[500px] mx-auto">
+                </div>
+                
+                <!-- Navegação -->
+                <div class="flex justify-between items-center mt-6">
+                    <button id="btn-anterior" class="flex items-center space-x-2 bg-[#374151] hover:bg-[#4b5563] text-white py-3 px-6 rounded-lg transition">
+                        <i class="fas fa-chevron-left"></i>
+                        <span>Anterior</span>
+                    </button>
+                    
+                    <div class="flex space-x-2">
+                        <button class="btn-modal-acao" title="Rotacionar">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                        <button class="btn-modal-acao" title="Baixar imagem" id="btn-download">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="btn-modal-acao" title="Compartilhar">
+                            <i class="fas fa-share-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <button id="btn-proximo" class="flex items-center space-x-2 bg-[#374151] hover:bg-[#4b5563] text-white py-3 px-6 rounded-lg transition">
+                        <span>Próximo</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Informações -->
+            <div class="space-y-6">
+                <!-- Dados do Bilhete -->
+                <div class="bg-[#262626] p-6 rounded-xl border border-gray-700">
+                    <h4 class="font-bold text-lg mb-4 text-[#d4af37]">Informações do Bilhete</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Número:</span>
+                            <span class="font-bold text-white" id="modal-numero">#001</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Participante:</span>
+                            <span class="font-bold text-white" id="modal-nome">Ana Silva</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Status:</span>
+                            <span class="font-bold text-[#10b981]">Confirmado</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Data:</span>
+                            <span class="font-bold text-white">15/12/2025</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-400">Valor:</span>
+                            <span class="font-bold text-[#d4af37]">R$ 6,00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Números -->
+                <div class="bg-[#262626] p-6 rounded-xl border border-gray-700">
+                    <h4 class="font-bold text-lg mb-4 text-[#d4af37]">Números da Sorte</h4>
+                    <div class="numeros-container justify-center" id="modal-numeros">
+                        <!-- Números serão inseridos aqui -->
+                    </div>
+                    <p class="text-xs text-gray-400 mt-4 text-center">
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Bilhete oficial da Caixa Econômica Federal
+                    </p>
+                </div>
+                
+                <!-- Ações -->
+                <div class="flex space-x-3">
+                    <a href="https://wa.me/5531982042552?text=Olá!%20Tenho%20dúvidas%20sobre%20o%20bilhete%20número%20" 
+                       id="whatsapp-link"
+                       target="_blank"
+                       class="flex-1 bg-[#10b981] hover:bg-[#059669] text-white font-bold py-3 px-4 rounded-lg transition text-center">
+                        <i class="fab fa-whatsapp mr-2"></i>Dúvidas?
+                    </a>
+                    <button onclick="copiarPix('pix-code-galeria')" class="flex-1 bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-4 rounded-lg transition">
+                        <i class="fas fa-copy mr-2"></i>PIX
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Miniaturas -->
+        <div class="mt-8">
+            <h4 class="font-bold text-lg mb-4 text-gray-300">Mais Bilhetes</h4>
+            <div class="flex overflow-x-auto space-x-4 pb-4" id="miniaturas-container">
+                <!-- Miniaturas serão carregadas aqui -->
+            </div>
+        </div>
+    </div>
+</div>
 
     
+
+        
 
 
     
@@ -3405,6 +3717,324 @@ document.addEventListener('keydown', (e) => {
 // Inicializar galeria
 atualizarEstatisticas();
 renderizarBilhetes();
+
+        // ========== GALERIA DE BILHETES OFICIAIS ==========
+const gridBilhetes = document.getElementById('grid-bilhetes');
+const buscaBilhetes = document.getElementById('busca-bilhetes');
+const contadorResultados = document.getElementById('contador-resultados');
+const nenhumResultado = document.getElementById('nenhum-resultado');
+const filterBadges = document.querySelectorAll('.filter-badge');
+
+// Modal
+const modalGaleria = document.getElementById('modal-galeria');
+const btnFecharModal = document.getElementById('btn-fechar-modal');
+const btnAnterior = document.getElementById('btn-anterior');
+const btnProximo = document.getElementById('btn-proximo');
+const btnDownload = document.getElementById('btn-download');
+
+// Dados dos 43 bilhetes (use suas imagens reais)
+const bilhetesGaleria = [
+    {
+        id: 1,
+        nome: "Adriane",
+        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["14", "29", "52", "37", "15", "51"],
+        codigo: "MT001",
+        data: "15/12/2025"
+    },
+    {
+        id: 2,
+        nome: "Ana Paula",
+        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["06", "07", "34", "42", "52", "45"],
+        codigo: "MT002",
+        data: "15/12/2025"
+    },
+    {
+        id: 3,
+        nome: "André",
+        imagem: "https://images.unsplash.com/photo-1585828918176-e6c6e6b1b43a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["06", "12", "26", "35", "44", "56"],
+        codigo: "MT003",
+        data: "15/12/2025"
+    },
+    {
+        id: 4,
+        nome: "Augusto",
+        imagem: "https://images.unsplash.com/photo-1559223607-a43c990c692c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["27", "32", "52", "10", "56", "34"],
+        codigo: "MT004",
+        data: "15/12/2025"
+    },
+    {
+        id: 5,
+        nome: "Augusto Guedes",
+        imagem: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["23", "07", "11", "33", "05", "57"],
+        codigo: "MT005",
+        data: "15/12/2025"
+    },
+    {
+        id: 6,
+        nome: "Brandino",
+        imagem: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["03", "09", "15", "25", "49", "60"],
+        codigo: "MT006",
+        data: "15/12/2025"
+    },
+    {
+        id: 7,
+        nome: "Bryan",
+        imagem: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["22", "28", "31", "36", "37", "45"],
+        codigo: "MT007",
+        data: "15/12/2025"
+    },
+    {
+        id: 8,
+        nome: "Camila",
+        imagem: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["01", "09", "15", "14", "05", "07"],
+        codigo: "MT008",
+        data: "15/12/2025"
+    },
+    {
+        id: 9,
+        nome: "Catiana",
+        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["07", "15", "32", "31", "10", "54"],
+        codigo: "MT009",
+        data: "15/12/2025"
+    },
+    {
+        id: 10,
+        nome: "Claudineia",
+        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: ["02", "06", "42", "45", "36", "50"],
+        codigo: "MT010",
+        data: "15/12/2025"
+    },
+    // Adicione os outros 33 bilhetes seguindo o mesmo padrão
+    // ... (você pode adicionar mais itens aqui)
+];
+
+// Adicione mais bilhetes para totalizar 43
+for (let i = 11; i <= 43; i++) {
+    bilhetesGaleria.push({
+        id: i,
+        nome: `Participante ${i}`,
+        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+        numeros: [
+            Math.floor(Math.random() * 60) + 1,
+            Math.floor(Math.random() * 60) + 1,
+            Math.floor(Math.random() * 60) + 1,
+            Math.floor(Math.random() * 60) + 1,
+            Math.floor(Math.random() * 60) + 1,
+            Math.floor(Math.random() * 60) + 1
+        ].map(n => n.toString().padStart(2, '0')),
+        codigo: `MT${i.toString().padStart(3, '0')}`,
+        data: "15/12/2025"
+    });
+}
+
+// Variáveis de controle
+let bilhetesFiltrados = [...bilhetesGaleria];
+let filtroAtual = 'todos';
+let bilheteAtualModal = 0;
+let buscaTimeout;
+
+// Renderizar bilhetes
+function renderizarBilhetes() {
+    gridBilhetes.innerHTML = '';
+    
+    if (bilhetesFiltrados.length === 0) {
+        nenhumResultado.classList.remove('hidden');
+        gridBilhetes.classList.add('hidden');
+        contadorResultados.textContent = '0 bilhetes';
+        return;
+    }
+    
+    nenhumResultado.classList.add('hidden');
+    gridBilhetes.classList.remove('hidden');
+    
+    bilhetesFiltrados.forEach((bilhete, index) => {
+        const card = document.createElement('div');
+        card.className = 'card-bilhete-galeria';
+        card.dataset.id = bilhete.id;
+        card.style.animationDelay = `${index * 0.05}s`;
+        
+        const numerosHTML = bilhete.numeros.map(num => 
+            `<span class="numero-mini">${num}</span>`
+        ).join('');
+        
+        card.innerHTML = `
+            <div class="badge-confirmado">
+                <i class="fas fa-check-circle"></i>
+                Confirmado
+            </div>
+            
+            <div class="bilhete-imagem-wrapper">
+                <img src="${bilhete.imagem}" 
+                     alt="Bilhete ${bilhete.codigo} - ${bilhete.nome}" 
+                     class="bilhete-imagem-galeria"
+                     loading="lazy">
+                <div class="bilhete-overlay-galeria">
+                    <button class="btn-ampliar-galeria" data-id="${bilhete.id}">
+                        <i class="fas fa-search-plus mr-2"></i>
+                        Ampliar Imagem
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bilhete-info">
+                <div class="bilhete-nome" title="${bilhete.nome}">${bilhete.nome}</div>
+                <div class="bilhete-codigo">${bilhete.codigo}</div>
+                
+                <div class="bilhete-numeros-mini">
+                    ${numerosHTML}
+                </div>
+                
+                <div class="text-xs text-gray-400 mt-3 flex justify-between">
+                    <span>${bilhete.data}</span>
+                    <span class="text-[#d4af37]">R$ 6,00</span>
+                </div>
+            </div>
+        `;
+        
+        gridBilhetes.appendChild(card);
+        
+        // Evento de clique para abrir modal
+        card.addEventListener('click', () => abrirModal(bilhete.id));
+    });
+    
+    // Atualizar contador
+    contadorResultados.textContent = `${bilhetesFiltrados.length} bilhete${bilhetesFiltrados.length !== 1 ? 's' : ''}`;
+}
+
+// Filtrar bilhetes
+function filtrarBilhetes() {
+    const termo = buscaBilhetes.value.trim().toLowerCase();
+    
+    if (filtroAtual === 'todos' && !termo) {
+        bilhetesFiltrados = [...bilhetesGaleria];
+    } else {
+        bilhetesFiltrados = bilhetesGaleria.filter(bilhete => {
+            // Filtrar por termo de busca
+            const matchBusca = !termo || 
+                bilhete.nome.toLowerCase().includes(termo) ||
+                bilhete.codigo.toLowerCase().includes(termo);
+            
+            // Filtrar por letra inicial
+            let matchFiltro = true;
+            if (filtroAtual !== 'todos') {
+                matchFiltro = bilhete.nome.charAt(0).toUpperCase() === filtroAtual;
+            }
+            
+            return matchBusca && matchFiltro;
+        });
+    }
+    
+    renderizarBilhetes();
+}
+
+// Abrir modal
+function abrirModal(id) {
+    const bilhete = bilhetesGaleria.find(b => b.id === id);
+    if (!bilhete) return;
+    
+    bilheteAtualModal = bilhetesFiltrados.findIndex(b => b.id === id);
+    
+    // Atualizar conteúdo do modal
+    document.getElementById('modal-titulo').textContent = `Bilhete ${bilhete.codigo}`;
+    document.getElementById('modal-participante').textContent = bilhete.nome;
+    document.getElementById('modal-imagem').src = bilhete.imagem;
+    document.getElementById('modal-imagem').alt = `Bilhete ${bilhete.codigo} - ${bilhete.nome}`;
+    document.getElementById('modal-numero').textContent = bilhete.codigo;
+    document.getElementById('modal-nome').textContent = bilhete.nome;
+    document.getElementById('modal-contador').textContent = `${bilheteAtualModal + 1} de ${bilhetesFiltrados.length}`;
+    
+    // Atualizar números
+    const numerosContainer = document.getElementById('modal-numeros');
+    numerosContainer.innerHTML = bilhete.numeros.map(num => 
+        `<span class="numero-sorteio">${num.padStart(2, '0')}</span>`
+    ).join('');
+    
+    // Atualizar link do WhatsApp
+    const whatsappLink = document.getElementById('whatsapp-link');
+    whatsappLink.href = `https://wa.me/5531982042552?text=Olá!%20Tenho%20dúvidas%20sobre%20o%20bilhete%20${bilhete.codigo}%20(${bilhete.nome})`;
+    
+    // Atualizar miniaturas
+    atualizarMiniaturas();
+    
+    // Mostrar modal
+    modalGaleria.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Atualizar miniaturas
+function atualizarMiniaturas() {
+    const container = document.getElementById('miniaturas-container');
+    container.innerHTML = '';
+    
+    bilhetesFiltrados.forEach((bilhete, index) => {
+        const miniatura = document.createElement('div');
+        miniatura.className = `miniatura-item ${index === bilheteAtualModal ? 'active' : ''}`;
+        miniatura.dataset.index = index;
+        
+        miniatura.innerHTML = `
+            <img src="${bilhete.imagem}" 
+                 alt="Bilhete ${bilhete.codigo}" 
+                 class="miniatura-imagem">
+        `;
+        
+        miniatura.addEventListener('click', () => {
+            bilheteAtualModal = index;
+            abrirModal(bilhete.id);
+        });
+        
+        container.appendChild(miniatura);
+    });
+}
+
+// Navegar no modal
+function navegarModal(direcao) {
+    if (bilhetesFiltrados.length === 0) return;
+    
+    if (direcao === 'anterior') {
+        bilheteAtualModal--;
+        if (bilheteAtualModal < 0) {
+            bilheteAtualModal = bilhetesFiltrados.length - 1;
+        }
+    } else {
+        bilheteAtualModal++;
+        if (bilheteAtualModal >= bilhetesFiltrados.length) {
+            bilheteAtualModal = 0;
+        }
+    }
+    
+    abrirModal(bilhetesFiltrados[bilheteAtualModal].id);
+}
+
+// Fechar modal
+function fecharModal() {
+    modalGaleria.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Download da imagem
+function downloadImagem() {
+    const bilhete = bilhetesFiltrados[bilheteAtualModal];
+    const link = document.createElement('a');
+    link.href = bilhete.imagem;
+    link.download = `bilhete-${bilhete.codigo}-${bilhete.nome}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Event Listeners
+buscaBilhetes.addEventListener('input', () => {
+    clearTimeout(buscaTimeout);
     </script>
 </body>
 </html>
