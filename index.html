@@ -177,69 +177,53 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             border-top: 1px solid #374151;
         }
 
-        /* ========== ESTILOS DO MENU MOBILE (IGUAL AO ACORDO) ========== */
-        #mobile-menu {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: #171717;
-            border-bottom: 1px solid #374151;
-            z-index: 100;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        #mobile-menu.active {
-            max-height: 500px;
-            opacity: 1;
-        }
-        
-        .mobile-link {
-            display: block;
-            padding: 12px 20px;
-            border-bottom: 1px solid rgba(55, 65, 81, 0.5);
-            transition: all 0.3s ease;
-            font-weight: 500;
-            color: white;
-            text-decoration: none;
-        }
-        
-        .mobile-link:hover {
-            background: rgba(212, 175, 55, 0.1);
-            color: #d4af37;
-            padding-left: 28px;
-        }
-        
-        .mobile-link:last-child {
-            border-bottom: none;
-        }
+/* ========== ESTILOS BÁSICOS DO MENU MOBILE ========== */
+#mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #171717;
+    border-bottom: 1px solid #374151;
+    z-index: 100;
+}
 
-        #mobile-menu-button {
-            display: block;
-            z-index: 150;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 8px;
-            transition: color 0.3s ease;
-        }
-        
-        #mobile-menu-button:hover {
-            color: #d4af37;
-        }
+#mobile-menu.active {
+    display: block;
+}
 
-        /* Ajuste para telas maiores - esconder menu mobile */
-        @media (min-width: 768px) {
-            #mobile-menu-button,
-            #mobile-menu {
-                display: none !important;
-            }
-        }
+.mobile-link {
+    display: block;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(55, 65, 81, 0.5);
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+}
+
+.mobile-link:last-child {
+    border-bottom: none;
+}
+
+#mobile-menu-button {
+    display: block;
+    z-index: 150;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+}
+
+/* Ajuste para telas maiores - esconder menu mobile */
+@media (min-width: 768px) {
+    #mobile-menu-button,
+    #mobile-menu {
+        display: none !important;
+    }
+}
 
 /* NÚMEROS OFICIAIS - 1 linha no desktop, 2 linhas no mobile */
 #numeros-oficiais {
@@ -251,22 +235,28 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     margin: 0 auto 20px auto; /* ← ADICIONADO margin-bottom */
 }
 
-        /* NÚMEROS OFICIAIS - AGORA VERDES POR PADRÃO */
         .numero-oficial {
             display: inline-flex;
             width: 45px;
             height: 45px;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #10b981, #059669); /* VERDE POR PADRÃO */
-            border: 2px solid #10b981;
+            background: white;
+            border: 2px solid #e2e8f0;
             border-radius: 50%;
             font-weight: bold;
             font-size: 16px;
-            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
-            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            color: #1e293b;
             transition: all 0.3s ease;
             margin: 0;
+        }
+
+        .numero-oficial.sorteado {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #10b981;
+            transform: scale(1.1);
         }
 
         /* NÚMEROS DOS TICKETS - 3 por linha */
@@ -310,16 +300,19 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     border: 1px solid rgba(255,255,255,0.2) !important; /* ← MANTÉM A BORDA ORIGINAL */
         }
 
-        /* NÚMEROS DE ACERTO - REMOVIDO O CIRCULO AMARELO */
-        /* .numero-acerto {
+        .numero-acerto {
             background: linear-gradient(135deg, #d4af37, #fbbf24);
             animation: bounce 0.5s;
             color: #1e293b;
             border-color: #d4af37;
             border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4) !important;
-            transform: scale(1.1);
-        } */
+        }
+
+        @keyframes bounce {
+            0%, 20%, 60%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            80% { transform: translateY(-4px); }
+        }
 
         .badge-premiado {
             position: absolute;
@@ -434,62 +427,30 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
         }
 
-/* ESTILOS PREMIUM PARA O VÍDEO NO MOBILE */
-.video-container-premium {
+/* ESTILOS GERAIS DO VÍDEO - SEM FAIXAS PRETAS */
+.video-container {
     position: relative;
     width: 100%;
-    height: 0;
-    padding-bottom: 75%; /* Mais alto que 16:9 para mobile (4:3) */
     overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
     background: #000;
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 8px 16px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 3px solid transparent;
-    background-clip: padding-box;
-    position: relative;
+    /* Altura automática baseada no conteúdo */
+    aspect-ratio: 16/9; /* Mantém proporção 16:9 */
 }
 
-.video-container-premium::before {
-    content: '';
+.video-container iframe {
     position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: linear-gradient(135deg, 
-        #d4af37 0%, 
-        #fbbf24 25%, 
-        #10b981 50%, 
-        #059669 75%, 
-        #d4af37 100%);
-    border-radius: inherit;
-    z-index: -1;
-    animation: border-glow 4s linear infinite;
-    background-size: 400% 400%;
-}
-
-@keyframes border-glow {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.video-container-premium iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
+    transform: translate(-50%, -50%);
     border: 0;
+    /* Faz o iframe cobrir todo o container */
+    object-fit: cover;
 }
+
 
         /* CORREÇÃO: MELHORIAS PARA MOBILE */
         @media (max-width: 768px) {
@@ -526,31 +487,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 
             .search-btn {
                 width: 100%;
-            }
-            
-            /* Ajustes específicos para mobile do vídeo */
-            #video {
-                padding: 3rem 1rem;
-            }
-            
-            .video-container-premium {
-                padding-bottom: 70%; /* Proporção mais quadrada para mobile */
-                margin: 0 -0.5rem; /* Extende um pouco além das bordas */
-                border-radius: 1rem;
-            }
-            
-            #video .container {
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-            }
-            
-            #video h2 {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            #video .bg-gradient-to-br {
-                padding: 1.5rem;
             }
         }
 
@@ -980,6 +916,64 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     z-index: 2;
 }
 
+/* CORREÇÃO: VÍDEO COMPLETO SEM CORTES NO MOBILE */
+@media (max-width: 768px) {
+    #video .container {
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    #video .bg-\[\#262626\] {
+        background: transparent !important;
+        border: none !important;
+        padding: 10px 15px;
+        border-radius: 0;
+    }
+    
+    .video-container {
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        margin: 0;
+        /* Mantém proporção mas sem padding-bottom */
+        aspect-ratio: 16/9;
+    }
+    
+    #video .bg-\[\#262626\] p {
+        padding: 0 15px;
+        margin-top: 15px;
+    }
+}
+
+/* Safe area para iPhones com notch */
+@supports (padding: max(0px)) {
+    @media (max-width: 768px) {
+        #video .container {
+            padding-left: max(15px, env(safe-area-inset-left));
+            padding-right: max(15px, env(safe-area-inset-right));
+        }
+    }
+}
+
+    
+/* AJUSTE ESPECÍFICO PARA LANDSCAPE - EVITAR CORTES */
+@media (max-width: 768px) and (orientation: landscape) {
+    .video-container {
+        padding-bottom: 50%; /* Ajuste balanceado para landscape */
+    }
+}
+
+/* Safe area para iPhones com notch */
+@supports (padding: max(0px)) {
+    @media (max-width: 768px) {
+        #video .container {
+            padding-left: max(15px, env(safe-area-inset-left));
+            padding-right: max(15px, env(safe-area-inset-right));
+        }
+    }
+}
+
+
 /* SOBRESCREVER QUALQUER MEDIA QUERY QUE ALTERE CORES NO MOBILE */
 @media (max-width: 768px) {
     .ticket-body {
@@ -1095,902 +1089,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     color: transparent;
     font-weight: 600;
 }
-
-    /* ESTILOS DO CONTADOR */
-.contador-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-width: 70px;
-    padding: 10px 12px;
-    background: rgba(23, 23, 23, 0.8);
-    border-radius: 12px;
-    border: 1px solid #374151;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.contador-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
-    border-color: #d4af37;
-}
-
-.contador-numero {
-    font-size: 2rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #d4af37, #fbbf24);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    line-height: 1;
-    margin-bottom: 4px;
-    font-family: 'Montserrat', sans-serif;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.contador-label {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #9ca3af;
-    font-weight: 600;
-}
-
-.contador-separator {
-    font-size: 1.5rem;
-    color: #d4af37;
-    font-weight: bold;
-    padding: 0 5px;
-    margin-top: -10px;
-}
-
-/* Animações para o contador */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.contador-animado {
-    animation: pulse 0.5s ease;
-}
-
-/* Responsividade para o contador */
-@media (max-width: 768px) {
-    .contador-item {
-        min-width: 60px;
-        padding: 8px 10px;
-    }
-    
-    .contador-numero {
-        font-size: 1.5rem;
-    }
-    
-    .contador-label {
-        font-size: 0.65rem;
-    }
-    
-    .contador-separator {
-        font-size: 1.2rem;
-        padding: 0 3px;
-    }
-}
-
-@media (max-width: 480px) {
-    .contador-item {
-        min-width: 50px;
-        padding: 6px 8px;
-    }
-    
-    .contador-numero {
-        font-size: 1.3rem;
-    }
-    
-    .contador-label {
-        font-size: 0.6rem;
-    }
-}
-
-/* ESTILOS PARA BARRA DE PROGRESSO DO CONTADOR */
-.progress-bar-container {
-    height: 2px;
-    background: #374151;
-    border-radius: 1px;
-    overflow: hidden;
-    margin-top: 8px;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #d4af37, #fbbf24);
-    border-radius: 1px;
-    transition: width 0.5s ease-in-out;
-    width: 0%;
-}
-
-/* Remover animações da barra de progresso que causam piscar */
-#progress-bar {
-    transition: width 0.5s ease-in-out !important;
-    animation: none !important;
-}
-
-/* REMOVER ANIMAÇÕES QUE CAUSAM PISCAR */
-@keyframes none {
-    0% { opacity: 1; }
-    100% { opacity: 1; }
-}
-
-    /* ESTILOS ELEGANTES PARA RESULTADOS APÓS SORTEIO */
-.sorteio-realizado .numero-oficial {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    border-color: #10b981;
-    transform: scale(1.1);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-}
-
-@keyframes pulse-verde {
-    0% { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
-    50% { box-shadow: 0 6px 30px rgba(16, 185, 129, 0.7); }
-    100% { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
-}
-
-/* Estilo premium para o container de resultados */
-.resultado-premium {
-    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
-    border: 2px solid;
-    border-image: linear-gradient(135deg, #d4af37, #10b981) 1;
-    position: relative;
-    overflow: hidden;
-}
-
-.resultado-premium::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-/* Estilo para mensagem de resultado */
-.mensagem-premio {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(212, 175, 55, 0.15));
-    border-left: 4px solid;
-    border-image: linear-gradient(to bottom, #d4af37, #10b981) 1;
-    padding: 20px;
-    border-radius: 0 12px 12px 0;
-    position: relative;
-    overflow: hidden;
-}
-
-.mensagem-premio::before {
-    content: "🏆";
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 60px;
-    opacity: 0.1;
-    transform: rotate(15deg);
-}
-
-/* Estilo para estatísticas */
-.estatistica-premio {
-    background: rgba(30, 41, 59, 0.8);
-    border-radius: 12px;
-    padding: 20px;
-    border: 1px solid rgba(212, 175, 55, 0.3);
-    position: relative;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-
-.estatistica-premio:hover {
-    transform: translateY(-5px);
-    border-color: #d4af37;
-    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
-}
-
-.estatistica-premio .valor {
-    font-size: 2rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #d4af37, #10b981);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* Badge de vencedor premium */
-.badge-premium {
-    background: linear-gradient(135deg, #d4af37, #fbbf24);
-    color: #1e293b;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 14px;
-    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-    position: relative;
-    overflow: hidden;
-}
-
-.badge-premium::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0) 50%
-    );
-    transform: rotate(30deg);
-}
-
-/* Efeito de confete para resultados */
-.confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #d4af37;
-    border-radius: 50%;
-    opacity: 0;
-    animation: confetti-fall 3s linear infinite;
-}
-
-@keyframes confetti-fall {
-    0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(500px) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-/* Estilo para o botão de verificação após sorteio */
-.btn-premium {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    padding: 15px 30px;
-    border-radius: 12px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    border: none;
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-premium:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.6);
-}
-
-.btn-premium::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: 0.5s;
-}
-
-.btn-premium:hover::after {
-    left: 100%;
-}
-
-/* NOVOS ESTILOS PARA GRADIENTES NO VÍDEO */
-.texto-gradiente-video {
-    background: linear-gradient(135deg, #d4af37, #fbbf24, #10b981, #059669);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: bold;
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-}
-
-@keyframes gradient-shift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-.texto-gradiente-premio {
-    background: linear-gradient(135deg, #d4af37, #fbbf24, #dc2626, #ef4444);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: bold;
-    background-size: 200% 200%;
-    animation: gradient-shift 4s ease infinite;
-}
-
-/* Para telas um pouco maiores (tablets) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .video-container-premium {
-        padding-bottom: 60%; /* Proporção intermediária */
-    }
-}
-
-/* Para desktop */
-@media (min-width: 1025px) {
-    .video-container-premium {
-        padding-bottom: 56.25%; /* Proporção 16:9 padrão */
-    }
-}
-
-/* Efeito de brilho ao redor do container do vídeo */
-.video-container-premium::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, 
-        rgba(212, 175, 55, 0.3), 
-        rgba(16, 185, 129, 0.3), 
-        rgba(212, 175, 55, 0.3));
-    border-radius: inherit;
-    z-index: -2;
-    filter: blur(10px);
-    opacity: 0.7;
-}
-
-/* Ajuste para landscape no mobile */
-@media (max-width: 768px) and (orientation: landscape) {
-    .video-container-premium {
-        padding-bottom: 50%; /* Mais largo para landscape */
-    }
-}
-
-    /* ========== ESTILOS PARA GALERIA DE BILHETES OFICIAIS ========== */
-
-/* Card de bilhete */
-.card-bilhete {
-    background: #262626;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #374151;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.card-bilhete:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
-    border-color: #d4af37;
-}
-
-.card-bilhete.confirmado {
-    border-left: 4px solid #10b981;
-}
-
-.card-bilhete.processamento {
-    border-left: 4px solid #fbbf24;
-}
-
-/* Imagem do bilhete */
-.bilhete-imagem-container {
-    position: relative;
-    overflow: hidden;
-    background: #000;
-    height: 200px;
-}
-
-.bilhete-imagem {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.card-bilhete:hover .bilhete-imagem {
-    transform: scale(1.05);
-}
-
-/* Overlay na imagem */
-.bilhete-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.card-bilhete:hover .bilhete-overlay {
-    opacity: 1;
-}
-
-.btn-ampliar {
-    background: rgba(212, 175, 55, 0.9);
-    color: #171717;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-ampliar:hover {
-    background: #d4af37;
-    transform: scale(1.05);
-}
-
-/* Conteúdo do card */
-.bilhete-conteudo {
-    padding: 16px;
-}
-
-.bilhete-numero {
-    font-size: 11px;
-    color: #9ca3af;
-    margin-bottom: 4px;
-}
-
-.bilhete-participante {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: white;
-}
-
-.bilhete-status {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
-    margin-bottom: 12px;
-}
-
-.status-confirmado {
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-    border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.status-processamento {
-    background: rgba(251, 191, 36, 0.2);
-    color: #fbbf24;
-    border: 1px solid rgba(251, 191, 36, 0.3);
-}
-
-/* Números no card */
-.bilhete-numeros {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 12px;
-}
-
-.bilhete-numero-item {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 13px;
-    color: #f1f5f9;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    padding: 20px;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-conteudo {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    border-radius: 16px;
-    padding: 30px;
-    width: 100%;
-    max-width: 1000px;
-    border: 1px solid #374151;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.modal-overlay.active .modal-conteudo {
-    transform: translateY(0);
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-    .bilhete-imagem-container {
-        height: 180px;
-    }
-    
-    .bilhete-participante {
-        font-size: 14px;
-    }
-    
-    .bilhete-numero-item {
-        width: 26px;
-        height: 26px;
-        font-size: 12px;
-    }
-    
-    .modal-conteudo {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 640px) {
-    .grid-cols-4 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-/* ========== GALERIA DE BILHETES OFICIAIS ========== */
-
-/* Card do bilhete */
-.card-bilhete-galeria {
-    background: #262626;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 2px solid #374151;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-}
-
-.card-bilhete-galeria:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
-    border-color: #d4af37;
-}
-
-/* Imagem do bilhete - SEM CORTES */
-.bilhete-imagem-wrapper {
-    position: relative;
-    width: 100%;
-    height: 220px;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.bilhete-imagem-galeria {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Mantém proporção sem cortar */
-    padding: 10px;
-    transition: transform 0.3s ease;
-}
-
-.card-bilhete-galeria:hover .bilhete-imagem-galeria {
-    transform: scale(1.05);
-}
-
-/* Overlay na imagem */
-.bilhete-overlay-galeria {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 40%);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 15px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.card-bilhete-galeria:hover .bilhete-overlay-galeria {
-    opacity: 1;
-}
-
-/* Conteúdo do card */
-.bilhete-info {
-    padding: 15px;
-    background: #1e293b;
-}
-
-.bilhete-nome {
-    font-weight: bold;
-    font-size: 15px;
-    color: white;
-    margin-bottom: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.bilhete-codigo {
-    font-size: 11px;
-    color: #9ca3af;
-    margin-bottom: 8px;
-    font-family: 'Courier New', monospace;
-}
-
-.bilhete-numeros-mini {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin-top: 10px;
-}
-
-.numero-mini {
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    border-radius: 50%;
-    font-weight: bold;
-    font-size: 12px;
-    color: #f1f5f9;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Badge de confirmação */
-.badge-confirmado {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    z-index: 10;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
-/* Modal */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    padding: 20px;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-conteudo {
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    border-radius: 16px;
-    padding: 30px;
-    width: 100%;
-    max-width: 1400px;
-    border: 1px solid #374151;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-    max-height: 95vh;
-    overflow-y: auto;
-}
-
-.modal-overlay.active .modal-conteudo {
-    transform: translateY(0);
-}
-
-/* Imagem no modal - SEM CORTES */
-#modal-imagem {
-    max-width: 100%;
-    max-height: 500px;
-    object-fit: contain;
-    margin: 0 auto;
-    display: block;
-}
-
-/* Botões do modal */
-.btn-modal-acao {
-    background: #374151;
-    color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-modal-acao:hover {
-    background: #4b5563;
-    transform: scale(1.1);
-}
-
-/* Miniaturas */
-.miniatura-item {
-    flex: 0 0 auto;
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid #374151;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.miniatura-item:hover {
-    border-color: #d4af37;
-    transform: scale(1.05);
-}
-
-.miniatura-item.active {
-    border-color: #d4af37;
-    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
-}
-
-.miniatura-imagem {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Filtros */
-.filter-badge.active {
-    background: linear-gradient(135deg, #d4af37, #fbbf24);
-    color: #1e293b;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
-}
-
-/* Barra de busca */
-#busca-bilhetes:focus {
-    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
-}
-
-/* Responsividade */
-@media (max-width: 1024px) {
-    .grid-cols-5 {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    
-    .bilhete-imagem-wrapper {
-        height: 200px;
-    }
-}
-
-@media (max-width: 768px) {
-    .grid-cols-5 {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .bilhete-imagem-wrapper {
-        height: 180px;
-    }
-    
-    .modal-conteudo {
-        padding: 20px;
-    }
-    
-    .modal-conteudo .grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 640px) {
-    .grid-cols-5 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .bilhete-imagem-wrapper {
-        height: 160px;
-    }
-}
-
-/* Placeholder para imagem ausente */
-.imagem-placeholder-galeria {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #1e293b, #0f172a);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #9ca3af;
-    padding: 20px;
-}
-
-.imagem-placeholder-galeria i {
-    font-size: 40px;
-    margin-bottom: 10px;
-    color: #4b5563;
-}
-
-/* Animações */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.card-bilhete-galeria {
-    animation: fadeIn 0.5s ease forwards;
-}
-
-/* Números no modal */
-#modal-numeros {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
-
-#modal-numeros .numero-sorteio {
-    width: 45px;
-    height: 45px;
-    font-size: 16px;
-}
 </style>
 </head>
 <body class="text-white">
@@ -2032,71 +1130,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
             </nav>
         </div>
     </header>
-
-    <!-- Contador para Mega da Virada -->
-<section id="contador" class="py-6 px-4 bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#0f172a] border-b border-[#374151]">
-    <div class="container mx-auto max-w-4xl">
-        <div class="flex flex-col md:flex-row items-center justify-center md:justify-between gap-4">
-            <!-- Título -->
-            <div class="text-center md:text-left">
-                <h2 class="text-2xl md:text-3xl font-bold">
-                    <i class="fas fa-clock text-[#d4af37] mr-2"></i>
-                    Mega da Virada 2025
-                </h2>
-                <p class="text-sm text-gray-300 mt-1">Sorteio: 31 de Dezembro - 19h</p>
-            </div>
-            
-            <!-- Contador -->
-            <div class="flex items-center gap-2 md:gap-4">
-                <!-- Dias -->
-                <div class="contador-item">
-                    <div class="contador-numero" id="dias">23</div>
-                    <div class="contador-label">Dias</div>
-                </div>
-                
-                <div class="contador-separator">:</div>
-                
-                <!-- Horas -->
-                <div class="contador-item">
-                    <div class="contador-numero" id="horas">12</div>
-                    <div class="contador-label">Horas</div>
-                </div>
-                
-                <div class="contador-separator">:</div>
-                
-                <!-- Minutos -->
-                <div class="contador-item">
-                    <div class="contador-numero" id="minutos">45</div>
-                    <div class="contador-label">Minutos</div>
-                </div>
-                
-                <div class="contador-separator">:</div>
-                
-                <!-- Segundos -->
-                <div class="contador-item">
-                    <div class="contador-numero" id="segundos">18</div>
-                    <div class="contador-label">Segundos</div>
-                </div>
-            </div>
-            
-            <!-- Ícone de destaque -->
-            <div class="hidden md:block">
-                <i class="fas fa-trophy text-3xl text-[#d4af37]"></i>
-            </div>
-        </div>
-        
-        <!-- Barra de progresso - CORRIGIDA: SEM ANIMAÇÃO DE PISCAR -->
-        <div class="mt-4">
-            <div class="flex justify-between text-xs text-gray-400 mb-1">
-                <span>08/12/2025</span>
-                <span>31/12/2025</span>
-            </div>
-            <div class="progress-bar-container">
-                <div id="progress-bar" class="progress-bar-fill"></div>
-            </div>
-        </div>
-    </div>
-</section>
 
     <!-- O RESTANTE DO SEU CÓDIGO index.html PERMANECE IGUAL A PARTIR DAQUI -->
 
@@ -2140,7 +1173,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                     </div>
                 </div>
 
-                <a href="https://wa.me/5531982042552?text=Oi%2C%20Tip!%20%F0%9F%98%83%20Quero%20muito%20participar%20do%20MegaTIP!%0AT%C3%B4%20animado%20pra%20escolher%20meus%20n%C3%BAmeros%20e%20tentar%20a%20sorte%20%F0%9F%8D%80%F0%9F%92%B0%0AMe%20explica%20direitinho%20como%20fa%C3%A7o%20o%20pagamento%2C%20at%C3%A9%20quando%20posso%20escolher%20ou%20mudar%20meus%20n%C3%BAmeros%2C%20e%20como%20funciona%20se%20eu%20ganhar%20%F0%9F%A4%A9%0AE%20quero%20entrar%20no%20grupo%20pra%20acompanhar%20tudo%20de%20perto!%20%F0%9F%9A%80" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
+                <a href="https://wa.me/5531982042552?text=Olá!%20Quero%20participar%20do%20Bolão%20MegaTIP!" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-full text-lg transition inline-block glow">
                     Participar Agora
                 </a>
             </div>
@@ -2156,14 +1189,14 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                 <div class="text-center mb-6">
                     <h3 class="text-2xl font-bold mb-4">Números Oficiais Sorteados</h3>
                     
-                    <!-- Números oficiais fixos - AGORA VERDES POR PADRÃO -->
+                    <!-- Números oficiais fixos -->
                     <div class="flex justify-center flex-wrap gap-3 mb-6" id="numeros-oficiais">
-                        <span class="numero-oficial">27</span>
-                        <span class="numero-oficial">32</span>
-                        <span class="numero-oficial">52</span>
-                        <span class="numero-oficial">10</span>
-                        <span class="numero-oficial">56</span>
-                        <span class="numero-oficial">03</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
+                        <span class="numero-oficial">00</span>
                     </div>
                     
                     <div class="flex justify-center mb-6">
@@ -2210,56 +1243,27 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         </div>
     </section>
 
-    <!-- Seção: Vídeo do Sorteio - ATUALIZADA COM GRADIENTES -->
+    <!-- Seção: Vídeo do Sorteio -->
     <section id="video" class="py-16 px-4 bg-[#171717]">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl font-bold text-center mb-8 md:mb-12">Sorteio ao vivo</h2>
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Sorteio ao vivo</h2>
             
-            <div class="bg-gradient-to-br from-[#1e293b] via-[#0f172a] to-[#1e293b] rounded-2xl md:rounded-3xl p-4 md:p-8 border-2 border-[#374151] shadow-2xl relative overflow-hidden">
-                <!-- Elementos decorativos -->
-                <div class="absolute top-0 left-0 w-32 h-32 bg-[#d4af37] opacity-5 rounded-full -translate-x-16 -translate-y-16"></div>
-                <div class="absolute bottom-0 right-0 w-40 h-40 bg-[#10b981] opacity-5 rounded-full translate-x-20 translate-y-20"></div>
-                
-                <!-- Container do vídeo com bordas suaves -->
-                <div class="video-container-premium rounded-xl md:rounded-2xl overflow-hidden shadow-2xl">
-                    <iframe src="https://www.youtube.com/embed/42F-HsIC27k?si=ZIEobD56QuawK0jT" 
+            <div class="bg-[#262626] rounded-xl p-6 border border-gray-700">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/kckWZMNo-8M?si=Du3rqJiXUmnfpV7j" 
                             title="Sorteio Mega da Virada" 
                             frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen
-                            class="w-full h-full">
+                            allowfullscreen>
                     </iframe>
                 </div>
-                
-                <div class="mt-6 md:mt-8 text-center px-2 md:px-0">
-                    <p class="text-lg md:text-xl font-bold mb-3 md:mb-4 texto-gradiente-video">
-                        NÃO VAI PERDER, VAI?
-                    </p>
-                    <p class="text-sm md:text-base text-gray-300 mb-4 md:mb-6 leading-relaxed">
-                        A transmissão oficial será realizada em 31 de dezembro de 2025.<br class="hidden md:block">
-                        É a nossa chance de mudar de vida juntos!
-                    </p>
-                    
-                    <div class="inline-block bg-gradient-to-r from-[#10b981] via-[#059669] to-[#10b981] p-1 rounded-full">
-                        <div class="bg-[#0f172a] rounded-full px-6 py-3">
-                            <h3 class="text-lg md:text-2xl font-bold">
-                                <span class="texto-gradiente-premio">BILHÃO DA VIRADA!</span><br>
-                                <span class="texto-gradiente-video">R$ 850 MILHÕES EM JOGO!</span>
-                            </h3>
-                        </div>
-                    </div>
-                    
-                    <!-- Informação adicional em destaque -->
-                    <div class="mt-6 md:mt-8 p-4 md:p-5 bg-gradient-to-r from-[#1e293b]/50 to-[#0f172a]/50 rounded-xl border border-[#374151]">
-                        <div class="flex items-center justify-center gap-3 md:gap-4">
-                            <i class="fas fa-play-circle text-2xl md:text-3xl text-[#d4af37]"></i>
-                            <div class="text-left">
-                                <p class="font-bold text-white text-sm md:text-base">Ao vivo às 19h</p>
-                                <p class="text-xs md:text-sm text-gray-400">YouTube oficial da Caixa</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<p class="text-center mt-4 text-gray-300 text-sm md:text-base">
+    <span class="font-bold">NÃO VAI PERDER, VAI?</span><br class="hidden md:block">
+    A transmissão oficial será realizada em 31 de dezembro de 2025. É a nossa chance de mudar de vida.
+</p>
+<h3 class="text-center text-xl md:text-2xl font-bold mt-3 titulo-premio-gradiente">
+    BILHÃO DA VIRADA! <br> R$ 850 MILHÕES EM JOGO!
+</h3>
             </div>
         </div>
     </section>
@@ -2332,6 +1336,88 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         </div>
     </section>
 
+    <section id="galeria-bilhetes" class="py-16 px-4 bg-[#171717]">
+    <div class="container mx-auto max-w-7xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Galeria de Bilhetes</h2>
+        <p class="text-center text-gray-300 mb-12">Confira fotos dos bilhetes físicos dos participantes</p>
+
+        <!-- Sistema de Busca -->
+        <div class="mb-10">
+            <div class="max-w-2xl mx-auto">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        id="search-gallery" 
+                        placeholder="Buscar por nome do participante..." 
+                        class="w-full px-6 py-4 rounded-xl bg-[#262626] border-2 border-[#d4af37] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:border-transparent"
+                    >
+                    <i class="fas fa-search absolute right-4 top-4 text-gray-400"></i>
+                </div>
+                <p id="search-results-count" class="text-center mt-3 text-gray-400 hidden">
+                    <span id="results-count">0</span> resultados encontrados
+                </p>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="filter-btn active px-4 py-2 rounded-lg bg-[#d4af37] text-[#171717] font-bold transition hover:bg-[#b8941f]" data-filter="all">
+                Todos
+            </button>
+            <button class="filter-btn px-4 py-2 rounded-lg bg-[#374151] hover:bg-[#4b5563] transition" data-filter="pago">
+                Pagos
+            </button>
+            <button class="filter-btn px-4 py-2 rounded-lg bg-[#374151] hover:bg-[#4b5563] transition" data-filter="pendente">
+                Pendentes
+            </button>
+        </div>
+
+        <!-- Grid de Fotos -->
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Bilhetes serão carregados aqui via JavaScript -->
+        </div>
+
+        <!-- Loading -->
+        <div id="loading-gallery" class="text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#d4af37]"></div>
+            <p class="mt-4 text-gray-300">Carregando galeria...</p>
+        </div>
+
+        <!-- Sem resultados -->
+        <div id="no-results" class="text-center py-12 hidden">
+            <i class="fas fa-image text-6xl text-gray-500 mb-4"></i>
+            <h3 class="text-xl font-bold mb-2">Nenhum bilhete encontrado</h3>
+            <p class="text-gray-400">Tente buscar por outro nome ou verificar os filtros</p>
+        </div>
+
+        <!-- Modal para Visualização Ampliada -->
+        <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden items-center justify-center p-4">
+            <div class="relative max-w-4xl w-full">
+                <button id="close-modal" class="absolute -top-12 right-0 text-white text-3xl hover:text-[#d4af37] transition">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="bg-[#262626] rounded-lg overflow-hidden">
+                    <img id="modal-image" src="" alt="" class="w-full h-auto max-h-[70vh] object-contain">
+                    <div class="p-6">
+                        <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span id="modal-status" class="px-3 py-1 rounded-full text-sm"></span>
+                            <span id="modal-date" class="px-3 py-1 rounded-full text-sm bg-[#374151]"></span>
+                        </div>
+                        <p id="modal-description" class="text-gray-300"></p>
+                    </div>
+                </div>
+                <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-[#d4af37] transition">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-[#d4af37] transition">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
     <section id="bilhetes" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
@@ -2359,202 +1445,6 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         </div>
     </section>
 
-
-
-<!-- Seção: Galeria de Bilhetes Oficiais -->
-<section id="galeria-bilhetes" class="py-16 px-4 bg-[#171717]">
-    <div class="container mx-auto max-w-7xl">
-        <h2 class="text-3xl font-bold text-center mb-4">Galeria de Bilhetes Oficiais</h2>
-        <p class="text-center text-gray-300 mb-10 max-w-3xl mx-auto">
-            Bilhetes oficiais da Caixa Econômica Federal apostados na Mega da Virada 2025.
-            <span class="text-[#d4af37] font-bold">43 bilhetes confirmados!</span>
-        </p>
-        
-        <!-- Barra de Busca -->
-        <div class="max-w-xl mx-auto mb-10">
-            <div class="relative">
-                <input type="text" 
-                       id="busca-bilhetes" 
-                       placeholder="Buscar por nome do participante..."
-                       class="w-full bg-[#262626] text-white border-2 border-[#374151] rounded-xl py-4 pl-12 pr-4 focus:outline-none focus:border-[#d4af37] focus:ring-2 focus:ring-[#d4af37] transition-all">
-                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                <div id="contador-resultados" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm">
-                    43 bilhetes
-                </div>
-            </div>
-            <p class="text-xs text-gray-500 mt-2 text-center">
-                Digite o nome do participante para filtrar os bilhetes
-            </p>
-        </div>
-        
-        <!-- Filtros Rápidos -->
-        <div class="flex flex-wrap justify-center gap-3 mb-8">
-            <button class="filter-badge active px-4 py-2 rounded-full bg-[#d4af37] text-[#171717] font-bold text-sm transition-all hover:scale-105" data-filter="todos">
-                Todos (43)
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="A">
-                A-C
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="D">
-                D-F
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="G">
-                G-I
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="J">
-                J-L
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="M">
-                M-O
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="P">
-                P-R
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="S">
-                S-U
-            </button>
-            <button class="filter-badge px-4 py-2 rounded-full bg-[#374151] text-white font-bold text-sm transition-all hover:bg-[#4b5563] hover:scale-105" data-filter="V">
-                V-Z
-            </button>
-        </div>
-        
-        <!-- Grid de Bilhetes -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6" id="grid-bilhetes">
-            <!-- Bilhetes serão carregados aqui -->
-        </div>
-        
-        <!-- Mensagem de nenhum resultado -->
-        <div id="nenhum-resultado" class="hidden text-center py-12">
-            <i class="fas fa-search text-4xl text-gray-600 mb-4"></i>
-            <h3 class="text-xl font-bold text-gray-400 mb-2">Nenhum bilhete encontrado</h3>
-            <p class="text-gray-500">Tente buscar por outro nome ou use os filtros acima</p>
-        </div>
-    </div>
-</section>
-
-<!-- Modal de Visualização -->
-<div id="modal-galeria" class="modal-overlay">
-    <div class="modal-conteudo max-w-6xl w-full">
-        <!-- Header do Modal -->
-        <div class="flex justify-between items-center mb-6">
-            <div>
-                <h3 class="text-2xl font-bold text-[#d4af37]" id="modal-titulo">Bilhete Oficial</h3>
-                <p class="text-gray-300 text-sm" id="modal-participante">Participante</p>
-            </div>
-            <div class="flex items-center space-x-4">
-                <span class="text-gray-400 text-sm" id="modal-contador">1 de 43</span>
-                <button id="btn-fechar-modal" class="text-gray-400 hover:text-white text-2xl">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Conteúdo Principal -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Imagem Ampliada -->
-            <div class="lg:col-span-2">
-                <div class="bg-black rounded-xl overflow-hidden">
-                    <img id="modal-imagem" src="" alt="Bilhete Oficial" class="w-full h-auto object-contain max-h-[500px] mx-auto">
-                </div>
-                
-                <!-- Navegação -->
-                <div class="flex justify-between items-center mt-6">
-                    <button id="btn-anterior" class="flex items-center space-x-2 bg-[#374151] hover:bg-[#4b5563] text-white py-3 px-6 rounded-lg transition">
-                        <i class="fas fa-chevron-left"></i>
-                        <span>Anterior</span>
-                    </button>
-                    
-                    <div class="flex space-x-2">
-                        <button class="btn-modal-acao" title="Rotacionar">
-                            <i class="fas fa-redo"></i>
-                        </button>
-                        <button class="btn-modal-acao" title="Baixar imagem" id="btn-download">
-                            <i class="fas fa-download"></i>
-                        </button>
-                        <button class="btn-modal-acao" title="Compartilhar">
-                            <i class="fas fa-share-alt"></i>
-                        </button>
-                    </div>
-                    
-                    <button id="btn-proximo" class="flex items-center space-x-2 bg-[#374151] hover:bg-[#4b5563] text-white py-3 px-6 rounded-lg transition">
-                        <span>Próximo</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Informações -->
-            <div class="space-y-6">
-                <!-- Dados do Bilhete -->
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-700">
-                    <h4 class="font-bold text-lg mb-4 text-[#d4af37]">Informações do Bilhete</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Número:</span>
-                            <span class="font-bold text-white" id="modal-numero">#001</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Participante:</span>
-                            <span class="font-bold text-white" id="modal-nome">Ana Silva</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Status:</span>
-                            <span class="font-bold text-[#10b981]">Confirmado</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Data:</span>
-                            <span class="font-bold text-white">15/12/2025</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Valor:</span>
-                            <span class="font-bold text-[#d4af37]">R$ 6,00</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Números -->
-                <div class="bg-[#262626] p-6 rounded-xl border border-gray-700">
-                    <h4 class="font-bold text-lg mb-4 text-[#d4af37]">Números da Sorte</h4>
-                    <div class="numeros-container justify-center" id="modal-numeros">
-                        <!-- Números serão inseridos aqui -->
-                    </div>
-                    <p class="text-xs text-gray-400 mt-4 text-center">
-                        <i class="fas fa-info-circle mr-1"></i>
-                        Bilhete oficial da Caixa Econômica Federal
-                    </p>
-                </div>
-                
-                <!-- Ações -->
-                <div class="flex space-x-3">
-                    <a href="https://wa.me/5531982042552?text=Olá!%20Tenho%20dúvidas%20sobre%20o%20bilhete%20número%20" 
-                       id="whatsapp-link"
-                       target="_blank"
-                       class="flex-1 bg-[#10b981] hover:bg-[#059669] text-white font-bold py-3 px-4 rounded-lg transition text-center">
-                        <i class="fab fa-whatsapp mr-2"></i>Dúvidas?
-                    </a>
-                    <button onclick="copiarPix('pix-code-galeria')" class="flex-1 bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-4 rounded-lg transition">
-                        <i class="fas fa-copy mr-2"></i>PIX
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Miniaturas -->
-        <div class="mt-8">
-            <h4 class="font-bold text-lg mb-4 text-gray-300">Mais Bilhetes</h4>
-            <div class="flex overflow-x-auto space-x-4 pb-4" id="miniaturas-container">
-                <!-- Miniaturas serão carregadas aqui -->
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-        
-
-
-    
     <section id="contato" class="py-16 px-4 bg-[#171717]">
     <div class="container mx-auto max-w-4xl">
         <h2 class="text-3xl font-bold text-center mb-12">Entre em Contato</h2>
@@ -2760,10 +1650,9 @@ function copiarPix(elementId) {
             
             // ========== VARIÁVEIS GLOBAIS ==========
             // Números oficiais da Mega da Virada - serão atualizados após o sorteio
-            let numerosSorteados = [27, 32, 52, 10, 56, 03]; // Números já definidos e VERDES
+            let numerosSorteados = [0, 0, 0, 0, 0, 0]; // Inicialmente todos zeros
             let bilheteVencedor = null;
             let grupoGanhou = false;
-            let verificacaoRealizada = false; // Nova variável para controlar se a verificação já foi feita
 
             // ========== SISTEMA DE VERIFICAÇÃO ==========
             const btnVerificarBilhetes = document.getElementById('btn-verificar-bilhetes');
@@ -2791,7 +1680,12 @@ function copiarPix(elementId) {
                 numerosElementos.forEach((elemento, index) => {
                     if (index < novosNumeros.length) {
                         elemento.textContent = novosNumeros[index].toString().padStart(2, '0');
-                        // Números já são verdes por padrão agora
+                        // Só adiciona a classe "sorteado" se o número for maior que 0
+                        if (novosNumeros[index] > 0) {
+                            elemento.classList.add('sorteado');
+                        } else {
+                            elemento.classList.remove('sorteado');
+                        }
                     }
                 });
                 
@@ -2954,9 +1848,6 @@ function copiarPix(elementId) {
                     return;
                 }
 
-                // Marcar que a verificação foi realizada
-                verificacaoRealizada = true;
-
                 let maxAcertos = 0;
                 let bilhetesComAcertos = [];
 
@@ -2991,75 +1882,116 @@ function copiarPix(elementId) {
             const ticketsGallery = document.getElementById('tickets-gallery');
             const loadMoreButton = document.getElementById('load-more');
 
-            const participantNames = [
-                "Adriane",
-                "Ana Paula",
-                "André",
-                "Augusto",
-                "Bryan",
-                "Camila",
-                "Daniele", 
-                "Duda", 
-                "Elton",
-                "Érica",
-                "Erlinda", 
-                "Ester",
-                "Gabriel",
-                "Juliano", 
-                "Kimyo",
-                "Leonardo",
-                "Leislaine",
-                "Lilian",
-                "Lydia",
-                "Marcela",
-                "Marco",
-                "Melissa",
-                "Olivier",
-                "Paloma",
-                "Pedro", 
-                "Ronaldo",
-                "Rosiclea", // NOVO PARTICIPANTE ADICIONADO
-                "Sandra",
-                "Soninha",
-                "Suellen",
-                "Thiago", 
-                "TH Romerito"
-            ];
-
-            const sampleTickets = [
-                { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "14, 29, 52, 37, 15, 51", assignedName: "Adriane" },
-                { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 07, 34, 42, 52, 45", assignedName: "Ana Paula" },
-                { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 12, 26, 35, 44, 56", assignedName: "André" },
-                { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "27, 32, 52, 10, 56, 34", assignedName: "Augusto" },
-                { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 09, 15, 25, 49, 60", assignedName: "Bryan" },
-                { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "22, 28, 31, 36, 37, 45", assignedName: "Camila" },
-                { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Daniele" },
-                { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 06, 42, 45, 36, 50", assignedName: "Duda" },
-                { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "31, 17, 34, 24, 09, 47", assignedName: "Elton" },
-                { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "37, 33, 25, 13, 28, 14", assignedName: "Érica" },
-                { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Erlinda" },
-                { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Ester" },
-                { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 03, 33, 50, 47, 42", assignedName: "Gabriel" },
-                { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Juliano" },
-                { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 08, 14, 59, 18, 57", assignedName: "Kimyo" },
-                { id: 16, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 07, 12, 18, 27, 44", assignedName: "Leonardo" },
-                { id: 17, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 24, 01, 21, 35, 18", assignedName: "Leislaine" },
-                { id: 18, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Lilian" },
-                { id: 19, event: "Mega da Virada", date: "31/12/2025", numbers: "23, 45, 60, 08, 38, 52", assignedName: "Lydia" },
-                { id: 20, event: "Mega da Virada", date: "31/12/2025", numbers: "12, 08, 07, 52, 23, 44", assignedName: "Marcela" },
-                { id: 21, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 12, 19, 31, 44, 48", assignedName: "Marco" },
-                { id: 22, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 35, 58, 46, 53, 11", assignedName: "Melissa" },
-                { id: 23, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 02, 13, 15, 57, 60", assignedName: "Olivier" },
-                { id: 24, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 13, 23, 33, 43, 53", assignedName: "Paloma" },
-                { id: 25, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 16, 19, 24, 03, 44", assignedName: "Pedro" },
-                { id: 26, event: "Mega da Virada", date: "31/12/2025", numbers: "49, 09, 38, 20, 21, 42", assignedName: "Ronaldo" },
-                { id: 27, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Rosiclea" }, // NOVO BILHETE
-                { id: 28, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 13, 15, 21, 17", assignedName: "Sandra" },
-                { id: 29, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 52, 33, 13, 48, 25", assignedName: "Soninha" },
-                { id: 30, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 05, 08, 11, 20, 24", assignedName: "Suellen" },
-                { id: 31, event: "Mega da Virada", date: "31/12/2025", numbers: "00, 00, 00, 00, 00, 00", assignedName: "Thiago" },
-                { id: 32, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 05, 34, 27, 25", assignedName: "TH Romerito" }
-            ];
+ const participantNames = [
+    "Adriane",
+    "Airton",
+    "Ana Paula",
+    "André",
+    "Augusto",
+    "Augusto Guedes",
+    "Brandino",
+    "Bryan",
+    "Camila",
+    "Catiana",
+    "Claudineia",
+    "DJ Romerito",
+    "Daniele",
+    "Duda",
+    "Edmar",
+    "Eliane",
+    "Elton",
+    "Érica",
+    "Erlinda",
+    "Ester",
+    "Gabriel",
+    "Gicélio",
+    "Glauber",
+    "Gustavo",
+    "Israel",
+    "João",
+    "José",
+    "Juliano",
+    "Kasheenen Willian",
+    "Kimyo",
+    "Leonardo",
+    "Leislaine",
+    "Lilian",
+    "Lorrayne",
+    "Lydia",
+    "Marcela",
+    "Marco",
+    "Maria APTK",
+    "Melissa",
+    "Mike",
+    "Olivier",
+    "Paloma",
+    "Pedro",
+    "Ronaldo",
+    "Ronnie",
+    "Rosiclea",
+    "Sandra",
+    "Soninha",
+    "Suellen",
+    "TH Romerito",
+    "Thiago Romerito",
+    "Tiago",
+    "Washington"
+];
+const sampleTickets = [
+    { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "14, 29, 52, 37, 15, 51", assignedName: "Adriane" },
+    { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "30, 24, 12, 13, 55, 27", assignedName: "Airton" },           
+    { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 07, 34, 42, 52, 45", assignedName: "Ana Paula" },
+    { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 12, 26, 35, 44, 56", assignedName: "André" },
+    { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "27, 32, 52, 10, 56, 34", assignedName: "Augusto" },
+    { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "23, 07, 11, 33, 05, 57", assignedName: "Augusto Guedes" },
+    { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "56, 11, 28, 32, 48, 14", assignedName: "Brandino" },
+    { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 09, 15, 25, 49, 60", assignedName: "Bryan" },
+    { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "22, 28, 31, 36, 37, 45", assignedName: "Camila" },
+    { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 09, 15, 14, 05, 07", assignedName: "Catiana" },
+    { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "33, 44, 12, 49, 51, 13", assignedName: "Claudineia" },
+    { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 15, 32, 31, 10, 54", assignedName: "Daniele" },
+    { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 06, 42, 45, 36, 50", assignedName: "Duda" },
+    { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 10, 15, 16, 17, 60", assignedName: "DJ Romerito" },
+    { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "37, 12, 24, 48, 39, 51", assignedName: "Edmar" },            
+    { id: 16, event: "Mega da Virada", date: "31/12/2025", numbers: "17, 31, 50, 51, 09, 10", assignedName: "Eliane" },
+    { id: 17, event: "Mega da Virada", date: "31/12/2025", numbers: "31, 17, 34, 24, 09, 47", assignedName: "Elton" },
+    { id: 18, event: "Mega da Virada", date: "31/12/2025", numbers: "37, 33, 25, 13, 28, 14", assignedName: "Érica" },
+    { id: 19, event: "Mega da Virada", date: "31/12/2025", numbers: "14, 37, 16, 21, 33, 04", assignedName: "Erlinda" },
+    { id: 20, event: "Mega da Virada", date: "31/12/2025", numbers: "15, 31, 16, 41, 09, 44", assignedName: "Ester" },
+    { id: 21, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 03, 33, 50, 47, 42", assignedName: "Gabriel" },
+    { id: 22, event: "Mega da Virada", date: "31/12/2025", numbers:"25, 33, 44, 15, 40, 58", assignedName: "Gicélio" },
+    { id: 23, event: "Mega da Virada", date: "31/12/2025", numbers:"26, 24, 52, 35, 07, 12", assignedName: "Glauber" },       
+    { id: 24, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 02, 01, 03, 07, 09", assignedName: "Gustavo" },
+    { id: 25, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 15, 20, 23, 36, 51", assignedName: "Israel" },
+    { id: 26, event: "Mega da Virada", date: "31/12/2025", numbers: "13, 17, 24, 01, 16, 40", assignedName: "João" },
+    { id: 27, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 04, 06, 10, 16, 20", assignedName: "José" },        
+    { id: 28, event: "Mega da Virada", date: "31/12/2025", numbers: "20, 22, 40, 04, 18, 13", assignedName: "Juliano" },
+    { id: 29, event: "Mega da Virada", date: "31/12/2025", numbers: "15, 12, 23, 21, 04, 30", assignedName: "Kasheenen Willian" },                              
+    { id: 30, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 08, 14, 59, 18, 57", assignedName: "Kimyo" },
+    { id: 31, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 07, 12, 18, 27, 44", assignedName: "Leonardo" },
+    { id: 32, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 24, 01, 21, 35, 18", assignedName: "Leislaine" },
+    { id: 33, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 11, 19, 25, 40, 47", assignedName: "Lilian" },
+    { id: 34, event: "Mega da Virada", date: "31/12/2025", numbers: "52, 50, 28, 21, 04, 48", assignedName: "Lorrayne" },
+    { id: 35, event: "Mega da Virada", date: "31/12/2025", numbers: "23, 45, 60, 08, 38, 52", assignedName: "Lydia" },
+    { id: 36, event: "Mega da Virada", date: "31/12/2025", numbers: "08, 04, 07, 05, 09, 24", assignedName: "Maria APTK" },            
+    { id: 37, event: "Mega da Virada", date: "31/12/2025", numbers: "12, 08, 07, 52, 23, 44", assignedName: "Marcela" },
+    { id: 38, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 12, 19, 31, 44, 48", assignedName: "Marco" },
+    { id: 39, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 35, 58, 46, 53, 11", assignedName: "Melissa" },
+    { id: 40, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 17, 19, 29, 50, 57", assignedName: "Mike" },           
+    { id: 41, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 02, 13, 15, 57, 60", assignedName: "Olivier" },
+    { id: 42, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 13, 23, 33, 43, 53", assignedName: "Paloma" },
+    { id: 43, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 16, 19, 24, 03, 44", assignedName: "Pedro" },
+    { id: 44, event: "Mega da Virada", date: "31/12/2025", numbers: "49, 09, 38, 20, 21, 42", assignedName: "Ronaldo" },
+    { id: 45, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 09, 12, 14, 21, 34", assignedName: "Ronnie" },
+    { id: 46, event: "Mega da Virada", date: "31/12/2025", numbers: "08, 04, 28, 26, 48, 45", assignedName: "Rosiclea" },
+    { id: 47, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 13, 15, 21, 17", assignedName: "Sandra" },
+    { id: 48, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 52, 33, 13, 48, 25", assignedName: "Soninha" },
+    { id: 49, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 05, 08, 11, 20, 24", assignedName: "Suellen" },
+    { id: 50, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 24, 37, 50, 57", assignedName: "Thiago Romerito" },
+    { id: 51, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 05, 34, 27, 25", assignedName: "TH Romerito" },
+    { id: 52, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 17, 42, 46, 54, 03", assignedName: "Tiago" },
+    { id: 53, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 08, 14, 18, 31, 49", assignedName: "Washington" }
+];
 
             let displayedTickets = window.innerWidth < 768 ? 4 : 8;
             let filteredTickets = [...sampleTickets]; // Cópia para filtragem
@@ -3121,7 +2053,7 @@ function copiarPix(elementId) {
 
                 for (let i = 0; i < displayedTickets && i < filteredTickets.length; i++) {
                     const ticket = filteredTickets[i];
-                    const acertos = verificacaoRealizada ? verificarAcertos(ticket.numbers) : 0;
+                    const acertos = verificarAcertos(ticket.numbers);
                     const isVencedor = grupoGanhou && bilheteVencedor && bilheteVencedor.id === ticket.id;
                     const isGrupoVencedor = grupoGanhou;
 
@@ -3131,9 +2063,8 @@ function copiarPix(elementId) {
                     const numerosArray = ticket.numbers.split(', ');
                     const numerosHTML = numerosArray.map(num => {
                         const numero = parseInt(num);
-                        // REMOVIDO: Não destacamos mais os números com círculo amarelo
-                        // Apenas mostramos quantos acertos foram feitos
-                        return `<span class="numero-sorteio">${num.padStart(2, '0')}</span>`;
+                        const isAcerto = temNumerosValidos(numerosSorteados) && numerosSorteados.includes(numero);
+                        return `<span class="numero-sorteio ${isAcerto ? 'numero-acerto' : ''}">${num.padStart(2, '0')}</span>`;
                     }).join('');
 
                     // Gerar um código aleatório para o ticket
@@ -3267,774 +2198,285 @@ function copiarPix(elementId) {
                 });
             });
 
-            // ========== ATUALIZAR NÚMEROS OFICIAIS ==========
-            atualizarNumerosOficiais([27, 32, 52, 10, 56, 03]);
+            // ========== EXEMPLO: Como atualizar os números após o sorteio oficial ==========
+            // Para usar após o sorteio oficial, descomente a linha abaixo e atualize com os números reais:
+            // atualizarNumerosOficiais([27, 32, 52, 10, 56, 03]);
         });
-
-        // ========== CONTADOR PARA MEGA DA VIRADA ==========
-function atualizarContador() {
-    const dataSorteio = new Date('December 31, 2025 19:00:00').getTime();
-    const agora = new Date().getTime();
-    const diferenca = dataSorteio - agora;
-    
-    // Se já passou do sorteio
-    if (diferenca < 0) {
-        document.getElementById('dias').textContent = '00';
-        document.getElementById('horas').textContent = '00';
-        document.getElementById('minutos').textContent = '00';
-        document.getElementById('segundos').textContent = '00';
-        
-        // Atualizar barra de progresso para 100%
-        document.getElementById('progress-bar').style.width = '100%';
-        
-        // Alterar mensagem do contador
-        const contadorSection = document.getElementById('contador');
-        const titulo = contadorSection.querySelector('h2');
-        titulo.innerHTML = '<i class="fas fa-trophy text-[#10b981] mr-2"></i>SORTEIO REALIZADO!';
-        
-        return;
-    }
-    
-    // Calcular dias, horas, minutos, segundos
-    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-    const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-    
-    // Atualizar elementos DOM com animação
-    atualizarComAnimacao('dias', dias.toString().padStart(2, '0'));
-    atualizarComAnimacao('horas', horas.toString().padStart(2, '0'));
-    atualizarComAnimacao('minutos', minutos.toString().padStart(2, '0'));
-    atualizarComAnimacao('segundos', segundos.toString().padStart(2, '0'));
-    
-    // Atualizar barra de progresso (SEM ANIMAÇÕES QUE CAUSAM PISCAR)
-    const dataInicio = new Date('December 08, 2025').getTime();
-    const dataFim = new Date('December 31, 2025 19:00:00').getTime();
-    const totalDias = dataFim - dataInicio;
-    const diasPassados = agora - dataInicio;
-    const progresso = Math.min((diasPassados / totalDias) * 100, 100);
-    
-    // Usar requestAnimationFrame para suavizar a transição
-    requestAnimationFrame(() => {
-        document.getElementById('progress-bar').style.width = `${progresso}%`;
-    });
-}
-
-function atualizarComAnimacao(elementId, novoValor) {
-    const elemento = document.getElementById(elementId);
-    if (elemento.textContent !== novoValor) {
-        elemento.classList.add('contador-animado');
-        elemento.textContent = novoValor;
-        
-        // Remover a classe de animação após a animação terminar
-        setTimeout(() => {
-            elemento.classList.remove('contador-animado');
-        }, 500);
-    }
-}
-
-// Iniciar contador
-atualizarContador();
-setInterval(atualizarContador, 1000);
-
-        // ========== APLICAR ESTILOS APÓS SORTEIO ==========
-function aplicarEstilosAposSorteio() {
-    const hoje = new Date();
-    const dataSorteio = new Date('December 31, 2025 19:00:00');
-    
-    // Verificar se o sorteio já ocorreu
-    if (hoje >= dataSorteio) {
-        // Adicionar classe especial à seção de resultados
-        const resultadoSection = document.querySelector('#resultado .bg-\\[\\#262626\\]');
-        if (resultadoSection) {
-            resultadoSection.classList.add('resultado-premium');
-        }
-        
-        // Atualizar título
-        const tituloResultado = document.querySelector('#resultado h2');
-        if (tituloResultado) {
-            tituloResultado.innerHTML = '🏆 <span class="text-[#d4af37]">Resultado Oficial</span> Mega da Virada 2025 🏆';
-        }
-        
-        // Atualizar botão de verificação
-        const btnVerificar = document.getElementById('btn-verificar-bilhetes');
-        if (btnVerificar) {
-            btnVerificar.innerHTML = '<i class="fas fa-trophy mr-2"></i>Conferir Prêmios';
-            btnVerificar.classList.add('btn-premium');
-        }
-        
-        // Adicionar efeito de confete
-        adicionarConfetti();
-    }
-}
-
-function adicionarConfetti() {
-    const container = document.getElementById('resultado');
-    const colors = ['#d4af37', '#10b981', '#fbbf24', '#3b82f6', '#8b5cf6'];
-    
-    for (let i = 0; i < 50; i++) {
-        const confetti = document.createElement('div');
-        confetti.classList.add('confetti');
-        confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDelay = Math.random() * 3 + 's';
-        confetti.style.width = Math.random() * 10 + 5 + 'px';
-        confetti.style.height = confetti.style.width;
-        container.appendChild(confetti);
-    }
-}
-
-// Aplicar estilos quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    // ... seu código existente ...
-    
-    // Adicionar esta linha no final do DOMContentLoaded
-    aplicarEstilosAposSorteio();
-});
-
-        // ========== GALERIA DE BILHETES OFICIAIS ==========
-const galeriaImagens = document.getElementById('galeria-imagens');
-const filtroBotoes = document.querySelectorAll('.filter-btn');
-const modalBilhete = document.getElementById('modal-bilhete');
-const fecharModal = document.getElementById('fechar-modal');
-const btnAnterior = document.getElementById('btn-anterior');
-const btnProximo = document.getElementById('btn-proximo');
-
-// Dados dos bilhetes oficiais (com imagens)
-const bilhetesOficiais = [
-    {
-        id: 1,
-        numero: "#001",
-        participante: "Ana Silva",
-        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["04", "12", "25", "33", "42", "58"],
-        status: "confirmado",
-        data: "15/12/2025",
-        descricao: "Bilhete oficial da Mega da Virada - Participante 1"
-    },
-    {
-        id: 2,
-        numero: "#002",
-        participante: "Carlos Santos",
-        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["07", "15", "23", "31", "46", "52"],
-        status: "confirmado",
-        data: "14/12/2025",
-        descricao: "Bilhete registrado na lotérica central"
-    },
-    {
-        id: 3,
-        numero: "#003",
-        participante: "Mariana Oliveira",
-        imagem: "https://images.unsplash.com/photo-1585828918176-e6c6e6b1b43a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["02", "11", "29", "37", "44", "60"],
-        status: "processamento",
-        data: "16/12/2025",
-        descricao: "Aguardando confirmação de pagamento"
-    },
-    {
-        id: 4,
-        numero: "#004",
-        participante: "Ricardo Lima",
-        imagem: "https://images.unsplash.com/photo-1559223607-a43c990c692c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["09", "18", "27", "35", "49", "55"],
-        status: "confirmado",
-        data: "13/12/2025",
-        descricao: "Bilhete escaneado após compra"
-    },
-    {
-        id: 5,
-        numero: "#005",
-        participante: "Fernanda Costa",
-        imagem: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["13", "21", "34", "41", "53", "59"],
-        status: "confirmado",
-        data: "15/12/2025",
-        descricao: "Comprovante oficial da Caixa"
-    },
-    {
-        id: 6,
-        numero: "#006",
-        participante: "Roberto Alves",
-        imagem: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["05", "16", "28", "39", "47", "56"],
-        status: "processamento",
-        data: "16/12/2025",
-        descricao: "Bilhete em análise"
-    },
-    {
-        id: 7,
-        numero: "#007",
-        participante: "Juliana Pereira",
-        imagem: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["03", "14", "26", "38", "45", "57"],
-        status: "confirmado",
-        data: "14/12/2025",
-        descricao: "Documento oficial da loteria"
-    },
-    {
-        id: 8,
-        numero: "#008",
-        participante: "Pedro Mendes",
-        imagem: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["08", "19", "32", "43", "51", "60"],
-        status: "confirmado",
-        data: "13/12/2025",
-        descricao: "Registro válido para o sorteio"
-    },
-    {
-        id: 9,
-        numero: "#009",
-        participante: "Patrícia Souza",
-        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["06", "17", "30", "40", "48", "54"],
-        status: "processamento",
-        data: "16/12/2025",
-        descricao: "Aguardando validação"
-    },
-    {
-        id: 10,
-        numero: "#010",
-        participante: "Lucas Ferreira",
-        imagem: "https://images.unsplash.com/photo-1585828918176-e6c6e6b1b43a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["10", "22", "31", "42", "50", "59"],
-        status: "confirmado",
-        data: "15/12/2025",
-        descricao: "Bilhete físico digitalizado"
-    },
-    {
-        id: 11,
-        numero: "#011",
-        participante: "Camila Rocha",
-        imagem: "https://images.unsplash.com/photo-1559223607-a43c990c692c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["01", "20", "33", "44", "52", "57"],
-        status: "confirmado",
-        data: "14/12/2025",
-        descricao: "Comprovante de aposta oficial"
-    },
-    {
-        id: 12,
-        numero: "#012",
-        participante: "Bruno Cardoso",
-        imagem: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["11", "24", "36", "45", "53", "60"],
-        status: "processamento",
-        data: "16/12/2025",
-        descricao: "Processando documentação"
-    }
-];
-
-// Variáveis de controle
-let filtroAtual = 'todos';
-let bilheteAtualModal = 0;
-let bilhetesFiltrados = [];
-
-// Atualizar estatísticas
-function atualizarEstatisticas() {
-    const total = bilhetesOficiais.length;
-    const confirmados = bilhetesOficiais.filter(b => b.status === 'confirmado').length;
-    const processamento = bilhetesOficiais.filter(b => b.status === 'processamento').length;
-    
-    document.getElementById('total-bilhetes').textContent = total;
-    document.getElementById('bilhetes-confirmados').textContent = confirmados;
-    document.getElementById('bilhetes-processamento').textContent = processamento;
-}
-
-// Renderizar bilhetes
-function renderizarBilhetes() {
-    galeriaImagens.innerHTML = '';
-    
-    // Filtrar bilhetes
-    bilhetesFiltrados = [...bilhetesOficiais];
-    
-    if (filtroAtual === 'confirmados') {
-        bilhetesFiltrados = bilhetesFiltrados.filter(b => b.status === 'confirmado');
-    } else if (filtroAtual === 'processamento') {
-        bilhetesFiltrados = bilhetesFiltrados.filter(b => b.status === 'processamento');
-    } else if (filtroAtual === 'numeros') {
-        bilhetesFiltrados = [...bilhetesFiltrados].sort((a, b) => {
-            const numA = parseInt(a.numeros[0]);
-            const numB = parseInt(b.numeros[0]);
-            return numA - numB;
-        });
-    }
-    
-    // Renderizar cada bilhete
-    bilhetesFiltrados.forEach(bilhete => {
-        const card = document.createElement('div');
-        card.className = `card-bilhete ${bilhete.status}`;
-        card.dataset.id = bilhete.id;
-        
-        // Criar elementos dos números
-        const numerosHTML = bilhete.numeros.map(num => 
-            `<span class="bilhete-numero-item">${num}</span>`
-        ).join('');
-        
-        card.innerHTML = `
-            <div class="bilhete-imagem-container">
-                <img src="${bilhete.imagem}" alt="Bilhete ${bilhete.numero}" class="bilhete-imagem">
-                <div class="bilhete-overlay">
-                    <button class="btn-ampliar" data-id="${bilhete.id}">
-                        <i class="fas fa-search-plus"></i>
-                        Ampliar
-                    </button>
-                </div>
-            </div>
-            
-            <div class="bilhete-conteudo">
-                <div class="bilhete-numero">${bilhete.numero}</div>
-                <div class="bilhete-participante">${bilhete.participante}</div>
-                <div class="bilhete-status ${bilhete.status === 'confirmado' ? 'status-confirmado' : 'status-processamento'}">
-                    <i class="fas ${bilhete.status === 'confirmado' ? 'fa-check-circle' : 'fa-clock'} mr-2"></i>
-                    ${bilhete.status === 'confirmado' ? 'Confirmado' : 'Em Processamento'}
-                </div>
-                
-                <div class="bilhete-numeros">
-                    ${numerosHTML}
-                </div>
-                
-                <div class="text-xs text-gray-400 mt-3">
-                    <i class="fas fa-calendar-alt mr-1"></i>
-                    ${bilhete.data}
-                </div>
-            </div>
-        `;
-        
-        galeriaImagens.appendChild(card);
-        
-        // Adicionar evento de clique
-        const btnAmpliar = card.querySelector('.btn-ampliar');
-        btnAmpliar.addEventListener('click', (e) => {
-            e.stopPropagation();
-            abrirModal(bilhete.id);
-        });
-        
-        card.addEventListener('click', () => {
-            abrirModal(bilhete.id);
-        });
-    });
-}
-
-// Abrir modal
-function abrirModal(id) {
-    const bilhete = bilhetesOficiais.find(b => b.id === id);
-    if (!bilhete) return;
-    
-    bilheteAtualModal = bilhetesFiltrados.findIndex(b => b.id === id);
-    
-    // Atualizar conteúdo do modal
-    document.getElementById('modal-titulo').textContent = `Bilhete ${bilhete.numero}`;
-    document.getElementById('modal-descricao').textContent = bilhete.descricao;
-    document.getElementById('modal-imagem').src = bilhete.imagem;
-    document.getElementById('modal-imagem').alt = `Bilhete ${bilhete.numero} - ${bilhete.participante}`;
-    document.getElementById('modal-numero').textContent = bilhete.numero;
-    document.getElementById('modal-participante').textContent = bilhete.participante;
-    document.getElementById('modal-status').textContent = 
-        bilhete.status === 'confirmado' ? 'Confirmado' : 'Em Processamento';
-    document.getElementById('modal-status').className = 
-        `font-bold ${bilhete.status === 'confirmado' ? 'text-[#10b981]' : 'text-[#fbbf24]'}`;
-    
-    // Atualizar números
-    const numerosContainer = document.getElementById('modal-numeros');
-    numerosContainer.innerHTML = bilhete.numeros.map(num => 
-        `<span class="numero-sorteio">${num.padStart(2, '0')}</span>`
-    ).join('');
-    
-    // Mostrar modal
-    modalBilhete.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-// Fechar modal
-function fecharModalHandler() {
-    modalBilhete.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-// Navegar no modal
-function navegarModal(direcao) {
-    if (bilhetesFiltrados.length === 0) return;
-    
-    if (direcao === 'anterior') {
-        bilheteAtualModal--;
-        if (bilheteAtualModal < 0) {
-            bilheteAtualModal = bilhetesFiltrados.length - 1;
-        }
-    } else {
-        bilheteAtualModal++;
-        if (bilheteAtualModal >= bilhetesFiltrados.length) {
-            bilheteAtualModal = 0;
-        }
-    }
-    
-    abrirModal(bilhetesFiltrados[bilheteAtualModal].id);
-}
-
-// Inicializar eventos
-filtroBotoes.forEach(btn => {
-    btn.addEventListener('click', function() {
-        // Remover classe active de todos
-        filtroBotoes.forEach(b => b.classList.remove('active'));
-        
-        // Adicionar classe active ao botão clicado
-        this.classList.add('active');
-        
-        // Atualizar filtro
-        filtroAtual = this.dataset.filter;
-        
-        // Renderizar bilhetes
-        renderizarBilhetes();
-    });
-});
-
-fecharModal.addEventListener('click', fecharModalHandler);
-btnAnterior.addEventListener('click', () => navegarModal('anterior'));
-btnProximo.addEventListener('click', () => navegarModal('proximo'));
-
-// Fechar modal ao clicar fora
-modalBilhete.addEventListener('click', (e) => {
-    if (e.target === modalBilhete) {
-        fecharModalHandler();
-    }
-});
-
-// Fechar modal com tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalBilhete.classList.contains('active')) {
-        fecharModalHandler();
-    }
-    
-    // Navegação com setas
-    if (modalBilhete.classList.contains('active')) {
-        if (e.key === 'ArrowLeft') {
-            navegarModal('anterior');
-        } else if (e.key === 'ArrowRight') {
-            navegarModal('proximo');
-        }
-    }
-});
-
-// Inicializar galeria
-atualizarEstatisticas();
-renderizarBilhetes();
-
-        // ========== GALERIA DE BILHETES OFICIAIS ==========
-const gridBilhetes = document.getElementById('grid-bilhetes');
-const buscaBilhetes = document.getElementById('busca-bilhetes');
-const contadorResultados = document.getElementById('contador-resultados');
-const nenhumResultado = document.getElementById('nenhum-resultado');
-const filterBadges = document.querySelectorAll('.filter-badge');
-
-// Modal
-const modalGaleria = document.getElementById('modal-galeria');
-const btnFecharModal = document.getElementById('btn-fechar-modal');
-const btnAnterior = document.getElementById('btn-anterior');
-const btnProximo = document.getElementById('btn-proximo');
-const btnDownload = document.getElementById('btn-download');
-
-// Dados dos 43 bilhetes (use suas imagens reais)
-const bilhetesGaleria = [
-    {
-        id: 1,
-        nome: "Adriane",
-        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["14", "29", "52", "37", "15", "51"],
-        codigo: "MT001",
-        data: "15/12/2025"
-    },
-    {
-        id: 2,
-        nome: "Ana Paula",
-        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["06", "07", "34", "42", "52", "45"],
-        codigo: "MT002",
-        data: "15/12/2025"
-    },
-    {
-        id: 3,
-        nome: "André",
-        imagem: "https://images.unsplash.com/photo-1585828918176-e6c6e6b1b43a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["06", "12", "26", "35", "44", "56"],
-        codigo: "MT003",
-        data: "15/12/2025"
-    },
-    {
-        id: 4,
-        nome: "Augusto",
-        imagem: "https://images.unsplash.com/photo-1559223607-a43c990c692c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["27", "32", "52", "10", "56", "34"],
-        codigo: "MT004",
-        data: "15/12/2025"
-    },
-    {
-        id: 5,
-        nome: "Augusto Guedes",
-        imagem: "https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["23", "07", "11", "33", "05", "57"],
-        codigo: "MT005",
-        data: "15/12/2025"
-    },
-    {
-        id: 6,
-        nome: "Brandino",
-        imagem: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["03", "09", "15", "25", "49", "60"],
-        codigo: "MT006",
-        data: "15/12/2025"
-    },
-    {
-        id: 7,
-        nome: "Bryan",
-        imagem: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["22", "28", "31", "36", "37", "45"],
-        codigo: "MT007",
-        data: "15/12/2025"
-    },
-    {
-        id: 8,
-        nome: "Camila",
-        imagem: "https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["01", "09", "15", "14", "05", "07"],
-        codigo: "MT008",
-        data: "15/12/2025"
-    },
-    {
-        id: 9,
-        nome: "Catiana",
-        imagem: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["07", "15", "32", "31", "10", "54"],
-        codigo: "MT009",
-        data: "15/12/2025"
-    },
-    {
-        id: 10,
-        nome: "Claudineia",
-        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: ["02", "06", "42", "45", "36", "50"],
-        codigo: "MT010",
-        data: "15/12/2025"
-    },
-    // Adicione os outros 33 bilhetes seguindo o mesmo padrão
-    // ... (você pode adicionar mais itens aqui)
-];
-
-// Adicione mais bilhetes para totalizar 43
-for (let i = 11; i <= 43; i++) {
-    bilhetesGaleria.push({
-        id: i,
-        nome: `Participante ${i}`,
-        imagem: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        numeros: [
-            Math.floor(Math.random() * 60) + 1,
-            Math.floor(Math.random() * 60) + 1,
-            Math.floor(Math.random() * 60) + 1,
-            Math.floor(Math.random() * 60) + 1,
-            Math.floor(Math.random() * 60) + 1,
-            Math.floor(Math.random() * 60) + 1
-        ].map(n => n.toString().padStart(2, '0')),
-        codigo: `MT${i.toString().padStart(3, '0')}`,
-        data: "15/12/2025"
-    });
-}
-
-// Variáveis de controle
-let bilhetesFiltrados = [...bilhetesGaleria];
-let filtroAtual = 'todos';
-let bilheteAtualModal = 0;
-let buscaTimeout;
-
-// Renderizar bilhetes
-function renderizarBilhetes() {
-    gridBilhetes.innerHTML = '';
-    
-    if (bilhetesFiltrados.length === 0) {
-        nenhumResultado.classList.remove('hidden');
-        gridBilhetes.classList.add('hidden');
-        contadorResultados.textContent = '0 bilhetes';
-        return;
-    }
-    
-    nenhumResultado.classList.add('hidden');
-    gridBilhetes.classList.remove('hidden');
-    
-    bilhetesFiltrados.forEach((bilhete, index) => {
-        const card = document.createElement('div');
-        card.className = 'card-bilhete-galeria';
-        card.dataset.id = bilhete.id;
-        card.style.animationDelay = `${index * 0.05}s`;
-        
-        const numerosHTML = bilhete.numeros.map(num => 
-            `<span class="numero-mini">${num}</span>`
-        ).join('');
-        
-        card.innerHTML = `
-            <div class="badge-confirmado">
-                <i class="fas fa-check-circle"></i>
-                Confirmado
-            </div>
-            
-            <div class="bilhete-imagem-wrapper">
-                <img src="${bilhete.imagem}" 
-                     alt="Bilhete ${bilhete.codigo} - ${bilhete.nome}" 
-                     class="bilhete-imagem-galeria"
-                     loading="lazy">
-                <div class="bilhete-overlay-galeria">
-                    <button class="btn-ampliar-galeria" data-id="${bilhete.id}">
-                        <i class="fas fa-search-plus mr-2"></i>
-                        Ampliar Imagem
-                    </button>
-                </div>
-            </div>
-            
-            <div class="bilhete-info">
-                <div class="bilhete-nome" title="${bilhete.nome}">${bilhete.nome}</div>
-                <div class="bilhete-codigo">${bilhete.codigo}</div>
-                
-                <div class="bilhete-numeros-mini">
-                    ${numerosHTML}
-                </div>
-                
-                <div class="text-xs text-gray-400 mt-3 flex justify-between">
-                    <span>${bilhete.data}</span>
-                    <span class="text-[#d4af37]">R$ 6,00</span>
-                </div>
-            </div>
-        `;
-        
-        gridBilhetes.appendChild(card);
-        
-        // Evento de clique para abrir modal
-        card.addEventListener('click', () => abrirModal(bilhete.id));
-    });
-    
-    // Atualizar contador
-    contadorResultados.textContent = `${bilhetesFiltrados.length} bilhete${bilhetesFiltrados.length !== 1 ? 's' : ''}`;
-}
-
-// Filtrar bilhetes
-function filtrarBilhetes() {
-    const termo = buscaBilhetes.value.trim().toLowerCase();
-    
-    if (filtroAtual === 'todos' && !termo) {
-        bilhetesFiltrados = [...bilhetesGaleria];
-    } else {
-        bilhetesFiltrados = bilhetesGaleria.filter(bilhete => {
-            // Filtrar por termo de busca
-            const matchBusca = !termo || 
-                bilhete.nome.toLowerCase().includes(termo) ||
-                bilhete.codigo.toLowerCase().includes(termo);
-            
-            // Filtrar por letra inicial
-            let matchFiltro = true;
-            if (filtroAtual !== 'todos') {
-                matchFiltro = bilhete.nome.charAt(0).toUpperCase() === filtroAtual;
-            }
-            
-            return matchBusca && matchFiltro;
-        });
-    }
-    
-    renderizarBilhetes();
-}
-
-// Abrir modal
-function abrirModal(id) {
-    const bilhete = bilhetesGaleria.find(b => b.id === id);
-    if (!bilhete) return;
-    
-    bilheteAtualModal = bilhetesFiltrados.findIndex(b => b.id === id);
-    
-    // Atualizar conteúdo do modal
-    document.getElementById('modal-titulo').textContent = `Bilhete ${bilhete.codigo}`;
-    document.getElementById('modal-participante').textContent = bilhete.nome;
-    document.getElementById('modal-imagem').src = bilhete.imagem;
-    document.getElementById('modal-imagem').alt = `Bilhete ${bilhete.codigo} - ${bilhete.nome}`;
-    document.getElementById('modal-numero').textContent = bilhete.codigo;
-    document.getElementById('modal-nome').textContent = bilhete.nome;
-    document.getElementById('modal-contador').textContent = `${bilheteAtualModal + 1} de ${bilhetesFiltrados.length}`;
-    
-    // Atualizar números
-    const numerosContainer = document.getElementById('modal-numeros');
-    numerosContainer.innerHTML = bilhete.numeros.map(num => 
-        `<span class="numero-sorteio">${num.padStart(2, '0')}</span>`
-    ).join('');
-    
-    // Atualizar link do WhatsApp
-    const whatsappLink = document.getElementById('whatsapp-link');
-    whatsappLink.href = `https://wa.me/5531982042552?text=Olá!%20Tenho%20dúvidas%20sobre%20o%20bilhete%20${bilhete.codigo}%20(${bilhete.nome})`;
-    
-    // Atualizar miniaturas
-    atualizarMiniaturas();
-    
-    // Mostrar modal
-    modalGaleria.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-// Atualizar miniaturas
-function atualizarMiniaturas() {
-    const container = document.getElementById('miniaturas-container');
-    container.innerHTML = '';
-    
-    bilhetesFiltrados.forEach((bilhete, index) => {
-        const miniatura = document.createElement('div');
-        miniatura.className = `miniatura-item ${index === bilheteAtualModal ? 'active' : ''}`;
-        miniatura.dataset.index = index;
-        
-        miniatura.innerHTML = `
-            <img src="${bilhete.imagem}" 
-                 alt="Bilhete ${bilhete.codigo}" 
-                 class="miniatura-imagem">
-        `;
-        
-        miniatura.addEventListener('click', () => {
-            bilheteAtualModal = index;
-            abrirModal(bilhete.id);
-        });
-        
-        container.appendChild(miniatura);
-    });
-}
-
-// Navegar no modal
-function navegarModal(direcao) {
-    if (bilhetesFiltrados.length === 0) return;
-    
-    if (direcao === 'anterior') {
-        bilheteAtualModal--;
-        if (bilheteAtualModal < 0) {
-            bilheteAtualModal = bilhetesFiltrados.length - 1;
-        }
-    } else {
-        bilheteAtualModal++;
-        if (bilheteAtualModal >= bilhetesFiltrados.length) {
-            bilheteAtualModal = 0;
-        }
-    }
-    
-    abrirModal(bilhetesFiltrados[bilheteAtualModal].id);
-}
-
-// Fechar modal
-function fecharModal() {
-    modalGaleria.classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-// Download da imagem
-function downloadImagem() {
-    const bilhete = bilhetesFiltrados[bilheteAtualModal];
-    const link = document.createElement('a');
-    link.href = bilhete.imagem;
-    link.download = `bilhete-${bilhete.codigo}-${bilhete.nome}.jpg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-
-// Event Listeners
-buscaBilhetes.addEventListener('input', () => {
-    clearTimeout(buscaTimeout);
     </script>
+
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Dados da galeria (seriam carregados de um banco de dados em produção)
+    const galleryItems = [
+        {
+            id: 1,
+            name: "Adriane",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Adriane",
+            status: "pago",
+            date: "10/12/2025",
+            description: "Bilhete confirmado e pago"
+        },
+        {
+            id: 2,
+            name: "Airton",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Airton",
+            status: "pago",
+            date: "11/12/2025",
+            description: "Pagamento confirmado"
+        },
+        {
+            id: 3,
+            name: "Ana Paula",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Ana+Paula",
+            status: "pendente",
+            date: "12/12/2025",
+            description: "Aguardando confirmação"
+        },
+        {
+            id: 4,
+            name: "André",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+André",
+            status: "pago",
+            date: "09/12/2025",
+            description: "Bilhete ativo"
+        },
+        {
+            id: 5,
+            name: "Augusto",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Augusto",
+            status: "pago",
+            date: "10/12/2025",
+            description: "Participação confirmada"
+        },
+        {
+            id: 6,
+            name: "Camila",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Camila",
+            status: "pendente",
+            date: "13/12/2025",
+            description: "Aguardando pagamento"
+        },
+        {
+            id: 7,
+            name: "Gabriel",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Gabriel",
+            status: "pago",
+            date: "08/12/2025",
+            description: "Organizador - Bilhete ativo"
+        },
+        {
+            id: 8,
+            name: "Maria APTK",
+            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Maria+APTK",
+            status: "pago",
+            date: "11/12/2025",
+            description: "Confirmado via PIX"
+        }
+    ];
+
+    // Elementos DOM
+    const galleryGrid = document.getElementById('gallery-grid');
+    const searchInput = document.getElementById('search-gallery');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const loading = document.getElementById('loading-gallery');
+    const noResults = document.getElementById('no-results');
+    const resultsCount = document.getElementById('search-results-count');
+    const countSpan = document.getElementById('results-count');
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalStatus = document.getElementById('modal-status');
+    const modalDate = document.getElementById('modal-date');
+    const modalDescription = document.getElementById('modal-description');
+    const closeModal = document.getElementById('close-modal');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentItems = [...galleryItems];
+    let currentIndex = 0;
+
+    // Inicializar galeria
+    function initGallery() {
+        renderGallery();
+        setTimeout(() => {
+            loading.classList.add('hidden');
+        }, 1000);
+    }
+
+    // Renderizar galeria
+    function renderGallery() {
+        galleryGrid.innerHTML = '';
+        
+        // Filtrar itens
+        let filteredItems = galleryItems.filter(item => {
+            const matchesFilter = currentFilter === 'all' || item.status === currentFilter;
+            const matchesSearch = item.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                                 item.description.toLowerCase().includes(currentSearch.toLowerCase());
+            return matchesFilter && matchesSearch;
+        });
+
+        // Atualizar contador
+        if (currentSearch || currentFilter !== 'all') {
+            resultsCount.classList.remove('hidden');
+            countSpan.textContent = filteredItems.length;
+        } else {
+            resultsCount.classList.add('hidden');
+        }
+
+        // Mostrar/ocultar "sem resultados"
+        if (filteredItems.length === 0) {
+            noResults.classList.remove('hidden');
+            galleryGrid.classList.add('hidden');
+        } else {
+            noResults.classList.add('hidden');
+            galleryGrid.classList.remove('hidden');
+            
+            // Renderizar itens
+            filteredItems.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'gallery-item bg-[#262626] rounded-xl overflow-hidden border border-gray-700 hover:border-[#d4af37] transition-all duration-300 hover:scale-[1.02]';
+                itemElement.dataset.index = index;
+                
+                itemElement.innerHTML = `
+                    <div class="relative overflow-hidden">
+                        <img src="${item.imageUrl}" alt="Bilhete ${item.name}" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 right-3">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold ${item.status === 'pago' ? 'bg-green-900 text-green-200' : 'bg-yellow-900 text-yellow-200'}">
+                                ${item.status === 'pago' ? 'PAGO' : 'PENDENTE'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">${item.name}</h3>
+                        <p class="text-gray-400 text-sm mb-3">${item.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">${item.date}</span>
+                            <button class="view-btn text-[#d4af37] hover:text-[#fbbf24] transition" data-id="${item.id}">
+                                <i class="fas fa-expand mr-1"></i>Ampliar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(itemElement);
+            });
+
+            // Adicionar event listeners aos botões de visualização
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = parseInt(this.dataset.id);
+                    openModal(itemId);
+                });
+            });
+
+            // Adicionar event listeners aos itens da galeria
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.addEventListener('click', function() {
+                    const itemElement = this.closest('.gallery-item');
+                    const itemIndex = parseInt(itemElement.dataset.index);
+                    const item = filteredItems[itemIndex];
+                    if (item) {
+                        openModal(item.id);
+                    }
+                });
+            });
+        }
+    }
+
+    // Abrir modal
+    function openModal(itemId) {
+        const item = galleryItems.find(i => i.id === itemId);
+        if (!item) return;
+
+        currentIndex = galleryItems.findIndex(i => i.id === itemId);
+        
+        modalImage.src = item.imageUrl;
+        modalImage.alt = `Bilhete ${item.name}`;
+        modalTitle.textContent = item.name;
+        modalStatus.textContent = item.status === 'pago' ? 'PAGO' : 'PENDENTE';
+        modalStatus.className = `px-3 py-1 rounded-full text-sm ${item.status === 'pago' ? 'bg-green-900 text-green-200' : 'bg-yellow-900 text-yellow-200'}`;
+        modalDate.textContent = item.date;
+        modalDescription.textContent = item.description;
+        
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Fechar modal
+    function closeModalFunc() {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+
+    // Navegar no modal
+    function navigateModal(direction) {
+        let newIndex = currentIndex + direction;
+        
+        if (newIndex < 0) {
+            newIndex = galleryItems.length - 1;
+        } else if (newIndex >= galleryItems.length) {
+            newIndex = 0;
+        }
+        
+        const item = galleryItems[newIndex];
+        if (item) {
+            currentIndex = newIndex;
+            openModal(item.id);
+        }
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', function() {
+        currentSearch = this.value.trim();
+        renderGallery();
+    });
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active', 'bg-[#d4af37]', 'text-[#171717]'));
+            filterBtns.forEach(b => {
+                if (!b.classList.contains('active')) {
+                    b.classList.add('bg-[#374151]');
+                    b.classList.remove('bg-[#d4af37]', 'text-[#171717]');
+                }
+            });
+            
+            this.classList.add('active', 'bg-[#d4af37]', 'text-[#171717]');
+            this.classList.remove('bg-[#374151]');
+            currentFilter = this.dataset.filter;
+            renderGallery();
+        });
+    });
+
+    closeModal.addEventListener('click', closeModalFunc);
+    prevBtn.addEventListener('click', () => navigateModal(-1));
+    nextBtn.addEventListener('click', () => navigateModal(1));
+
+    // Fechar modal com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+            closeModalFunc();
+        } else if (e.key === 'ArrowLeft' && !modal.classList.contains('hidden')) {
+            navigateModal(-1);
+        } else if (e.key === 'ArrowRight' && !modal.classList.contains('hidden')) {
+            navigateModal(1);
+        }
+    });
+
+    // Fechar modal ao clicar fora
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModalFunc();
+        }
+    });
+
+    // Inicializar
+    initGallery();
+});
+</script>
 </body>
 </html>
