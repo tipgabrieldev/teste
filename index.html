@@ -1089,6 +1089,260 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
     color: transparent;
     font-weight: 600;
 }
+
+
+    
+
+    /* Ícone de expandir visual apenas */
+    .expand-icon {
+        z-index: 20;
+    }
+    
+    .expand-icon .fa-expand {
+        font-size: 2rem;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-item:hover .expand-icon .fa-expand {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    
+    /* Efeito de pulso suave */
+    @keyframes expand-pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    
+    .gallery-item:hover .expand-icon .fa-expand {
+        animation: expand-pulse 1.5s infinite;
+    }
+    
+    /* Garantir que o modal funcione */
+    #image-modal {
+        z-index: 9999 !important;
+    }
+    
+    #modal-image {
+        display: block !important;
+        max-width: 90vw;
+        max-height: 90vh;
+    }
+    
+    /* Botões do modal sempre visíveis */
+    #close-modal, #prev-btn, #next-btn {
+        z-index: 10000;
+        cursor: pointer;
+    }
+
+
+
+    /* Garantir que as imagens mantenham o fundo azul original */
+    .gallery-item img {
+        background-color: #0d0b06; /* Preto similar ao dos bilhetes */
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* Quando a imagem falha, mostrar fundo Preto com ícone */
+    .gallery-item div[style*="display: none"] + div,
+    .gallery-item > div:first-child > div {
+        background-color: #0d0b06;
+    }
+    
+    /* Ícone de expandir */
+    .expand-icon .fa-expand {
+        font-size: 1.75rem;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+    
+    .gallery-item:hover .expand-icon .fa-expand {
+        opacity: 1;
+        transform: scale(1.15);
+        animation: expand-pulse 1.5s infinite;
+    }
+    
+    @keyframes expand-pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Modal */
+    #modal-image {
+        background-color: transparent;
+    }
+
+
+
+      /* Garantir que as imagens mantenham o fundo azul original */
+    .gallery-item img {
+        background-color: #0d0b06 !important; /* Azul similar ao dos bilhetes */
+        background-size: cover;
+        background-position: center;
+    }
+    
+    /* Quando a imagem falha, mostrar fundo azul com ícone */
+    .gallery-item div[style*="display: none"] + div,
+    .gallery-item > div:first-child > div {
+        background-color: #0d0b06 !important;
+    }
+    
+    /* Forçar fundo azul no container da imagem */
+    .gallery-item > div:first-child {
+        background-color: #0d0b06 !important;
+    }
+    
+    /* Ícone de expandir */
+    .expand-icon .fa-expand {
+        font-size: 1.75rem;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+        opacity: 0.8;
+        transition: all 0.3s ease;
+    }
+    
+    
+    @keyframes expand-pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+        100% { transform: scale(1); }
+    }
+
+    
+    /* Correção para garantir que as imagens tenham o mesmo tamanho */
+    .gallery-item > div:first-child {
+        height: 300px; /* Altura fixa para todas */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .gallery-item img {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+
+
+
+
+
+
+    /* ========== AJUSTES SOLICITADOS PARA GALERIA DE BILHETES ========== */
+
+/* 1. FUNDO PRETO PARA CADA IMAGEM DOS BILHETES */
+.gallery-item > div:first-child {
+    background-color: #000000 !important;
+}
+
+.gallery-item img {
+    background-color: #000000 !important;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gallery-item div[style*="display: none"] + div,
+.gallery-item > div:first-child > div {
+    background-color: #000000 !important;
+}
+
+/* 2. BILHETE CENTRALIZADO E EXIBIDO POR COMPLETO */
+.gallery-item > div:first-child {
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000000;
+}
+
+.gallery-item img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center;
+    display: block;
+    margin: 0 auto;
+}
+
+/* 3. SETAS DE NAVEGAÇÃO MAIS AFASTADAS NO MOBILE - GALERIA ABERTA */
+@media (max-width: 768px) {
+    #prev-btn {
+        left: 20px !important;
+    }
+    
+    #next-btn {
+        right: 20px !important;
+    }
+    
+    #prev-btn, #next-btn {
+        width: 50px !important;
+        height: 50px !important;
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        border: 2px solid rgba(212, 175, 55, 0.5) !important;
+    }
+    
+    #close-modal {
+        top: 25px !important;
+        right: 25px !important;
+        width: 50px !important;
+        height: 50px !important;
+        background-color: rgba(0, 0, 0, 0.7) !important;
+        border: 2px solid rgba(212, 175, 55, 0.5) !important;
+    }
+    
+    #modal-image {
+        max-width: 90vw !important;
+        max-height: 75vh !important;
+        margin-top: 30px;
+    }
+    
+    /* Ajuste adicional para garantir que a imagem não toque nas bordas */
+    .fixed.inset-0.z-\\[9999\\] {
+        padding: 15px;
+    }
+}
+
+/* AJUSTES ADICIONAIS PARA CENTRALIZAÇÃO */
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.gallery-item > div:first-child {
+    flex-grow: 1;
+}
+
+.gallery-item > div:first-child > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+/* MELHORAR VISIBILIDADE DAS SETAS NO MODAL */
+#prev-btn:hover, #next-btn:hover {
+    background-color: rgba(212, 175, 55, 0.8) !important;
+    transform: scale(1.1);
+}
+
+#close-modal:hover {
+    background-color: rgba(220, 38, 38, 0.8) !important;
+    transform: scale(1.1);
+        }
 </style>
 </head>
 <body class="text-white">
@@ -1107,6 +1361,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                 <a href="#video" class="hover:text-[#d4af37] transition font-medium">Ao Vivo</a>
                 <a href="regulamento.html" class="hover:text-[#d4af37] transition font-medium">Regulamento</a>
                 <a href="#pagamento" class="hover:text-[#d4af37] transition font-medium">Pagamento</a>
+                <a href="#galeria" class="hover:text-[#d4af37] transition font-medium">Galeria</a>
                 <a href="#bilhetes" class="hover:text-[#d4af37] transition font-medium">Bilhetes</a>
                 <a href="#contato" class="hover:text-[#d4af37] transition font-medium">Contato</a>
             </nav>
@@ -1125,6 +1380,7 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
                 <a href="#video" class="mobile-link">Ao Vivo</a>
                 <a href="regulamento.html" class="mobile-link">Regulamento</a>
                 <a href="#pagamento" class="mobile-link">Pagamento</a>
+                <a href="#galeria" class="mobile-link">Galeria</a>
                 <a href="#bilhetes" class="mobile-link">Bilhetes</a>
                 <a href="#contato" class="mobile-link">Contato</a>
             </nav>
@@ -1336,10 +1592,13 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         </div>
     </section>
 
-    <section id="galeria-bilhetes" class="py-16 px-4 bg-[#171717]">
-    <div class="container mx-auto max-w-7xl">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Galeria de Bilhetes</h2>
-        <p class="text-center text-gray-300 mb-12">Confira fotos dos bilhetes físicos dos participantes</p>
+<!-- Seção Galeria de Bilhetes -->
+<section id="galeria" class="py-8 md:py-16 px-4 bg-[#171717] overflow-hidden">
+    <div class="container mx-auto max-w-7xl px-4 md:px-6">
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-3 md:mb-4 text-white">Galeria de Bilhetes Físicos</h2>
+        <p class="text-center text-gray-300 mb-8 md:mb-12 text-sm md:text-base px-4">
+            Confira as fotos dos bilhetes físicos de todos os participantes
+        </p>
 
         <!-- Sistema de Busca -->
         <div class="mb-10">
@@ -1362,13 +1621,10 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         <!-- Filtros -->
         <div class="flex flex-wrap justify-center gap-3 mb-8">
             <button class="filter-btn active px-4 py-2 rounded-lg bg-[#d4af37] text-[#171717] font-bold transition hover:bg-[#b8941f]" data-filter="all">
-                Todos
+                <i class="fas fa-layer-group mr-2"></i>Todos
             </button>
-            <button class="filter-btn px-4 py-2 rounded-lg bg-[#374151] hover:bg-[#4b5563] transition" data-filter="pago">
-                Pagos
-            </button>
-            <button class="filter-btn px-4 py-2 rounded-lg bg-[#374151] hover:bg-[#4b5563] transition" data-filter="pendente">
-                Pendentes
+            <button class="filter-btn px-4 py-2 rounded-lg bg-[#374151] hover:bg-[#4b5563] transition" data-filter="confirmado">
+                <i class="fas fa-check-circle mr-2"></i>Confirmados
             </button>
         </div>
 
@@ -1386,38 +1642,56 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
         <!-- Sem resultados -->
         <div id="no-results" class="text-center py-12 hidden">
             <i class="fas fa-image text-6xl text-gray-500 mb-4"></i>
-            <h3 class="text-xl font-bold mb-2">Nenhum bilhete encontrado</h3>
-            <p class="text-gray-400">Tente buscar por outro nome ou verificar os filtros</p>
+            <h3 class="text-xl font-bold mb-2 text-white">Nenhum bilhete encontrado</h3>
+            <p class="text-gray-400">Tente buscar por outro nome</p>
         </div>
 
-        <!-- Modal para Visualização Ampliada -->
-        <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden items-center justify-center p-4">
-            <div class="relative max-w-4xl w-full">
-                <button id="close-modal" class="absolute -top-12 right-0 text-white text-3xl hover:text-[#d4af37] transition">
+        <!-- Botão Carregar Mais (inicialmente escondido) -->
+        <div id="load-more-container" class="text-center mt-12 hidden">
+            <button id="load-more-btn" class="bg-[#d4af37] hover:bg-[#b8941f] text-[#171717] font-bold py-3 px-8 rounded-lg transition transform hover:scale-105">
+                <i class="fas fa-plus-circle mr-2"></i>Carregar Mais Bilhetes
+                <span id="load-more-count" class="ml-2 text-sm bg-[#171717] text-[#d4af37] px-2 py-1 rounded-full"></span>
+            </button>
+            <p class="text-gray-400 text-sm mt-2">
+                Mostrando <span id="showing-count">0</span> de <span id="total-count">0</span> bilhetes
+            </p>
+        </div>
+
+        <!-- Modal para Visualização Ampliada - VERSÃO SIMPLIFICADA -->
+        <div id="image-modal" class="fixed inset-0 z-[9999] hidden bg-black bg-opacity-95">
+            <div class="relative h-full w-full flex items-center justify-center p-4">
+                <!-- Botão fechar -->
+                <button id="close-modal" class="absolute top-6 right-6 text-white text-3xl hover:text-[#d4af37] transition z-[10000] bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center">
                     <i class="fas fa-times"></i>
                 </button>
-                <div class="bg-[#262626] rounded-lg overflow-hidden">
-                    <img id="modal-image" src="" alt="" class="w-full h-auto max-h-[70vh] object-contain">
-                    <div class="p-6">
-                        <h3 id="modal-title" class="text-xl font-bold mb-2"></h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span id="modal-status" class="px-3 py-1 rounded-full text-sm"></span>
-                            <span id="modal-date" class="px-3 py-1 rounded-full text-sm bg-[#374151]"></span>
-                        </div>
-                        <p id="modal-description" class="text-gray-300"></p>
-                    </div>
-                </div>
-                <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-[#d4af37] transition">
+                
+                <!-- Botões de navegação -->
+                <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-[#d4af37] transition bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center z-[10000]">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-3xl hover:text-[#d4af37] transition">
+                <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-4xl hover:text-[#d4af37] transition bg-black bg-opacity-50 rounded-full w-12 h-12 flex items-center justify-center z-[10000]">
                     <i class="fas fa-chevron-right"></i>
                 </button>
+                
+                <!-- Imagem apenas -->
+                <img id="modal-image" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl">
+            </div>
+        </div>
+
+        <!-- Contador de Bilhetes -->
+        <div class="mt-12 text-center">
+            <div class="inline-flex items-center bg-[#262626] px-6 py-3 rounded-lg border border-gray-700">
+                <i class="fas fa-ticket-alt text-[#d4af37] mr-3 text-xl"></i>
+                <div>
+                    <p class="text-sm text-gray-400">Total de bilhetes confirmados</p>
+                    <p class="text-2xl font-bold text-[#d4af37]" id="total-count-display">0</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
-
+    
+    
     <section id="bilhetes" class="py-16 px-4 bg-[#171717]">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-3xl font-bold text-center mb-12">Nossos Bilhetes</h2>
@@ -1938,58 +2212,58 @@ function copiarPix(elementId) {
     "Washington"
 ];
 const sampleTickets = [
-    { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "14, 29, 52, 37, 15, 51", assignedName: "Adriane" },
-    { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "30, 24, 12, 13, 55, 27", assignedName: "Airton" },           
-    { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 07, 34, 42, 52, 45", assignedName: "Ana Paula" },
+    { id: 1, event: "Mega da Virada", date: "31/12/2025", numbers: "14, 15, 29, 37, 51, 52", assignedName: "Adriane" },
+    { id: 2, event: "Mega da Virada", date: "31/12/2025", numbers: "12, 13, 24, 27, 30, 55", assignedName: "Airton" },
+    { id: 3, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 07, 34, 42, 45, 52", assignedName: "Ana Paula" },
     { id: 4, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 12, 26, 35, 44, 56", assignedName: "André" },
-    { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "27, 32, 52, 10, 56, 34", assignedName: "Augusto" },
-    { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "23, 07, 11, 33, 05, 57", assignedName: "Augusto Guedes" },
-    { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "56, 11, 28, 32, 48, 14", assignedName: "Brandino" },
+    { id: 5, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 27, 32, 34, 52, 56", assignedName: "Augusto" },
+    { id: 6, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 07, 11, 23, 33, 57", assignedName: "Augusto Guedes" },
+    { id: 7, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 14, 28, 32, 48, 56", assignedName: "Brandino" },
     { id: 8, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 09, 15, 25, 49, 60", assignedName: "Bryan" },
     { id: 9, event: "Mega da Virada", date: "31/12/2025", numbers: "22, 28, 31, 36, 37, 45", assignedName: "Camila" },
-    { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 09, 15, 14, 05, 07", assignedName: "Catiana" },
-    { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "33, 44, 12, 49, 51, 13", assignedName: "Claudineia" },
-    { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 15, 32, 31, 10, 54", assignedName: "Daniele" },
-    { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 06, 42, 45, 36, 50", assignedName: "Duda" },
+    { id: 10, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 05, 07, 09, 14, 15", assignedName: "Catiana" },
+    { id: 11, event: "Mega da Virada", date: "31/12/2025", numbers: "12, 13, 33, 44, 49, 51", assignedName: "Claudineia" },
+    { id: 12, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 10, 15, 31, 32, 54", assignedName: "Daniele" },
+    { id: 13, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 06, 36, 42, 45, 50", assignedName: "Duda" },
     { id: 14, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 10, 15, 16, 17, 60", assignedName: "DJ Romerito" },
-    { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "37, 12, 24, 48, 39, 51", assignedName: "Edmar" },            
-    { id: 16, event: "Mega da Virada", date: "31/12/2025", numbers: "17, 31, 50, 51, 09, 10", assignedName: "Eliane" },
-    { id: 17, event: "Mega da Virada", date: "31/12/2025", numbers: "31, 17, 34, 24, 09, 47", assignedName: "Elton" },
-    { id: 18, event: "Mega da Virada", date: "31/12/2025", numbers: "37, 33, 25, 13, 28, 14", assignedName: "Érica" },
-    { id: 19, event: "Mega da Virada", date: "31/12/2025", numbers: "14, 37, 16, 21, 33, 04", assignedName: "Erlinda" },
-    { id: 20, event: "Mega da Virada", date: "31/12/2025", numbers: "15, 31, 16, 41, 09, 44", assignedName: "Ester" },
-    { id: 21, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 03, 33, 50, 47, 42", assignedName: "Gabriel" },
-    { id: 22, event: "Mega da Virada", date: "31/12/2025", numbers:"25, 33, 44, 15, 40, 58", assignedName: "Gicélio" },
-    { id: 23, event: "Mega da Virada", date: "31/12/2025", numbers:"26, 24, 52, 35, 07, 12", assignedName: "Glauber" },       
-    { id: 24, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 02, 01, 03, 07, 09", assignedName: "Gustavo" },
+    { id: 15, event: "Mega da Virada", date: "31/12/2025", numbers: "12, 24, 37, 39, 48, 51", assignedName: "Edmar" },
+    { id: 16, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 10, 17, 31, 50, 51", assignedName: "Eliane" },
+    { id: 17, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 17, 24, 31, 34, 47", assignedName: "Elton" },
+    { id: 18, event: "Mega da Virada", date: "31/12/2025", numbers: "13, 14, 25, 28, 33, 37", assignedName: "Érica" },
+    { id: 19, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 14, 16, 21, 33, 37", assignedName: "Erlinda" },
+    { id: 20, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 15, 16, 31, 41, 44", assignedName: "Ester" },
+    { id: 21, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 03, 33, 42, 47, 50", assignedName: "Gabriel" },
+    { id: 22, event: "Mega da Virada", date: "31/12/2025", numbers: "15, 25, 33, 40, 44, 58", assignedName: "Gicélio" },
+    { id: 23, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 12, 24, 26, 35, 52", assignedName: "Glauber" },
+    { id: 24, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 02, 03, 06, 07, 09", assignedName: "Gustavo" },
     { id: 25, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 15, 20, 23, 36, 51", assignedName: "Israel" },
-    { id: 26, event: "Mega da Virada", date: "31/12/2025", numbers: "13, 17, 24, 01, 16, 40", assignedName: "João" },
-    { id: 27, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 04, 06, 10, 16, 20", assignedName: "José" },        
-    { id: 28, event: "Mega da Virada", date: "31/12/2025", numbers: "20, 22, 40, 04, 18, 13", assignedName: "Juliano" },
-    { id: 29, event: "Mega da Virada", date: "31/12/2025", numbers: "15, 12, 23, 21, 04, 30", assignedName: "Kasheenen Willian" },                              
-    { id: 30, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 08, 14, 59, 18, 57", assignedName: "Kimyo" },
+    { id: 26, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 13, 16, 17, 24, 40", assignedName: "João" },
+    { id: 27, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 04, 06, 10, 16, 20", assignedName: "José" },
+    { id: 28, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 13, 18, 20, 22, 40", assignedName: "Juliano" },
+    { id: 29, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 12, 15, 21, 23, 30", assignedName: "Kasheenen Willian" },
+    { id: 30, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 08, 14, 18, 57, 59", assignedName: "Kimyo" },
     { id: 31, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 07, 12, 18, 27, 44", assignedName: "Leonardo" },
-    { id: 32, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 24, 01, 21, 35, 18", assignedName: "Leislaine" },
+    { id: 32, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 11, 18, 21, 24, 35", assignedName: "Leislaine" },
     { id: 33, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 11, 19, 25, 40, 47", assignedName: "Lilian" },
-    { id: 34, event: "Mega da Virada", date: "31/12/2025", numbers: "52, 50, 28, 21, 04, 48", assignedName: "Lorrayne" },
-    { id: 35, event: "Mega da Virada", date: "31/12/2025", numbers: "23, 45, 60, 08, 38, 52", assignedName: "Lydia" },
-    { id: 36, event: "Mega da Virada", date: "31/12/2025", numbers: "08, 04, 07, 05, 09, 24", assignedName: "Maria APTK" },            
-    { id: 37, event: "Mega da Virada", date: "31/12/2025", numbers: "12, 08, 07, 52, 23, 44", assignedName: "Marcela" },
+    { id: 34, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 21, 28, 48, 50, 52", assignedName: "Lorrayne" },
+    { id: 35, event: "Mega da Virada", date: "31/12/2025", numbers: "08, 23, 38, 45, 52, 60", assignedName: "Lydia" },
+    { id: 36, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 05, 07, 08, 09, 24", assignedName: "Maria APTK" },
+    { id: 37, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 08, 12, 23, 44, 52", assignedName: "Marcela" },
     { id: 38, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 12, 19, 31, 44, 48", assignedName: "Marco" },
-    { id: 39, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 35, 58, 46, 53, 11", assignedName: "Melissa" },
-    { id: 40, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 17, 19, 29, 50, 57", assignedName: "Mike" },           
+    { id: 39, event: "Mega da Virada", date: "31/12/2025", numbers: "06, 11, 35, 46, 53, 58", assignedName: "Melissa" },
+    { id: 40, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 17, 19, 29, 50, 57", assignedName: "Mike" },
     { id: 41, event: "Mega da Virada", date: "31/12/2025", numbers: "01, 02, 13, 15, 57, 60", assignedName: "Olivier" },
     { id: 42, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 13, 23, 33, 43, 53", assignedName: "Paloma" },
-    { id: 43, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 16, 19, 24, 03, 44", assignedName: "Pedro" },
-    { id: 44, event: "Mega da Virada", date: "31/12/2025", numbers: "49, 09, 38, 20, 21, 42", assignedName: "Ronaldo" },
+    { id: 43, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 03, 16, 19, 24, 44", assignedName: "Pedro" },
+    { id: 44, event: "Mega da Virada", date: "31/12/2025", numbers: "09, 20, 21, 38, 42, 49", assignedName: "Ronaldo" },
     { id: 45, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 09, 12, 14, 21, 34", assignedName: "Ronnie" },
-    { id: 46, event: "Mega da Virada", date: "31/12/2025", numbers: "08, 04, 28, 26, 48, 45", assignedName: "Rosiclea" },
-    { id: 47, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 13, 15, 21, 17", assignedName: "Sandra" },
-    { id: 48, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 52, 33, 13, 48, 25", assignedName: "Soninha" },
+    { id: 46, event: "Mega da Virada", date: "31/12/2025", numbers: "04, 08, 26, 28, 45, 48", assignedName: "Rosiclea" },
+    { id: 47, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 13, 15, 17, 21", assignedName: "Sandra" },
+    { id: 48, event: "Mega da Virada", date: "31/12/2025", numbers: "07, 13, 25, 33, 48, 52", assignedName: "Soninha" },
     { id: 49, event: "Mega da Virada", date: "31/12/2025", numbers: "02, 05, 08, 11, 20, 24", assignedName: "Suellen" },
     { id: 50, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 24, 37, 50, 57", assignedName: "Thiago Romerito" },
-    { id: 51, event: "Mega da Virada", date: "31/12/2025", numbers: "10, 19, 05, 34, 27, 25", assignedName: "TH Romerito" },
-    { id: 52, event: "Mega da Virada", date: "31/12/2025", numbers: "11, 17, 42, 46, 54, 03", assignedName: "Tiago" },
+    { id: 51, event: "Mega da Virada", date: "31/12/2025", numbers: "05, 10, 19, 25, 27, 34", assignedName: "TH Romerito" },
+    { id: 52, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 11, 17, 42, 46, 54", assignedName: "Tiago" },
     { id: 53, event: "Mega da Virada", date: "31/12/2025", numbers: "03, 08, 14, 18, 31, 49", assignedName: "Washington" }
 ];
 
@@ -2206,77 +2480,438 @@ const sampleTickets = [
 
 
 
-    <script>
+
+<script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Dados da galeria (seriam carregados de um banco de dados em produção)
     const galleryItems = [
         {
             id: 1,
             name: "Adriane",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Adriane",
-            status: "pago",
-            date: "10/12/2025",
-            description: "Bilhete confirmado e pago"
+            imageUrl: "adriane.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         },
         {
             id: 2,
             name: "Airton",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Airton",
-            status: "pago",
-            date: "11/12/2025",
-            description: "Pagamento confirmado"
+            imageUrl: "airton.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         },
         {
             id: 3,
             name: "Ana Paula",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Ana+Paula",
-            status: "pendente",
-            date: "12/12/2025",
-            description: "Aguardando confirmação"
+            imageUrl: "ana-paula.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         },
         {
             id: 4,
             name: "André",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+André",
-            status: "pago",
-            date: "09/12/2025",
-            description: "Bilhete ativo"
+            imageUrl: "andre.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         },
         {
             id: 5,
             name: "Augusto",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Augusto",
-            status: "pago",
-            date: "10/12/2025",
-            description: "Participação confirmada"
+            imageUrl: "augusto.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         },
         {
             id: 6,
-            name: "Camila",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Camila",
-            status: "pendente",
-            date: "13/12/2025",
-            description: "Aguardando pagamento"
+            name: "Augusto Guedes",
+            imageUrl: "augusto-guedes.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         },
         {
             id: 7,
-            name: "Gabriel",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Gabriel",
-            status: "pago",
-            date: "08/12/2025",
-            description: "Organizador - Bilhete ativo"
+            name: "Brandino",
+            imageUrl: "brandino.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         },
         {
             id: 8,
+            name: "Bryan",
+            imageUrl: "bryan.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 9,
+            name: "Camila",
+            imageUrl: "camila.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 10,
+            name: "Catiana",
+            imageUrl: "catiana.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 11,
+            name: "Claudineia",
+            imageUrl: "claudineia.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 12,
+            name: "DJ Romerito",
+            imageUrl: "dj-romerito.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 13,
+            name: "Daniele",
+            imageUrl: "daniele.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 14,
+            name: "Duda",
+            imageUrl: "duda.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 15,
+            name: "Edmar",
+            imageUrl: "edmar.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 16,
+            name: "Eliane",
+            imageUrl: "eliane.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 17,
+            name: "Elton",
+            imageUrl: "elton.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 18,
+            name: "Érica",
+            imageUrl: "erica.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 19,
+            name: "Erlinda",
+            imageUrl: "erlinda.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 20,
+            name: "Ester",
+            imageUrl: "ester.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 21,
+            name: "Gabriel",
+            imageUrl: "gabriel.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 22,
+            name: "Gicélio",
+            imageUrl: "gicelio.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 23,
+            name: "Glauber",
+            imageUrl: "glauber.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 24,
+            name: "Gustavo",
+            imageUrl: "gustavo.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 25,
+            name: "Israel",
+            imageUrl: "israel.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 26,
+            name: "João",
+            imageUrl: "joao.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 27,
+            name: "José",
+            imageUrl: "jose.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 28,
+            name: "Juliano",
+            imageUrl: "juliano.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 29,
+            name: "Kasheenen Willian",
+            imageUrl: "kasheenen.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 30,
+            name: "Kimyo",
+            imageUrl: "kimyo.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 31,
+            name: "Leonardo",
+            imageUrl: "leo.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 32,
+            name: "Leislaine",
+            imageUrl: "leislaine.png",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 33,
+            name: "Lilian",
+            imageUrl: "lilian.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 34,
+            name: "Lorrayne",
+            imageUrl: "lorrayne.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 35,
+            name: "Lydia",
+            imageUrl: "lydia.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 36,
+            name: "Marcela",
+            imageUrl: "marcela.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 37,
+            name: "Marco",
+            imageUrl: "marco.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 38,
             name: "Maria APTK",
-            imageUrl: "https://via.placeholder.com/400x600/1e293b/d4af37?text=Bilhete+Maria+APTK",
-            status: "pago",
-            date: "11/12/2025",
-            description: "Confirmado via PIX"
+            imageUrl: "maria.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 39,
+            name: "Melissa",
+            imageUrl: "melissa.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 40,
+            name: "Mike",
+            imageUrl: "mike.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 41,
+            name: "Olivier",
+            imageUrl: "olivier.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 42,
+            name: "Paloma",
+            imageUrl: "paloma.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 43,
+            name: "Pedro",
+            imageUrl: "pedro.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 44,
+            name: "Ronaldo",
+            imageUrl: "ronaldo.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 45,
+            name: "Ronnie",
+            imageUrl: "ronnie.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 46,
+            name: "Rosiclea",
+            imageUrl: "rosiclea.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 47,
+            name: "Sandra",
+            imageUrl: "sandra.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 48,
+            name: "Soninha",
+            imageUrl: "soninha.jpeg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 49,
+            name: "Suellen",
+            imageUrl: "suellen.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 50,
+            name: "TH Romerito",
+            imageUrl: "th-romerito.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 51,
+            name: "Thiago Romerito",
+            imageUrl: "thiago-romerito.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 52,
+            name: "Tiago",
+            imageUrl: "tiago.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
+        },
+        {
+            id: 53,
+            name: "Washington",
+            imageUrl: "washington.jpg",
+            status: "confirmado",
+            date: "23/12/2025",
+            description: "Bilhete registrado"
         }
     ];
 
-    // Elementos DOM
+
+// Elementos DOM
     const galleryGrid = document.getElementById('gallery-grid');
     const searchInput = document.getElementById('search-gallery');
     const filterBtns = document.querySelectorAll('.filter-btn');
@@ -2284,197 +2919,322 @@ document.addEventListener('DOMContentLoaded', function() {
     const noResults = document.getElementById('no-results');
     const resultsCount = document.getElementById('search-results-count');
     const countSpan = document.getElementById('results-count');
+    const loadMoreContainer = document.getElementById('load-more-container');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreCount = document.getElementById('load-more-count');
+    const showingCount = document.getElementById('showing-count');
+    const totalCount = document.getElementById('total-count');
+    const totalCountDisplay = document.getElementById('total-count-display');
+
+    // Elementos do Modal
     const modal = document.getElementById('image-modal');
     const modalImage = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title');
-    const modalStatus = document.getElementById('modal-status');
-    const modalDate = document.getElementById('modal-date');
-    const modalDescription = document.getElementById('modal-description');
-    const closeModal = document.getElementById('close-modal');
+    const closeModalBtn = document.getElementById('close-modal');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
 
+    // Variáveis de estado
     let currentFilter = 'all';
     let currentSearch = '';
-    let currentItems = [...galleryItems];
     let currentIndex = 0;
+    const itemsPerPage = 12;
+    let currentPage = 1;
+    let filteredItems = [];
+    let allFilteredItems = [];
+    let isModalOpen = false;
+    let scrollPosition = 0;
+
+    // Função auxiliar para criar HTML seguro
+    function createGalleryItemHTML(item) {
+        // CORREÇÃO: Separar o HTML em variáveis para evitar problemas com aspas
+        const statusClass = item.status === 'confirmado' ? 'bg-green-900 text-green-200' : 'bg-yellow-900 text-yellow-200';
+        const statusText = item.status === 'confirmado' ? 'PAGO' : 'PENDENTE';
+        
+        // HTML seguro sem problemas de aspas
+        return `
+        <div class="aspect-[4/3] overflow-hidden relative">
+            <img 
+                src="${item.imageUrl}" 
+                alt="Bilhete de ${item.name}"
+                class="w-full h-full object-contain transition-transform duration-500"
+                loading="lazy"
+                onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div class=\\'w-full h-full flex flex-col items-center justify-center p-4 bg-[#1e40af]\\'><i class=\\'fas fa-ticket-alt text-4xl text-[#d4af37] mb-2\\'></i><p class=\\'text-white font-bold text-lg\\'>${item.name}</p><span class=\\'mt-2 px-3 py-1 rounded-full text-xs font-bold bg-green-900 text-green-200\\'>PAGO</span></div>';"
+            >
+            
+            <!-- Ícone de expandir visual apenas -->
+            <div class="expand-icon absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <i class="fas fa-expand text-white text-2xl drop-shadow-lg"></i>
+            </div>
+        </div>
+        <div class="p-4">
+            <div class="flex justify-between items-start mb-2">
+                <h3 class="font-bold text-white truncate">${item.name}</h3>
+                <span class="px-2 py-1 text-xs rounded-full font-bold ${statusClass}">
+                    ${statusText}
+                </span>
+            </div>
+            <div class="flex items-center text-gray-400 text-sm">
+                <i class="fas fa-calendar-alt mr-2"></i>
+                <span>${item.date}</span>
+            </div>
+        </div>
+        `;
+    }
 
     // Inicializar galeria
     function initGallery() {
+        if (totalCount) totalCount.textContent = galleryItems.length;
+        if (totalCountDisplay) totalCountDisplay.textContent = galleryItems.length;
+        
+        setupEventListeners();
+        updateFilterData();
         renderGallery();
+        
         setTimeout(() => {
-            loading.classList.add('hidden');
-        }, 1000);
+            if (loading) loading.classList.add('hidden');
+        }, 500);
     }
 
-    // Renderizar galeria
-    function renderGallery() {
-        galleryGrid.innerHTML = '';
-        
-        // Filtrar itens
-        let filteredItems = galleryItems.filter(item => {
-            const matchesFilter = currentFilter === 'all' || item.status === currentFilter;
-            const matchesSearch = item.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                                 item.description.toLowerCase().includes(currentSearch.toLowerCase());
-            return matchesFilter && matchesSearch;
-        });
-
-        // Atualizar contador
-        if (currentSearch || currentFilter !== 'all') {
-            resultsCount.classList.remove('hidden');
-            countSpan.textContent = filteredItems.length;
-        } else {
-            resultsCount.classList.add('hidden');
+    // Configurar event listeners
+    function setupEventListeners() {
+        // Busca
+        if (searchInput) {
+            let searchTimeout;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    currentSearch = this.value.trim().toLowerCase();
+                    updateFilterData();
+                    renderGallery();
+                }, 300);
+            });
         }
 
-        // Mostrar/ocultar "sem resultados"
-        if (filteredItems.length === 0) {
-            noResults.classList.remove('hidden');
+        // Filtros
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-[#d4af37]', 'text-[#171717]');
+                    b.classList.add('bg-[#374151]', 'text-white');
+                });
+                
+                this.classList.add('active', 'bg-[#d4af37]', 'text-[#171717]');
+                this.classList.remove('bg-[#374151]', 'text-white');
+                
+                currentFilter = this.dataset.filter;
+                updateFilterData();
+                renderGallery();
+            });
+        });
+
+        // Carregar Mais
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', loadMore);
+        }
+
+        // Delegação de eventos para os itens da galeria
+        if (galleryGrid) {
+            galleryGrid.addEventListener('click', function(e) {
+                const target = e.target;
+                const galleryItem = target.closest('.gallery-item');
+                
+                if (galleryItem) {
+                    const itemId = parseInt(galleryItem.dataset.id);
+                    openModal(itemId);
+                }
+            });
+        }
+
+        // Event listeners do Modal
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if (prevBtn) prevBtn.addEventListener('click', () => navigateModal(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => navigateModal(1));
+
+        // Teclado
+        document.addEventListener('keydown', function(e) {
+            if (!isModalOpen) return;
+            
+            if (e.key === 'Escape') closeModal();
+            else if (e.key === 'ArrowLeft') navigateModal(-1);
+            else if (e.key === 'ArrowRight') navigateModal(1);
+        });
+
+        // Fechar modal clicando fora
+        if (modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeModal();
+            });
+        }
+    }
+
+    // Atualizar dados filtrados
+    function updateFilterData() {
+        let items = galleryItems;
+        if (currentFilter !== 'all') {
+            items = galleryItems.filter(item => item.status === currentFilter);
+        }
+        
+        if (currentSearch) {
+            items = items.filter(item => 
+                item.name.toLowerCase().includes(currentSearch)
+            );
+        }
+        
+        allFilteredItems = items;
+        currentPage = 1;
+        filteredItems = allFilteredItems.slice(0, itemsPerPage);
+        
+        if (resultsCount && countSpan) {
+            if (currentSearch || currentFilter !== 'all') {
+                resultsCount.classList.remove('hidden');
+                countSpan.textContent = allFilteredItems.length;
+            } else {
+                resultsCount.classList.add('hidden');
+            }
+        }
+    }
+
+    // Renderizar galeria - VERSÃO CORRIGIDA
+    function renderGallery() {
+        if (!galleryGrid) return;
+        
+        galleryGrid.innerHTML = '';
+        
+        if (allFilteredItems.length === 0) {
+            if (noResults) noResults.classList.remove('hidden');
             galleryGrid.classList.add('hidden');
+            if (loadMoreContainer) loadMoreContainer.classList.add('hidden');
         } else {
-            noResults.classList.add('hidden');
+            if (noResults) noResults.classList.add('hidden');
             galleryGrid.classList.remove('hidden');
             
-            // Renderizar itens
-            filteredItems.forEach((item, index) => {
+            filteredItems.forEach((item) => {
                 const itemElement = document.createElement('div');
-                itemElement.className = 'gallery-item bg-[#262626] rounded-xl overflow-hidden border border-gray-700 hover:border-[#d4af37] transition-all duration-300 hover:scale-[1.02]';
-                itemElement.dataset.index = index;
+                itemElement.className = 'gallery-item relative overflow-hidden rounded-xl bg-[#262626] border border-gray-700 hover:border-[#d4af37] transition-all duration-300 cursor-pointer group';
+                itemElement.dataset.id = item.id;
                 
-                itemElement.innerHTML = `
-                    <div class="relative overflow-hidden">
-                        <img src="${item.imageUrl}" alt="Bilhete ${item.name}" class="w-full h-48 object-cover">
-                        <div class="absolute top-3 right-3">
-                            <span class="px-3 py-1 rounded-full text-xs font-bold ${item.status === 'pago' ? 'bg-green-900 text-green-200' : 'bg-yellow-900 text-yellow-200'}">
-                                ${item.status === 'pago' ? 'PAGO' : 'PENDENTE'}
-                            </span>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${item.name}</h3>
-                        <p class="text-gray-400 text-sm mb-3">${item.description}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xs text-gray-500">${item.date}</span>
-                            <button class="view-btn text-[#d4af37] hover:text-[#fbbf24] transition" data-id="${item.id}">
-                                <i class="fas fa-expand mr-1"></i>Ampliar
-                            </button>
-                        </div>
-                    </div>
-                `;
+                // Usar a função auxiliar para criar HTML seguro
+                itemElement.innerHTML = createGalleryItemHTML(item);
                 
                 galleryGrid.appendChild(itemElement);
             });
-
-            // Adicionar event listeners aos botões de visualização
-            document.querySelectorAll('.view-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const itemId = parseInt(this.dataset.id);
-                    openModal(itemId);
-                });
-            });
-
-            // Adicionar event listeners aos itens da galeria
-            document.querySelectorAll('.gallery-item img').forEach(img => {
-                img.addEventListener('click', function() {
-                    const itemElement = this.closest('.gallery-item');
-                    const itemIndex = parseInt(itemElement.dataset.index);
-                    const item = filteredItems[itemIndex];
-                    if (item) {
-                        openModal(item.id);
-                    }
-                });
-            });
+            
+            if (showingCount) showingCount.textContent = filteredItems.length;
+            if (totalCount) totalCount.textContent = galleryItems.length;
+            
+            updateLoadMoreButton();
         }
     }
 
-    // Abrir modal
-    function openModal(itemId) {
-        const item = galleryItems.find(i => i.id === itemId);
-        if (!item) return;
-
-        currentIndex = galleryItems.findIndex(i => i.id === itemId);
+    // Carregar mais bilhetes
+    function loadMore() {
+        currentPage++;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const newItems = allFilteredItems.slice(startIndex, endIndex);
         
-        modalImage.src = item.imageUrl;
-        modalImage.alt = `Bilhete ${item.name}`;
-        modalTitle.textContent = item.name;
-        modalStatus.textContent = item.status === 'pago' ? 'PAGO' : 'PENDENTE';
-        modalStatus.className = `px-3 py-1 rounded-full text-sm ${item.status === 'pago' ? 'bg-green-900 text-green-200' : 'bg-yellow-900 text-yellow-200'}`;
-        modalDate.textContent = item.date;
-        modalDescription.textContent = item.description;
+        newItems.forEach((item) => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'gallery-item relative overflow-hidden rounded-xl bg-[#262626] border border-gray-700 hover:border-[#d4af37] transition-all duration-300 cursor-pointer group';
+            itemElement.dataset.id = item.id;
+            
+            // Usar a função auxiliar para criar HTML seguro
+            itemElement.innerHTML = createGalleryItemHTML(item);
+            
+            galleryGrid.appendChild(itemElement);
+        });
         
-        modal.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+        filteredItems = [...filteredItems, ...newItems];
+        
+        if (showingCount) showingCount.textContent = filteredItems.length;
+        updateLoadMoreButton();
     }
 
+    // Atualizar botão "Carregar Mais"
+    function updateLoadMoreButton() {
+        if (!loadMoreContainer || !loadMoreCount) return;
+        
+        const hasMoreItems = filteredItems.length < allFilteredItems.length;
+        const remaining = allFilteredItems.length - filteredItems.length;
+        
+        if (hasMoreItems && allFilteredItems.length > itemsPerPage) {
+            loadMoreContainer.classList.remove('hidden');
+            loadMoreCount.textContent = remaining;
+        } else {
+            loadMoreContainer.classList.add('hidden');
+        }
+    }
+
+    function openModal(itemId) {
+    const item = galleryItems.find(i => i.id === itemId);
+    if (!item || !modal) return;
+    
+    currentIndex = galleryItems.findIndex(i => i.id === itemId);
+    isModalOpen = true;
+    
+    // Salvar posição do scroll
+    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Bloquear scroll do body
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = `-${scrollPosition}px`;
+    
+    // Configurar imagem
+    if (modalImage) {
+        modalImage.src = item.imageUrl;
+        modalImage.alt = `Bilhete de ${item.name}`;
+        modalImage.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl mx-auto';
+        
+        modalImage.onerror = function() {
+            this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><rect width="600" height="400" fill="#000000"/><text x="300" y="180" font-family="Arial" font-size="24" fill="#d4af37" text-anchor="middle" font-weight="bold">Bilhete de</text><text x="300" y="220" font-family="Arial" font-size="28" fill="white" text-anchor="middle">' + item.name + '</text></svg>';
+            this.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl mx-auto';
+        };
+    }
+    
+    // Mostrar modal
+    modal.classList.remove('hidden');
+}
+
     // Fechar modal
-    function closeModalFunc() {
+    function closeModal() {
+        if (!modal) return;
+        
         modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
+        isModalOpen = false;
+        
+        // Restaurar scroll do body
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        
+        // Restaurar posição do scroll
+        if (scrollPosition !== 0) {
+            window.scrollTo(0, scrollPosition);
+        }
     }
 
     // Navegar no modal
     function navigateModal(direction) {
         let newIndex = currentIndex + direction;
         
-        if (newIndex < 0) {
-            newIndex = galleryItems.length - 1;
-        } else if (newIndex >= galleryItems.length) {
-            newIndex = 0;
-        }
+        if (newIndex < 0) newIndex = galleryItems.length - 1;
+        if (newIndex >= galleryItems.length) newIndex = 0;
         
         const item = galleryItems[newIndex];
         if (item) {
             currentIndex = newIndex;
-            openModal(item.id);
+            
+            if (modalImage) {
+                modalImage.src = item.imageUrl;
+                modalImage.alt = `Bilhete de ${item.name}`;
+            }
         }
     }
 
-    // Event Listeners
-    searchInput.addEventListener('input', function() {
-        currentSearch = this.value.trim();
-        renderGallery();
-    });
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterBtns.forEach(b => b.classList.remove('active', 'bg-[#d4af37]', 'text-[#171717]'));
-            filterBtns.forEach(b => {
-                if (!b.classList.contains('active')) {
-                    b.classList.add('bg-[#374151]');
-                    b.classList.remove('bg-[#d4af37]', 'text-[#171717]');
-                }
-            });
-            
-            this.classList.add('active', 'bg-[#d4af37]', 'text-[#171717]');
-            this.classList.remove('bg-[#374151]');
-            currentFilter = this.dataset.filter;
-            renderGallery();
-        });
-    });
-
-    closeModal.addEventListener('click', closeModalFunc);
-    prevBtn.addEventListener('click', () => navigateModal(-1));
-    nextBtn.addEventListener('click', () => navigateModal(1));
-
-    // Fechar modal com ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-            closeModalFunc();
-        } else if (e.key === 'ArrowLeft' && !modal.classList.contains('hidden')) {
-            navigateModal(-1);
-        } else if (e.key === 'ArrowRight' && !modal.classList.contains('hidden')) {
-            navigateModal(1);
-        }
-    });
-
-    // Fechar modal ao clicar fora
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModalFunc();
-        }
-    });
-
-    // Inicializar
+    // Inicializar galeria
     initGallery();
 });
 </script>
