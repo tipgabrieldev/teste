@@ -1379,24 +1379,65 @@ radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 40%)
 
 /* ========== AJUSTES ESPECÍFICOS SOLICITADOS ========== */
 
-/* 1. REMOVER HOVER AO PASSAR O MOUSE NA SEÇÃO DOS BILHETES */
+/* 1. REMOVER COMPLETAMENTE TODOS OS EFEITOS HOVER NOS BILHETES */
 .ticket-item,
 .ticket,
-.bilhete-item {
+.bilhete-item,
+.gallery-item {
     cursor: pointer !important;
 }
 
+/* REMOVER QUALQUER EFEITO VISUAL AO PASSAR O MOUSE */
 .ticket:hover,
 .gallery-item:hover {
     transform: none !important;
     box-shadow: none !important;
     background-color: transparent !important;
+    border-color: #c5d9f1 !important; /* Mantém a cor da borda original */
 }
 
 .ticket:hover .ticket-body,
 .ticket:hover .ticket-header,
-.ticket:hover .ticket-footer {
+.ticket:hover .ticket-footer,
+.ticket:hover .ticket-participante,
+.ticket:hover .ticket-codigo {
     background: inherit !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Remover efeito hover dos números individualmente */
+.ticket:hover .numero-sorteio {
+    transform: none !important;
+    box-shadow: 
+        0 4px 6px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.2) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+/* Remover efeito hover do container de números */
+.ticket:hover .numeros-container {
+    transform: none !important;
+}
+
+/* Remover qualquer transição que possa causar efeito hover */
+.ticket,
+.ticket *,
+.gallery-item,
+.gallery-item * {
+    transition: none !important;
+}
+
+/* Especificamente para as galerias - remover borda colorida ao passar mouse */
+.gallery-item:hover {
+    border-color: #374151 !important; /* Mantém a cor cinza original */
+}
+
+/* Remover efeito de escalar do ícone de expandir */
+.gallery-item:hover .expand-icon .fa-expand {
+    transform: scale(1) !important;
+    opacity: 0.8 !important; /* Mantém visível mas sem efeito */
+    animation: none !important; /* Remove a animação de pulso */
 }
 
 /* 2. MOSTRAR NOME E NÚMERO DO BILHETE QUANDO GALERIA ESTIVER ABERTA */
